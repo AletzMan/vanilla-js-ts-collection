@@ -1,0 +1,183 @@
+---
+import JSIcon from "../../icons/JSIcon.astro";
+import TSIcon from "../../icons/TSIcon.astro";
+import Button from "../Button.astro";
+import Tag from "./Tag.astro";
+import { BinocularsIcon, FolderKanban, CodeXml } from "@lucide/astro";
+import { projects } from "../../data/proyects";
+const total = projects.length;
+---
+
+<main id="container">
+	<section>
+		<div class="icons">
+			<JSIcon class="icon" />
+			<TSIcon class="icon icon-ts" />
+		</div>
+		<h1 class="title">Vanilla Collection</h1>
+		<p>
+			Esta colección reúne proyectos web desarrollados sin frameworks, usando solo JavaScript y
+			TypeScript. Desde juegos y utilidades hasta efectos visuales y componentes interactivos, es
+			una muestra de cómo crear cosas increíbles partiendo desde cero.
+		</p>
+		<div class="tags">
+			<Tag title="Sin frameworks" icon={true} color="#FF3366" />
+			<Tag title="Código abierto" icon={true} color="#33FF66" />
+			<Tag title="Responsive" icon={true} color="#3366FF" />
+		</div>
+		<div class="button-container">
+			<Button title="Explorar proyectos" color="primary" icon={BinocularsIcon} />
+		</div>
+		<div class="project-count-card">
+			<div class="project-count-icon">
+				<FolderKanban size={32} />
+			</div>
+			<div class="project-count-content">
+				<h2>{total} proyectos publicados</h2>
+				<p>Añadiendo proyectos frecuentemente</p>
+			</div>
+		</div>
+	</section>
+</main>
+
+<style>
+	#container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	section {
+		position: relative;
+		height: 100svh;
+		max-width: var(--max-width);
+		width: 100%;
+		background-color: #ffffff02;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		text-wrap: balance;
+		padding: 2em 0 0 0;
+
+		@media (width < 768px) {
+			padding: 1em 0 0 0;
+			gap: 0.5rem;
+		}
+	}
+
+	.icon {
+		width: calc(2.5svw + 70px);
+		height: calc(2.5svw + 70px);
+		transform: rotate(10deg);
+	}
+
+	.icon-ts {
+		transform: rotate(-10deg);
+	}
+
+	.code {
+		width: 50px;
+		height: 50px;
+		border-radius: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--color-js);
+		background: var(--color-ts);
+	}
+
+	.title {
+		font-size: calc(2rem + 3svw);
+		line-height: 1em;
+		font-weight: bold;
+		background: linear-gradient(90deg, var(--color-js), var(--color-ts));
+		background-clip: text;
+		text-align: center;
+		text-wrap: balance;
+		margin: 1rem 0;
+		-webkit-text-fill-color: transparent;
+	}
+
+	p {
+		font-size: 1rem;
+		font-weight: 300;
+		color: var(--color-text);
+		max-width: 70ch;
+		text-align: center;
+	}
+	.tags {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.button-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 2rem;
+
+		@media (width < 768px) {
+			margin-top: 1rem;
+		}
+	}
+
+	.project-count-card {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		background: #1a1a1a;
+		color: #fff;
+		padding: 1.25rem 1.5rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+		margin-top: 2.5rem;
+		animation: hover 3s ease-in-out forwards infinite;
+
+		@media (width < 768px) {
+			margin-top: 1.5rem;
+		}
+	}
+
+	@keyframes hover {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		25% {
+			transform: translateY(-5px);
+		}
+		50% {
+			transform: translateY(5px);
+		}
+		75% {
+			transform: translateY(-5px);
+		}
+	}
+
+	.project-count-icon {
+		background: linear-gradient(135deg, #f7df1e, #3178c6);
+		padding: 0.75rem;
+		border-radius: 0.75rem;
+		display: grid;
+		place-items: center;
+	}
+
+	.project-count-content h2 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 0;
+		background: linear-gradient(to right, #f7df1e, #3178c6);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.project-count-content p {
+		font-size: 0.9rem;
+		color: #aaa;
+		margin: 0.25rem 0 0 0;
+	}
+</style>
