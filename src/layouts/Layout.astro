@@ -1,3 +1,7 @@
+---
+import "@fontsource-variable/jost";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -13,10 +17,44 @@
 </html>
 
 <style>
+	:root {
+		/* Base */
+		--color-bg: #0f0f0f;
+		--color-text: #eaeaea;
+		--color-text-secondary: #a0a0a0;
+
+		/* JS y TS */
+		--color-js: #f7df1e;
+		--color-ts: #3178c6;
+
+		/* Neutrales */
+		--color-surface: #1e1e1e;
+		--color-surface-secondary: #2a2a2a40;
+		--color-border: #2a2a2a;
+
+		/* Acentos */
+		--color-accent: #9b5de5;
+		--color-hover: #7a42be;
+
+		/* Tamaños */
+		--size-xs: 0.25rem;
+		--size-sm: 0.5rem;
+		--size-md: 0.75rem;
+		--size-lg: 1rem;
+		--size-xl: 1.5rem;
+		--size-2xl: 2rem;
+		--max-width: 1200px;
+
+		/* Gradientes (opcional) */
+		--gradient-js-ts: linear-gradient(90deg, var(--color-js), var(--color-ts));
+	}
+
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: "Jost Variable", sans-serif;
+		background: linear-gradient(135deg, #03101f, #1f1b02);
 	}
 </style>
