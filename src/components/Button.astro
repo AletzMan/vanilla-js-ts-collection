@@ -1,0 +1,91 @@
+---
+interface Props {
+	title: string;
+	icon?: typeof IconType;
+	color?: "primary" | "secondary";
+	size?: "small" | "medium" | "large";
+}
+import { type Icon as IconType } from "@lucide/astro";
+const { title, icon: Icon, color, size } = Astro.props;
+---
+
+<button
+	class={`button ${color === "primary" ? "button-primary" : "button-secondary"} ${size === "small" ? "button-small" : size === "large" ? "button-large" : "button-medium"}`}
+>
+	{Icon && <Icon class="icon" />}
+	{title}
+</button>
+
+<style>
+	.button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		font-size: 1rem;
+		border-radius: 6px;
+		background: var(--color-surface);
+		border: 1.5px solid var(--color-border);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease,
+			box-shadow 0.3s ease;
+		cursor: pointer;
+		user-select: none;
+		font-weight: 600;
+		/* Evitar que el botón sea demasiado ancho en pantallas pequeñas */
+		max-width: max-content;
+	}
+
+	.button-primary {
+		background: var(--color-accent);
+		color: var(--color-text);
+		border-color: var(--color-accent);
+	}
+
+	.button-primary:hover,
+	.button-primary:focus-visible {
+		background: var(--color-hover);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		outline: none;
+	}
+
+	.button-secondary {
+		background: var(--color-surface);
+		color: var(--color-text);
+		border-color: var(--color-border);
+	}
+
+	.button-secondary:hover,
+	.button-secondary:focus-visible {
+		background: var(--color-hover);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		outline: none;
+	}
+
+	.icon {
+		width: 20px;
+		height: 20px;
+		stroke-width: 2; /* Para que el ícono sea más definido */
+		display: block; /* Para evitar espacio debajo */
+	}
+
+	.button-small {
+		padding: 0.4rem 1rem;
+		font-size: 0.8rem;
+		border-radius: 4px;
+	}
+
+	.button-medium {
+		padding: 0.75rem 1.5rem;
+		font-size: 1rem;
+		border-radius: 6px;
+	}
+
+	.button-large {
+		padding: 1rem 2.5rem;
+		font-size: 1.25rem;
+		border-radius: 8px;
+	}
+</style>
