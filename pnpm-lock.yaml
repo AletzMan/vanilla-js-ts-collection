@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource-variable/jost':
+    specifier: ^5.2.6
+    version: 5.2.6
+  '@lucide/astro':
+    specifier: ^0.518.0
+    version: 0.518.0(astro@5.10.0)
   astro:
     specifier: ^5.10.0
     version: 5.10.0(typescript@5.8.3)
@@ -338,6 +344,10 @@ packages:
     dev: false
     optional: true
 
+  /@fontsource-variable/jost@5.2.6:
+    resolution: {integrity: sha512-MvNwzo2j2gARQ2z9w2bH7z5KCnXWGcdlBcJ91cmpWPixvhpi5qSUdHIyFcf7AuwrSIY/BTkbYBwPX+njcE5Law==}
+    dev: false
+
   /@img/sharp-darwin-arm64@0.33.5:
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -520,6 +530,14 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.5.0:
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+    dev: false
+
+  /@lucide/astro@0.518.0(astro@5.10.0):
+    resolution: {integrity: sha512-sFFAdLj7A40UFVK5BnutzqH7jb7bqfWEFq7mwkBzjf+Il466I7SFmIe2lAyqdtKA2kJ9V0+129H27tsP1AbJSQ==}
+    peerDependencies:
+      astro: ^4 || ^5
+    dependencies:
+      astro: 5.10.0(typescript@5.8.3)
     dev: false
 
   /@oslojs/encoding@1.1.0:
