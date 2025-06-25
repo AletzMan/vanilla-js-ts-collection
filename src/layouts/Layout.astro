@@ -11,7 +11,7 @@ import "@fontsource-variable/jost";
 		<meta name="generator" content={Astro.generator} />
 		<title>Vanilla JS/TS Collection</title>
 	</head>
-	<body>
+	<body class="scrollBar">
 		<slot />
 	</body>
 </html>
@@ -20,7 +20,7 @@ import "@fontsource-variable/jost";
 	:root {
 		/* Base */
 		--color-bg: #0f0f0f;
-		--color-text: #eaeaea;
+		--color-text: #f0f0f0;
 		--color-text-secondary: #a0a0a0;
 
 		/* JS y TS */
@@ -28,13 +28,18 @@ import "@fontsource-variable/jost";
 		--color-ts: #3178c6;
 
 		/* Neutrales */
-		--color-surface: #1e1e1e;
-		--color-surface-secondary: #2a2a2a40;
-		--color-border: #2a2a2a;
+		--color-surface: #151b22;
+		--color-surface-hover: #232c36;
+		--color-surface-secondary: #0f1318;
+		--color-surface-secondary-hover: #1a2129;
+		--color-border: #28394d;
+		--color-border-hover: #455468;
 
 		/* Acentos */
 		--color-accent: #9b5de5;
+		--color-accent-opacity: #9b5de550;
 		--color-hover: #7a42be;
+		--color-hover-opacity: #7a42be50;
 
 		/* Tamaños */
 		--size-xs: 0.25rem;
@@ -45,16 +50,36 @@ import "@fontsource-variable/jost";
 		--size-2xl: 2rem;
 		--max-width: 1200px;
 
+		--radius-xs: 0.25rem;
+		--radius-sm: 0.5rem;
+		--radius-md: 0.75rem;
+		--radius-lg: 1rem;
+		--radius-xl: 1.5rem;
+		--radius-2xl: 2rem;
+
 		/* Gradientes (opcional) */
 		--gradient-js-ts: linear-gradient(90deg, var(--color-js), var(--color-ts));
+	}
+
+	* {
+		box-sizing: border-box;
+		padding: 0;
+		margin: 0;
 	}
 
 	html,
 	body {
 		margin: 0;
-		width: 100%;
+		width: 100svw;
+		overflow-x: hidden;
 		height: 100%;
 		font-family: "Jost Variable", sans-serif;
-		background: linear-gradient(135deg, #03101f, #1f1b02);
+		background: linear-gradient(135deg, #040507, #0b121d);
+		scroll-behavior: smooth;
+	}
+
+	.scrollBar {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-accent) var(--color-surface);
 	}
 </style>
