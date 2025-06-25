@@ -3,11 +3,15 @@ interface Props {
 	title: string;
 	icon?: boolean;
 	color?: string;
+	size?: "small" | "medium" | "large";
+	radius?: "xsmall" | "small" | "medium" | "large";
 }
-const { title, icon, color } = Astro.props;
+const { title, icon, color, size = "medium", radius = "medium" } = Astro.props;
 ---
 
-<div class="tag">
+<div
+	class={`tag ${size === "small" ? "tag-small" : size === "medium" ? "tag-medium" : "tag-large"} ${radius === "xsmall" ? "tag-radius-xsmall" : radius === "small" ? "tag-radius-small" : radius === "medium" ? "tag-radius-medium" : "tag-radius-large"}`}
+>
 	{icon && <span class="tag-icon" style={{ backgroundColor: color || "var(--color-accent)" }} />}
 	<span class="tag-title">{title}</span>
 </div>
@@ -16,9 +20,9 @@ const { title, icon, color } = Astro.props;
 	.tag {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 0.5rem;
 		padding: 0.25rem 1rem;
-		border-radius: 30px;
 		background: var(--color-surface-secondary);
 		border: 1px solid var(--color-border);
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -29,9 +33,35 @@ const { title, icon, color } = Astro.props;
 		border-radius: 50%;
 	}
 	.tag-title {
-		font-size: 1rem;
-		font-weight: 500;
 		color: var(--color-text);
 		width: max-content;
+	}
+	.tag-small {
+		font-size: 0.75rem;
+		font-weight: 300;
+		padding: 0.25rem 0.5rem;
+	}
+	.tag-medium {
+		font-size: 1rem;
+		font-weight: 400;
+		padding: 0.25rem 1rem;
+	}
+	.tag-large {
+		font-size: 1.25rem;
+		font-weight: 400;
+		padding: 0.5rem 1rem;
+	}
+
+	.tag-radius-xsmall {
+		border-radius: var(--radius-xs);
+	}
+	.tag-radius-small {
+		border-radius: var(--radius-sm);
+	}
+	.tag-radius-medium {
+		border-radius: var(--radius-md);
+	}
+	.tag-radius-large {
+		border-radius: var(--radius-lg);
 	}
 </style>
