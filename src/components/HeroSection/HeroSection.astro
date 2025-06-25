@@ -3,13 +3,16 @@ import JSIcon from "../../icons/JSIcon.astro";
 import TSIcon from "../../icons/TSIcon.astro";
 import Button from "../Button.astro";
 import Tag from "./Tag.astro";
-import { BinocularsIcon, FolderKanban, CodeXml } from "@lucide/astro";
+import { BinocularsIcon, FolderKanban } from "@lucide/astro";
 import { projects } from "../../data/proyects";
 const total = projects.length;
 ---
 
-<main id="container">
-	<section>
+<section>
+	<div class="background">
+		<div class="background-gradient"></div>
+	</div>
+	<div class="container">
 		<div class="icons">
 			<JSIcon class="icon" />
 			<TSIcon class="icon icon-ts" />
@@ -26,7 +29,13 @@ const total = projects.length;
 			<Tag title="Responsive" icon={true} color="#3366FF" />
 		</div>
 		<div class="button-container">
-			<Button title="Explorar proyectos" color="primary" icon={BinocularsIcon} />
+			<Button
+				title="Explorar proyectos"
+				color="primary"
+				icon={BinocularsIcon}
+				type="link"
+				href="#projects"
+			/>
 		</div>
 		<div class="project-count-card">
 			<div class="project-count-icon">
@@ -37,31 +46,59 @@ const total = projects.length;
 				<p>Añadiendo proyectos frecuentemente</p>
 			</div>
 		</div>
-	</section>
-</main>
+	</div>
+</section>
 
 <style>
-	#container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
 	section {
 		position: relative;
 		height: 100svh;
 		max-width: var(--max-width);
-		width: 100%;
-		background-color: #ffffff02;
+		width: calc(100svw - 10px);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		gap: 1rem;
 		text-wrap: balance;
-		padding: 2em 0 0 0;
+		align-items: center;
+		background: linear-gradient(135deg, #03101f, #b1980c);
+		background-image: linear-gradient(#f1f2ff08 1px, transparent 1px),
+			linear-gradient(to right, #f1f2ff08 1px, #8a821c00 1px);
+		background-size: 20px 20px;
+	}
+
+	.background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow: hidden;
+		width: 100svw;
+		z-index: -1;
+	}
+
+	.background-gradient {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg, #0a0f1430, #0d1f2730);
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 100svw;
+		height: 100svh;
+		gap: 1rem;
+		text-wrap: balance;
 
 		@media (width < 768px) {
-			padding: 1em 0 0 0;
 			gap: 0.5rem;
 		}
 	}
