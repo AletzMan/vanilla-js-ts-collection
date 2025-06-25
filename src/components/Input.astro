@@ -1,0 +1,72 @@
+---
+import { type Icon as IconType } from "@lucide/astro";
+interface Props {
+	type: astroHTML.JSX.HTMLInputTypeAttribute;
+	placeholder: string;
+	size?: "small" | "medium" | "large";
+	icon?: typeof IconType;
+}
+
+const { type, placeholder, size = "medium", icon: Icon } = Astro.props;
+---
+
+<div class="input-container">
+	<input
+		type={type}
+		placeholder={placeholder}
+		class={`input ${Icon ? "input-icon" : ""}`}
+		size={size}
+	/>
+	{Icon && <Icon class="icon" />}
+</div>
+
+<style>
+	.input-container {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.input {
+		width: 100%;
+		border-radius: var(--radius-xs);
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-border);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		color: var(--color-text);
+	}
+
+	.input:is([size="small"]) {
+		padding: 0.25rem 0.5rem;
+
+		&.input-icon {
+			padding: 0.25rem 0.5rem 0.25rem 1rem;
+		}
+	}
+
+	.input:is([size="medium"]) {
+		padding: 0.5rem 1rem;
+
+		&.input-icon {
+			padding: 0.5rem 1rem 0.5rem 2rem;
+		}
+	}
+
+	.input:is([size="large"]) {
+		padding: 0.75rem 1.5rem;
+
+		&.input-icon {
+			padding: 0.75rem 1.5rem 0.75rem 2.5rem;
+		}
+	}
+
+	.icon {
+		position: absolute;
+		top: 50%;
+		left: 0.5rem;
+		transform: translateY(-50%);
+		width: 1.25rem;
+		height: 1.25rem;
+		color: var(--color-text-secondary);
+	}
+</style>
