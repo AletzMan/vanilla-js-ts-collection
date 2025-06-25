@@ -1,0 +1,99 @@
+.title {
+	font-size: 1em;
+	font-weight: 500;
+	margin: 0.5em 0;
+	color: var(--color-text);
+}
+
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.checkbox {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--size-xl);
+	height: var(--size-xl);
+	border-radius: var(--radius-xs);
+	background: var(--color-surface);
+}
+
+.check-icon {
+	width: var(--size-lg);
+	height: var(--size-lg);
+	opacity: 0;
+}
+
+.language {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	border-radius: var(--radius-xs);
+	padding: var(--size-xs) var(--size-md) var(--size-xs) var(--size-xs);
+	background: linear-gradient(
+		135deg,
+		var(--color-surface-secondary),
+		var(--color-surface),
+		var(--color-surface-secondary)
+	);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	color: var(--color-text);
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover:not(.language-checked) {
+		background: linear-gradient(
+			135deg,
+			var(--color-surface-secondary-hover),
+			var(--color-surface-hover),
+			var(--color-surface-secondary-hover)
+		);
+		color: var(--color-text);
+		border-color: var(--color-border-hover);
+	}
+}
+
+.language-checked {
+	background: linear-gradient(135deg, #5dd1e530, #5dd1e530, #5dd1e530);
+	color: var(--color-text);
+	border-color: #45a9bb;
+
+	.check {
+		background: #5dd1e599;
+	}
+
+	.check-icon {
+		color: #ffffff;
+		opacity: 1;
+	}
+}
+
+.icon {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.count {
+	color: var(--color-text-secondary);
+	font-size: var(--size-md);
+}
+
+.language-content {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
