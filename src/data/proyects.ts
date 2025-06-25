@@ -26,7 +26,7 @@ export const projects: Project[] = [
 		date: "2023-10-02",
 		featured: true,
 		image:
-			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paintboard.webp",
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paint-board.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/paintboard",
 		urlDemo: "https://aletzman.github.io/paintboard/",
