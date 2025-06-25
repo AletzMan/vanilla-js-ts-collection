@@ -1,0 +1,175 @@
+---
+import Input from "../Input.astro";
+import { Funnel, SearchIcon, ChevronDown } from "@lucide/astro";
+import Categories from "./Categories.astro";
+import Difficulty from "./Difficulty.astro";
+import Languages from "./Languages.astro";
+import { projects } from "../../data/proyects";
+---
+
+<section id="projects">
+	<header>
+		<h2 class="title">Explora los proyectos</h2>
+		<Input type="search" placeholder="Buscar proyectos" size="large" icon={SearchIcon} />
+		<Categories />
+		<div class="filters">
+			<button class="filters-button"
+				><Funnel class="icon" /> Filtros Avanzados<ChevronDown class="icon" /></button
+			>
+			<div class="checkboxes">
+				<Difficulty />
+				<Languages />
+			</div>
+		</div>
+	</header>
+	<div class="projects">
+		{
+			projects.map((project) => (
+				<div class="project">
+					<img src={project.image} alt={project.name} />
+					<h2>{project.name}</h2>
+				</div>
+			))
+		}
+	</div>
+</section>
+
+<script>
+	const filtersButton = document.querySelector(".filters-button") as HTMLButtonElement;
+	const checkboxes = document.querySelector(".checkboxes") as HTMLDivElement;
+
+	filtersButton.addEventListener("click", () => {
+		if (checkboxes.style.height === "auto") {
+			checkboxes.style.height = "0";
+			checkboxes.style.transform = "scaleY(0)";
+		} else {
+			checkboxes.style.height = "auto";
+			checkboxes.style.transform = "scaleY(1)";
+		}
+	});
+</script>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		min-height: 100svh;
+		margin: 0 auto;
+	}
+
+	header {
+		width: calc(100svw - 2rem);
+		max-width: var(--max-width);
+		padding: var(--size-sm) var(--size-sm) var(--size-xs) var(--size-sm);
+		background-color: #16a9ff09;
+		border-bottom: 1px solid #16a9ff15;
+	}
+
+	.title {
+		font-size: 1.5em;
+		margin: 0.5em 0;
+		padding: 0 0 0.5em 0;
+		color: var(--color-text);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.projects {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 1rem;
+		width: 100%;
+	}
+
+	.checkboxes {
+		position: absolute;
+		top: 3.4em;
+		right: 0;
+		width: 100%;
+		height: 0;
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+		padding: var(--size-md);
+		border-radius: var(--radius-xs);
+		border: 1px solid var(--color-border);
+		background-color: var(--color-surface);
+		box-sizing: border-box;
+		transition: all 0.3s ease;
+		transform: scaleY(0);
+		transform-origin: top;
+	}
+
+	.filters {
+		position: relative;
+		width: 100%;
+		border-top: 1px solid var(--color-border);
+		margin-top: 1rem;
+		padding: var(--size-xs) 0 0 0;
+	}
+
+	.filters-button {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.85em;
+		margin: 0.5em 0;
+		padding: var(--size-sm) var(--size-sm);
+		border-radius: var(--radius-xs);
+		background-color: transparent;
+		border: none;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		color: var(--color-text);
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:hover {
+			background-color: var(--color-surface-secondary-hover);
+		}
+	}
+
+	.icon {
+		width: var(--size-lg);
+		height: var(--size-lg);
+	}
+
+	.project {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		border-radius: var(--radius-xs);
+		padding: var(--size-xs) var(--size-md) var(--size-xs) var(--size-xs);
+		background: linear-gradient(
+			135deg,
+			var(--color-surface-secondary),
+			var(--color-surface),
+			var(--color-surface-secondary)
+		);
+		border: 1px solid var(--color-border);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		color: var(--color-text);
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:hover:not(.project-checked) {
+			background: linear-gradient(
+				135deg,
+				var(--color-surface-secondary-hover),
+				var(--color-surface-hover),
+				var(--color-surface-secondary-hover)
+			);
+			color: var(--color-text);
+			border-color: var(--color-border-hover);
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			border-radius: var(--radius-xs);
+		}
+	}
+</style>
