@@ -1,20 +1,34 @@
 ---
+import { type Icon as IconType } from "@lucide/astro";
 interface Props {
 	title: string;
 	icon?: typeof IconType;
 	color?: "primary" | "secondary";
 	size?: "small" | "medium" | "large";
+	type?: "button" | "link";
+	href?: string;
 }
-import { type Icon as IconType } from "@lucide/astro";
-const { title, icon: Icon, color, size } = Astro.props;
+const { title, icon: Icon, color, size, type, href } = Astro.props;
 ---
 
-<button
-	class={`button ${color === "primary" ? "button-primary" : "button-secondary"} ${size === "small" ? "button-small" : size === "large" ? "button-large" : "button-medium"}`}
->
-	{Icon && <Icon class="icon" />}
-	{title}
-</button>
+{
+	type === "link" ? (
+		<a
+			href={href}
+			class={`link ${color === "primary" ? "button-primary" : "button-secondary"} ${size === "small" ? "button-small" : size === "large" ? "button-large" : "button-medium"}`}
+		>
+			{Icon && <Icon class="icon" />}
+			{title}
+		</a>
+	) : (
+		<button
+			class={`button ${color === "primary" ? "button-primary" : "button-secondary"} ${size === "small" ? "button-small" : size === "large" ? "button-large" : "button-medium"}`}
+		>
+			{Icon && <Icon class="icon" />}
+			{title}
+		</button>
+	)
+}
 
 <style>
 	.button {
@@ -87,5 +101,18 @@ const { title, icon: Icon, color, size } = Astro.props;
 		padding: 1rem 2.5rem;
 		font-size: 1.25rem;
 		border-radius: 8px;
+	}
+
+	.link {
+		display: flex;
+		align-items: center;
+		max-width: max-content;
+		gap: 0.5rem;
+		background: var(--color-accent);
+		border: none;
+		color: var(--color-text);
+		text-decoration: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
 	}
 </style>
