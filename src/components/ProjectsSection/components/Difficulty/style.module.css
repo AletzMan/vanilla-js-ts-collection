@@ -1,0 +1,96 @@
+.difficulty-container {
+}
+
+.difficulties {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.title {
+	font-size: 1em;
+	font-weight: 500;
+	margin: 0.5em 0;
+	color: var(--color-text);
+}
+
+.check {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--size-xl);
+	height: var(--size-xl);
+	border-radius: var(--radius-xs);
+	background: var(--color-surface);
+}
+
+.check-icon {
+	width: var(--size-lg);
+	height: var(--size-lg);
+	opacity: 0;
+}
+
+.checkbox {
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+}
+
+.difficulty {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	border-radius: var(--radius-xs);
+	padding: var(--size-xs) var(--size-md) var(--size-xs) var(--size-xs);
+	background: linear-gradient(
+		135deg,
+		var(--color-surface-secondary),
+		var(--color-surface),
+		var(--color-surface-secondary)
+	);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	color: var(--color-text);
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover:not(.difficulty-checked) {
+		background: linear-gradient(
+			135deg,
+			var(--color-surface-secondary-hover),
+			var(--color-surface-hover),
+			var(--color-surface-secondary-hover)
+		);
+		color: var(--color-text);
+		border-color: var(--color-border-hover);
+	}
+}
+
+.difficulty-checked {
+	background: linear-gradient(135deg, #b5e55d30, #c9e79030, #b5e55d30);
+	color: var(--color-text);
+	border-color: #6a9121;
+
+	.check {
+		background: #6a912199;
+	}
+
+	.check-icon {
+		color: #ffffff;
+		opacity: 1;
+	}
+}
+
+.difficulty-content {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.count {
+	color: var(--color-text-secondary);
+	font-size: var(--size-md);
+}
