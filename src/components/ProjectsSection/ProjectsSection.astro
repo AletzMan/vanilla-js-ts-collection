@@ -1,33 +1,40 @@
 ---
 import Input from "../Input.astro";
 import { Funnel, SearchIcon, ChevronDown } from "@lucide/astro";
-import Categories from "./Categories.astro";
-import Difficulty from "./Difficulty.astro";
-import Languages from "./Languages.astro";
-import { projects } from "../../data/proyects";
+import Tag from "../HeroSection/Tag.astro";
+import { projectsFiltered } from "../../store/store";
+import { Categories } from "./components/Categories/Categories";
+import { Languages } from "./components/Languages/Languages";
+import { Difficulty } from "./components/Difficulty/Difficulty";
 ---
 
 <section id="projects">
 	<header>
 		<h2 class="title">Explora los proyectos</h2>
 		<Input type="search" placeholder="Buscar proyectos" size="large" icon={SearchIcon} />
-		<Categories />
+		<Categories client:load />
 		<div class="filters">
 			<button class="filters-button"
 				><Funnel class="icon" /> Filtros Avanzados<ChevronDown class="icon" /></button
 			>
 			<div class="checkboxes">
-				<Difficulty />
-				<Languages />
+				<Languages client:load />
+				<Difficulty client:load />
 			</div>
 		</div>
 	</header>
 	<div class="projects">
 		{
-			projects.map((project) => (
+			projectsFiltered.get().map((project) => (
 				<div class="project">
 					<img src={project.image} alt={project.name} />
 					<h2>{project.name}</h2>
+					<p>{project.description}</p>
+					<div class="tags">
+						{project.tags.map((tag) => (
+							<Tag title={tag} size="small" radius="xsmall" />
+						))}
+					</div>
 				</div>
 			))
 		}
@@ -35,8 +42,11 @@ import { projects } from "../../data/proyects";
 </section>
 
 <script>
+	import { projectsFiltered } from "../../store/store";
 	const filtersButton = document.querySelector(".filters-button") as HTMLButtonElement;
 	const checkboxes = document.querySelector(".checkboxes") as HTMLDivElement;
+	const projects = projectsFiltered.get();
+	console.log(projects);
 
 	filtersButton.addEventListener("click", () => {
 		if (checkboxes.style.height === "auto") {
@@ -46,6 +56,9 @@ import { projects } from "../../data/proyects";
 			checkboxes.style.height = "auto";
 			checkboxes.style.transform = "scaleY(1)";
 		}
+	});
+	projectsFiltered.subscribe((projects) => {
+		console.log(projects);
 	});
 </script>
 
@@ -57,15 +70,16 @@ import { projects } from "../../data/proyects";
 		gap: 1rem;
 		width: 100%;
 		min-height: 100svh;
+		max-width: var(--max-width);
 		margin: 0 auto;
 	}
 
 	header {
-		width: calc(100svw - 2rem);
-		max-width: var(--max-width);
+		width: 100%;
 		padding: var(--size-sm) var(--size-sm) var(--size-xs) var(--size-sm);
 		background-color: #16a9ff09;
 		border-bottom: 1px solid #16a9ff15;
+		box-sizing: border-box;
 	}
 
 	.title {
@@ -78,9 +92,22 @@ import { projects } from "../../data/proyects";
 
 	.projects {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		gap: 1rem;
+		grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+		padding: var(--size-sm);
 		width: 100%;
+		max-width: var(--max-width);
+		box-sizing: border-box;
+		gap: 1rem;
+		background-color: #d7d7f003;
+		opacity: 0.8;
+		background-size: 10px 10px;
+		background-image: repeating-linear-gradient(
+			45deg,
+			#cbcdfc00 0,
+			#cbcdfc30 1px,
+			#e5e5f703 0,
+			#e5e5f700 50%
+		);
 	}
 
 	.checkboxes {
@@ -109,6 +136,7 @@ import { projects } from "../../data/proyects";
 		border-top: 1px solid var(--color-border);
 		margin-top: 1rem;
 		padding: var(--size-xs) 0 0 0;
+		z-index: 10;
 	}
 
 	.filters-button {
@@ -170,6 +198,12 @@ import { projects } from "../../data/proyects";
 			width: 100%;
 			height: auto;
 			border-radius: var(--radius-xs);
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.25rem;
 		}
 	}
 </style>
