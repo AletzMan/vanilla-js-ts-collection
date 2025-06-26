@@ -1,18 +1,27 @@
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { categories } from "../../../../data/filters";
 import { projects } from "../../../../data/proyects";
-import { categorySelected, projectsFiltered } from "../../../../store/store";
+import { categorySelected } from "../../../../store/store";
 import styles from "./styles.module.css";
 
 export function Categories() {
 	const [categorySelect, setCategorySelect] = useState("Todos");
-	const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+	useEffect(() => {
+		const unsubscribe = categorySelected.subscribe((value) => {
+			setCategorySelect(value);
+		});
+		return () => {
+			unsubscribe();
+		};
+	}, []);
+
+	const handleCategoryChange = (e: MouseEvent<HTMLInputElement>) => {
 		const value = (e.target as HTMLInputElement).value;
 		categorySelected.set(value);
-		const categoryName = categories.find((category) => category.name === value)?.value;
-		projectsFiltered.set(projects.filter((project) => project.category === categoryName));
 		setCategorySelect(value);
 	};
+
 	return (
 		<div className={styles.categoriesContainer}>
 			<h2 className={styles.title}>Categorias</h2>
@@ -33,9 +42,9 @@ export function Categories() {
 								className={styles.radioCategory}
 								id={category.name}
 								value={category.name}
-								onChange={handleCategoryChange}
+								onClick={handleCategoryChange}
 							/>
-							<Icon />
+							<Icon className={styles.icon} />
 							{category.name}
 							<span className={styles.count}>
 								(
