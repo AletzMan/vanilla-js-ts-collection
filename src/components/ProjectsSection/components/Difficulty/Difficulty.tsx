@@ -2,11 +2,19 @@ import { CheckIcon } from "lucide-react";
 import { difficulties } from "../../../../data/filters";
 import { projects } from "../../../../data/proyects";
 import styles from "./style.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { difficultySelected } from "../../../../store/store";
 
 export function Difficulty() {
 	const [difficultySelect, setDifficultySelect] = useState<string[]>([]);
+
+	useEffect(() => {
+		const unsubscribe = difficultySelected.subscribe((value) =>
+			setDifficultySelect(value as string[])
+		);
+		return () => unsubscribe();
+	}, []);
+
 	const handleDifficultyChange = (value: string) => {
 		setDifficultySelect((prev) => {
 			if (prev.includes(value)) {
@@ -15,7 +23,13 @@ export function Difficulty() {
 				return [...prev, value];
 			}
 		});
-		difficultySelected.set(value);
+		let difficulty = difficultySelect;
+		if (difficulty.includes(value)) {
+			difficulty = difficulty.filter((diff) => diff !== value);
+		} else {
+			difficulty = [...difficulty, value];
+		}
+		difficultySelected.set(difficulty);
 	};
 	return (
 		<div className={styles["difficulty-container"]}>
@@ -23,6 +37,7 @@ export function Difficulty() {
 			<div className={styles.difficulties}>
 				{difficulties.map((difficulty) => (
 					<button
+						key={difficulty.value}
 						className={`${styles.difficulty}  ${
 							difficultySelect.includes(difficulty.value) ? styles["difficulty-checked"] : ""
 						}`}
