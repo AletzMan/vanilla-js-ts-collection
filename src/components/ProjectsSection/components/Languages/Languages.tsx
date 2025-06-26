@@ -2,11 +2,16 @@ import { CheckIcon } from "lucide-react";
 import { projects } from "../../../../data/proyects";
 import { languages } from "../../../../data/filters";
 import styles from "./style.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { languageSelected } from "../../../../store/store";
 
 export function Languages() {
 	const [languageSelect, setLanguageSelect] = useState<string[]>([]);
+	useEffect(() => {
+		const unsubscribe = languageSelected.subscribe((value) => setLanguageSelect(value as string[]));
+		return () => unsubscribe();
+	}, []);
+
 	const handleLanguageChange = (value: string) => {
 		setLanguageSelect((prev) => {
 			if (prev.includes(value)) {
@@ -15,8 +20,15 @@ export function Languages() {
 				return [...prev, value];
 			}
 		});
-		languageSelected.set(value);
+		let language = languageSelect;
+		if (language.includes(value)) {
+			language = language.filter((lang) => lang !== value);
+		} else {
+			language = [...language, value];
+		}
+		languageSelected.set(language);
 	};
+
 	return (
 		<div className={styles["language-container"]}>
 			<h2 className={styles.title}>Lenguajes</h2>

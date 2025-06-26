@@ -1,7 +1,7 @@
 .title {
-	font-size: 1em;
-	font-weight: 500;
-	margin: 0.5em 0;
+	font-size: 0.85em;
+	font-weight: 400;
+	margin: 0.25em 0;
 	color: var(--color-text);
 }
 
@@ -23,15 +23,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--size-xl);
-	height: var(--size-xl);
+	width: var(--size-lg);
+	height: var(--size-lg);
 	border-radius: var(--radius-xs);
 	background: var(--color-surface);
 }
 
 .check-icon {
-	width: var(--size-lg);
-	height: var(--size-lg);
+	width: var(--size-md);
+	height: var(--size-md);
 	opacity: 0;
 }
 
@@ -83,8 +83,8 @@
 }
 
 .icon {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: var(--size-lg);
+	height: var(--size-lg);
 }
 
 .count {
@@ -95,5 +95,6 @@
 .language-content {
 	display: flex;
 	align-items: center;
+	font-size: 0.85em;
 	gap: 0.5rem;
 }
