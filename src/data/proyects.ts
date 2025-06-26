@@ -2,6 +2,7 @@ import type { Project } from "./types";
 
 export const projects: Project[] = [
 	{
+		id: 1,
 		name: "Calculadora",
 		description:
 			"Calculadora avanzada con memoria, operaciones básicas, raíz cuadrada, exponente, porcentaje y función 1/x (inverso multiplicativo). Interfaz intuitiva y soporte para teclado.",
@@ -17,6 +18,7 @@ export const projects: Project[] = [
 		urlDemo: "https://aletzman.github.io/calculator/",
 	},
 	{
+		id: 2,
 		name: "PaintBoard",
 		description:
 			"Lienzo interactivo tipo Paint para dibujar libremente con el mouse, selección de colores y control de grosor de trazo.",
@@ -32,6 +34,7 @@ export const projects: Project[] = [
 		urlDemo: "https://aletzman.github.io/paintboard/",
 	},
 	{
+		id: 3,
 		name: "Reloj Analógico",
 		description:
 			"Reloj clásico de agujas animadas con diseño responsivo, actualizado en tiempo real usando transformaciones CSS.",
@@ -47,6 +50,7 @@ export const projects: Project[] = [
 		urlDemo: "https://aletzman.github.io/analog-clock/",
 	},
 	{
+		id: 4,
 		name: "Reloj Digital",
 		description:
 			"Reloj digital con visualización en tiempo real, cronómetro funcional y cuenta regresiva personalizable.",
@@ -62,6 +66,7 @@ export const projects: Project[] = [
 		urlDemo: "https://aletzman.github.io/digital-clock-vanilla/",
 	},
 	{
+		id: 5,
 		name: "Bubble Shooter Game",
 		description:
 			"Juego arcade de disparo de burbujas. Apunta y lanza a las burbujas del mismo color que la objetivo. No tiene niveles, el objetivo es alcanzar el mayor puntaje posible.",
