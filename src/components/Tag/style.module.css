@@ -1,0 +1,47 @@
+.tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.25rem 1rem;
+	background: var(--color-surface-secondary);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.tag-icon {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+}
+.tag-title {
+	color: var(--color-text);
+	width: max-content;
+}
+.tag-size-small {
+	font-size: 0.75rem;
+	font-weight: 300;
+	padding: 0.25rem 0.5rem;
+}
+.tag-size-medium {
+	font-size: 1rem;
+	font-weight: 400;
+	padding: 0.25rem 1rem;
+}
+.tag-size-large {
+	font-size: 1.25rem;
+	font-weight: 400;
+	padding: 0.5rem 1rem;
+}
+
+.tag-radius-xsmall {
+	border-radius: var(--radius-xs);
+}
+.tag-radius-small {
+	border-radius: var(--radius-sm);
+}
+.tag-radius-medium {
+	border-radius: var(--radius-md);
+}
+.tag-radius-large {
+	border-radius: var(--radius-lg);
+}
