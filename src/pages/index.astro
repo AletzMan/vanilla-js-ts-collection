@@ -1,6 +1,6 @@
 ---
 import HeroSection from "../components/HeroSection/HeroSection.astro";
-import ProjectsSection from "../components/ProjectsSection/ProjectsSection.astro";
+import { ProjectsSection } from "../components/ProjectsSection/ProjectSection";
 import Layout from "../layouts/Layout.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -9,5 +9,5 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
 	{/*<HeroSection />*/}
-	<ProjectsSection />
+	<ProjectsSection client:load />
 </Layout>
