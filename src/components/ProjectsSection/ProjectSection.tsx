@@ -12,7 +12,7 @@ import { Categories } from "./components/Categories/Categories";
 import { Languages } from "./components/Languages/Languages";
 import { Difficulty } from "./components/Difficulty/Difficulty";
 import styles from "./style.module.css";
-import Input from "../Input/Input";
+import { Input } from "../Input/Input";
 import Tag from "../Tag/Tag";
 import { categories } from "../../data/filters";
 import { projects } from "../../data/proyects";
@@ -25,7 +25,7 @@ export function ProjectsSection() {
 	const [difficulty, setDifficulty] = useState<string[]>(difficultySelected.get());
 	const [category, setCategory] = useState<string>(categorySelected.get());
 	const [showFilters, setShowFilters] = useState(false);
-	const [sort, setSort] = useState<string>("name");
+	const [sort, setSort] = useState<string>("id");
 	const [sortDirection, setSortDirection] = useState<string>("asc");
 
 	const filtersRef = useRef<HTMLDivElement>(null);
@@ -61,6 +61,12 @@ export function ProjectsSection() {
 			return isLanguageMatch && isDifficultyMatch && isCategoryMatch && isSearchMatch;
 		});
 		switch (sort) {
+			case "id": {
+				if (sortDirection === "desc") {
+					return filtered.sort((a, b) => b.id - a.id);
+				}
+				return filtered.sort((a, b) => a.id - b.id);
+			}
 			case "name": {
 				if (sortDirection === "desc") {
 					return filtered.sort((a, b) => b.name.localeCompare(a.name));
@@ -117,14 +123,16 @@ export function ProjectsSection() {
 	return (
 		<section id="projects" className={styles.section}>
 			<header className={styles.header}>
-				<h2 className={styles.title}>Explora los proyectos</h2>
-				<Input
-					type="search"
-					placeholder="Buscar proyectos"
-					size="large"
-					onChange={(e) => setSearch(e.target.value)}
-					icon={<SearchIcon className={styles.icon} />}
-				/>
+				<div className={styles["title-container"]}>
+					<h2 className={styles["title-container-title"]}>Explora los proyectos</h2>
+					<Input
+						type="search"
+						placeholder="Buscar proyectos"
+						size="large"
+						onChange={(e) => setSearch(e.target.value)}
+						icon={<SearchIcon className={styles.icon} />}
+					/>{" "}
+				</div>
 
 				<Categories />
 				<div className={styles.options}>
@@ -161,6 +169,9 @@ export function ProjectsSection() {
 							)}
 						</button>
 						<select className={styles.sort} onChange={(e) => setSort(e.target.value)}>
+							<option value="id" className={styles["sort-option"]}>
+								ID
+							</option>
 							<option className={styles["sort-option"]} value="name">
 								Nombre
 							</option>

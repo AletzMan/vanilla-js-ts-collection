@@ -7,32 +7,48 @@ section {
 	min-height: 100svh;
 	max-width: var(--max-width);
 	margin: 0 auto;
-}
-
-header {
-	width: 100%;
-	padding: var(--size-sm) var(--size-sm) var(--size-xs) var(--size-sm);
-	background-color: #16a9ff09;
-	border-bottom: 1px solid #16a9ff15;
 	box-sizing: border-box;
 }
 
-.title {
-	font-size: 1.5em;
+.header {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	padding: var(--size-sm) var(--size-sm) var(--size-xs) var(--size-sm);
+	background-color: #010d14;
+	border-bottom: 1px solid #16a9ff15;
+	box-sizing: border-box;
+	z-index: 10;
+}
+
+.title-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.75rem;
+	width: 100%;
+	box-sizing: border-box;
 	margin: 0.5em 0;
 	padding: 0 0 0.5em 0;
-	color: var(--color-text);
 	border-bottom: 1px solid var(--color-border);
+}
+
+.title-container-title {
+	font-size: 1.5em;
+	margin: 0;
+	min-width: max-content;
+	color: var(--color-text);
 }
 
 .projects {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 	padding: var(--size-lg);
 	width: 100%;
 	max-width: var(--max-width);
 	box-sizing: border-box;
 	gap: var(--size-lg);
+	border: 1px solid var(--color-border);
 	background-color: #d7d7f003;
 	opacity: 0.8;
 	background-size: 10px 10px;
