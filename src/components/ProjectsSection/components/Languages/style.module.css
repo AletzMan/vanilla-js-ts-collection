@@ -1,3 +1,7 @@
+.language-container {
+	font-family: var(--font-family);
+}
+
 .title {
 	font-size: 0.85em;
 	font-weight: 400;
@@ -65,6 +69,10 @@
 		color: var(--color-text);
 		border-color: var(--color-border-hover);
 	}
+}
+
+.language-name {
+	font-weight: 300;
 }
 
 .language-checked {

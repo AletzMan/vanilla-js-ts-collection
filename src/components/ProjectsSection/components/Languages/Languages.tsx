@@ -45,8 +45,8 @@ export function Languages() {
 							<div className={styles.check}>
 								<CheckIcon className={styles["check-icon"]} />
 							</div>
-							{language.icon && <language.icon className={styles["icon"]} />}
-							{language.name}
+							{/*language.icon && <language.icon className={styles["icon"]} />*/}
+							<span className={styles["language-name"]}>{language.name}</span>
 						</div>
 						<span className={styles["count"]}>
 							({projects.filter((project) => project.language === language.value).length})
