@@ -25,6 +25,14 @@ export default function Project({ project }: { project: Project }) {
 				<picture className={styles.picture}>
 					{project.featured && <StarIcon className={styles["featured-icon"]} />}
 					<img src={project.image} alt={project.name} />
+					<a
+						href={`details/${project.id}`}
+						target="_parent"
+						rel="noopener noreferrer"
+						className={styles["button-details"]}
+					>
+						Detalles del proyecto
+					</a>
 				</picture>
 			</header>
 			<div className={styles.content}>
@@ -41,7 +49,7 @@ export default function Project({ project }: { project: Project }) {
 				<h2>
 					{project.name} {IconLanguage}
 				</h2>
-				<p>{project.description}</p>
+				{<p>{project.description}</p>}
 				<div className={styles.tags}>
 					{project.tags.map((tag) => (
 						<Tag title={tag} size="small" radius="xsmall" key={tag} type="tag" />
