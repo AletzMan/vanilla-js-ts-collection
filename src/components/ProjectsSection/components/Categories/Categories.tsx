@@ -32,9 +32,20 @@ export function Categories() {
 						<label
 							key={category.name}
 							htmlFor={category.name}
-							className={`${styles.category} ${
-								categorySelect === category.name ? styles["category-checked"] : ""
-							}`}
+							className={`${styles.category}  `}
+							style={
+								categorySelect === category.name
+									? {
+											background: `linear-gradient(135deg, ${category.color}20, ${category.color}40, ${category.color}20)`,
+											border: `1px solid ${category.color}70`,
+											color: category.color,
+									  }
+									: {
+											background:
+												"linear-gradient(135deg, var(--color-surface-secondary), var(--color-surface), var(--color-surface-secondary))",
+											border: `1px solid var(--color-border)`,
+									  }
+							}
 						>
 							<input
 								type="radio"
@@ -45,14 +56,16 @@ export function Categories() {
 								onClick={handleCategoryChange}
 							/>
 							<Icon className={styles.icon} />
-							{category.name}
-							<span className={styles.count}>
-								(
-								{category.value === "all"
-									? projects.length
-									: projects.filter((project) => project.category === category.value).length}
-								)
-							</span>
+							<div className={styles["category-content"]}>
+								{category.name}
+								<span className={styles.count}>
+									(
+									{category.value === "all"
+										? projects.length
+										: projects.filter((project) => project.category === category.value).length}
+									)
+								</span>
+							</div>
 						</label>
 					);
 				})}
