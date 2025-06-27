@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 	gap: 0.5rem;
 	border-radius: var(--radius-xs);
 	background: linear-gradient(
@@ -13,19 +14,13 @@
 	border: 1px solid var(--color-border);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	color: var(--color-text);
-	cursor: pointer;
 	transition: all 0.3s ease;
 	overflow: hidden;
 
 	&:hover:not(.project-checked) {
-		background: linear-gradient(
-			135deg,
-			var(--color-surface-secondary-hover),
-			var(--color-surface-hover),
-			var(--color-surface-secondary-hover)
-		);
 		color: var(--color-text);
 		border-color: var(--color-border-hover);
+		box-shadow: 0 0 2px 2px rgba(58, 58, 58, 0.2);
 
 		&:hover img {
 			transform: scale(1.05);
@@ -33,18 +28,36 @@
 	}
 
 	.picture {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-self: flex-start;
+		position: relative;
 		height: 200px;
 		width: 100%;
 		overflow: hidden;
+		border-bottom: 1px solid var(--color-border);
 
 		img {
 			width: 100%;
+			height: 100%;
 			object-position: top left;
 			object-fit: cover;
 			border-radius: var(--radius-xs);
 			transition: all 0.3s ease;
 		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(0deg, #000000 0%, #00000080 10%, #00000000 50%, #00000000 100%);
+		}
 	}
+
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
@@ -52,38 +65,104 @@
 	}
 }
 
+.featured-icon {
+	position: absolute;
+	bottom: 0.5rem;
+	right: 0.5rem;
+	width: var(--size-lg);
+	height: var(--size-lg);
+	z-index: 1;
+	color: #fbee3c;
+	fill: #fbee3c;
+}
+
 .content {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	align-items: flex-start;
+	box-sizing: border-box;
+	height: 100%;
+	max-height: 210px;
+	gap: 0.25rem;
 	padding: var(--size-xs) var(--size-md);
 
+	.content-id {
+		font-size: 0.9em;
+		color: #8dc707;
+	}
+
 	h2 {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		font-size: 1.25em;
 		margin: 0;
+
+		svg {
+			width: var(--size-lg);
+			height: var(--size-lg);
+		}
 	}
 
 	p {
 		font-size: 0.85em;
-		margin: 0;
+		margin: 0 0 var(--size-xs) 0;
 		color: var(--color-text-secondary);
 	}
 }
 
-.footer {
+.content-header {
 	display: flex;
-	flex-direction: row;
+	align-items: center;
 	justify-content: space-between;
-	gap: 0.5rem;
 	width: 100%;
-	padding: var(--size-xs) var(--size-2xl);
-	border-top: 1px solid var(--color-border);
+	gap: 0.5rem;
+	font-size: 0.85em;
+	color: var(--color-text-secondary);
+}
 
-	.footer-date {
+.content-difficulty {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.85em;
+	border-radius: var(--radius-xs);
+	padding: var(--size-xs) var(--size-sm);
+	color: var(--color-text-secondary);
+
+	&.content-difficulty-easy {
+		color: #10b981;
+		background-color: #10b9811a;
+	}
+
+	&.content-difficulty-intermediate {
+		color: #fbb83c;
+		background-color: #fbb83c1a;
+	}
+
+	&.content-difficulty-advanced {
+		color: #ef7544;
+		background-color: #ef75441a;
+	}
+
+	&.content-difficulty-expert {
+		color: #f51717;
+		background-color: #f517171a;
+	}
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-sizing: border-box;
+	border-bottom: 1px solid var(--color-border);
+
+	.header-date {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		font-size: 0.8em;
+		font-size: 0.75em;
 		font-weight: 300;
 
 		svg {
@@ -92,8 +171,51 @@
 		}
 	}
 
-	.footer-category {
+	.header-category {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 		font-size: 0.85em;
-		color: var(--color-text-secondary);
+
+		svg {
+			width: var(--size-lg);
+			height: var(--size-lg);
+		}
+	}
+}
+
+.header-info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	width: 100%;
+	padding: var(--size-sm) var(--size-md);
+	border-bottom: 1px solid var(--color-border);
+	background-color: #041324;
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 0.5rem;
+	width: 100%;
+	padding: var(--size-sm) var(--size-md);
+	box-sizing: border-box;
+	border-top: 1px solid var(--color-border);
+}
+
+.footer-link {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.85em;
+	color: var(--color-text-secondary);
+	text-decoration: none;
+	transition: all 0.3s ease;
+
+	&:hover {
+		color: var(--color-text);
 	}
 }
