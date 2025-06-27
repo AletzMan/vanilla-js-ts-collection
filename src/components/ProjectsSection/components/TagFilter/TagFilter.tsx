@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 
 interface TagFilterProps {
 	text: string;
-	type: "language" | "difficulty" | "category" | "default";
+	type: "language" | "difficulty" | "category" | "search" | "default";
 	onClick: () => void;
 }
 

@@ -14,6 +14,12 @@
 	font-weight: 400;
 }
 
+.tag-filter-search {
+	background-color: #ffffff10;
+	border: 1px solid #ffffff35;
+	padding: 0.39em 0.5rem;
+}
+
 .tag-filter-language {
 	background-color: #5dd1e530;
 	border: 1px solid #5dd1e599;
