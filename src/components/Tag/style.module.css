@@ -16,9 +16,10 @@
 .tag-title {
 	color: var(--color-text);
 	width: max-content;
+	text-transform: capitalize;
 }
 .tag-size-small {
-	font-size: 0.75rem;
+	font-size: 0.7rem;
 	font-weight: 300;
 	padding: 0.25rem 0.5rem;
 }
