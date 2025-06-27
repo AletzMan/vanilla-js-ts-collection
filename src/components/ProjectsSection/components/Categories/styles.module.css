@@ -25,12 +25,12 @@ label {
 	gap: 0.05rem;
 	font-size: 0.8rem;
 	position: relative;
-	padding: 0.25rem 0.5rem;
+	padding: 0 var(--size-xs);
 	border-radius: var(--radius-xs);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	color: var(--color-text);
 	cursor: pointer;
-	transition: all 0.3s ease;
+	transition: all 0.3s ease !important;
 
 	&:hover:not(.category-checked) {
 		background: linear-gradient(
@@ -38,9 +38,9 @@ label {
 			var(--color-surface-secondary-hover),
 			var(--color-surface-hover),
 			var(--color-surface-secondary-hover)
-		);
+		) !important;
 		color: var(--color-text);
-		border-color: var(--color-border-hover);
+		border-color: var(--color-border-hover) !important;
 	}
 }
 
@@ -66,9 +66,7 @@ label {
 }
 
 .category-checked {
-	.icon {
-		opacity: 1;
-	}
+	opacity: 1;
 }
 
 input[type="radio"] {
