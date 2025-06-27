@@ -6,6 +6,7 @@ import {
 	ChevronUp,
 	ArrowUpWideNarrow,
 	ArrowDownWideNarrow,
+	SearchX,
 } from "lucide-react";
 import { categorySelected, difficultySelected, languageSelected } from "../../store/store";
 import { Categories } from "./components/Categories/Categories";
@@ -80,10 +81,15 @@ export function ProjectsSection() {
 				return filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 			}
 			case "difficulty": {
+				const difficulties = ["expert", "advanced", "intermediate", "easy"];
 				if (sortDirection === "desc") {
-					return filtered.sort((a, b) => b.difficulty.localeCompare(a.difficulty));
+					return filtered.sort(
+						(a, b) => difficulties.indexOf(b.difficulty) - difficulties.indexOf(a.difficulty)
+					);
 				}
-				return filtered.sort((a, b) => a.difficulty.localeCompare(b.difficulty));
+				return filtered.sort(
+					(a, b) => difficulties.indexOf(a.difficulty) - difficulties.indexOf(b.difficulty)
+				);
 			}
 			case "language": {
 				if (sortDirection === "desc") {
@@ -128,7 +134,8 @@ export function ProjectsSection() {
 					<Input
 						type="search"
 						placeholder="Buscar proyectos"
-						size="large"
+						size="medium"
+						value={search}
 						onChange={(e) => setSearch(e.target.value)}
 						icon={<SearchIcon className={styles.icon} />}
 					/>{" "}
@@ -187,50 +194,69 @@ export function ProjectsSection() {
 						</select>
 					</div>
 				</div>
-				<div className={styles["tags-container"]}>
-					{category !== "Todos" && (
-						<TagFilter
-							text={category}
-							type="category"
-							onClick={() => categorySelected.set("Todos")}
-						/>
-					)}
-					{language.length > 0 &&
-						language.map((lang) => (
+				{(language.length > 0 ||
+					difficulty.length > 0 ||
+					category !== "Todos" ||
+					search.length > 0) && (
+					<div className={styles["tags-container"]}>
+						{search.length > 0 && (
+							<TagFilter text={search} type="search" onClick={() => setSearch("")} />
+						)}
+						{category !== "Todos" && (
 							<TagFilter
-								key={lang}
-								text={lang}
-								type="language"
-								onClick={() => languageSelected.set(language.filter((l) => l !== lang))}
+								text={category}
+								type="category"
+								onClick={() => categorySelected.set("Todos")}
 							/>
-						))}
-					{difficulty.length > 0 &&
-						difficulty.map((diff) => (
+						)}
+						{language.length > 0 &&
+							language.map((lang) => (
+								<TagFilter
+									key={lang}
+									text={lang}
+									type="language"
+									onClick={() => languageSelected.set(language.filter((l) => l !== lang))}
+								/>
+							))}
+						{difficulty.length > 0 &&
+							difficulty.map((diff) => (
+								<TagFilter
+									key={diff}
+									text={diff}
+									type="difficulty"
+									onClick={() => difficultySelected.set(difficulty.filter((d) => d !== diff))}
+								/>
+							))}
+						{(language.length > 0 || difficulty.length > 0 || category !== "Todos") && (
 							<TagFilter
-								key={diff}
-								text={diff}
-								type="difficulty"
-								onClick={() => difficultySelected.set(difficulty.filter((d) => d !== diff))}
+								text="Limpiar filtros"
+								type="default"
+								onClick={() => {
+									languageSelected.set([]);
+									difficultySelected.set([]);
+									categorySelected.set("Todos");
+									setSearch("");
+								}}
 							/>
-						))}
-					{(language.length > 0 || difficulty.length > 0 || category !== "Todos") && (
-						<TagFilter
-							text="Limpiar filtros"
-							type="default"
-							onClick={() => {
-								languageSelected.set([]);
-								difficultySelected.set([]);
-								categorySelected.set("Todos");
-							}}
-						/>
-					)}
-				</div>
+						)}
+					</div>
+				)}
 			</header>
 			<span className={styles.count}>Mostrando {filteredProjects.length} proyectos</span>
-			<div className={styles.projects}>
+			<div
+				className={`${styles.projects} ${
+					filteredProjects.length === 0 ? styles["not-found-projects"] : ""
+				} scrollBar`}
+			>
 				{filteredProjects.map((project) => (
 					<Project project={project} key={project.name} />
 				))}
+				{filteredProjects.length === 0 && (
+					<p className={styles["not-found-projects-message"]}>
+						<SearchX className={styles["not-found-projects-icon"]} />
+						No se encontraron proyectos
+					</p>
+				)}
 			</div>
 		</section>
 	);

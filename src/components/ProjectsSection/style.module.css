@@ -14,7 +14,7 @@ section {
 	position: sticky;
 	top: 0;
 	width: 100%;
-	padding: var(--size-sm) var(--size-sm) var(--size-xs) var(--size-sm);
+	padding: 0 var(--size-sm) 0 var(--size-sm);
 	background-color: #010d14;
 	border-bottom: 1px solid #16a9ff15;
 	box-sizing: border-box;
@@ -34,22 +34,25 @@ section {
 }
 
 .title-container-title {
-	font-size: 1.5em;
+	font-size: 1.2em;
 	margin: 0;
 	min-width: max-content;
 	color: var(--color-text);
 }
 
 .projects {
+	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 	padding: var(--size-lg);
 	width: 100%;
 	max-width: var(--max-width);
+	max-height: calc(100svh - 270px);
+	overflow-y: auto;
 	box-sizing: border-box;
 	gap: var(--size-lg);
 	border: 1px solid var(--color-border);
-	background-color: #d7d7f003;
+	background-color: #4e4eff00;
 	opacity: 0.8;
 	background-size: 10px 10px;
 	background-image: repeating-linear-gradient(
@@ -86,7 +89,7 @@ section {
 	justify-content: space-between;
 	margin-top: var(--size-lg);
 	border-top: 1px solid var(--color-border);
-	padding: var(--size-sm) var(--size-sm) var(--size-xs) 0;
+	padding: var(--size-sm) var(--size-sm) var(--size-sm) 0;
 }
 
 .filters {
@@ -122,7 +125,7 @@ section {
 
 .count {
 	font-size: 0.85em;
-	margin: 0.5em 0;
+	margin: 0;
 	padding: var(--size-xs) var(--size-sm);
 	border-radius: var(--radius-xs);
 	background-color: transparent;
@@ -152,7 +155,7 @@ section {
 	align-items: center;
 	justify-content: flex-start;
 	border-top: 1px solid var(--color-border);
-	padding: var(--size-md) 0 var(--size-sm) 0;
+	padding: var(--size-md) 0;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 }
@@ -200,4 +203,28 @@ section {
 .sort-icon {
 	width: var(--size-lg);
 	height: var(--size-lg);
+}
+
+.not-found-projects {
+	position: relative;
+	padding: 5em 0;
+}
+.not-found-projects-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 0.5rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.5em;
+	color: var(--color-text);
+	text-align: center;
+}
+
+.not-found-projects-icon {
+	width: 3em;
+	height: 3em;
 }
