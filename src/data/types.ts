@@ -11,8 +11,15 @@ export interface Project {
 	language: Language;
 	urlRepo: string;
 	urlDemo: string;
+	projectDetails: ProjectDetails;
 }
 
 export type Category = "game" | "utility" | "effect" | "component" | "animation";
 export type Language = "javascript" | "typescript";
-export type Difficulty = "easy" | "intermediate" | "advanced";
+export type Difficulty = "easy" | "intermediate" | "advanced" | "expert";
+export type ProjectDetails = {
+	description: string;
+	keyFeatures: string[];
+	codeHighlights: string[];
+	futureImprovements: string[];
+};
