@@ -16,7 +16,7 @@ import "@fontsource-variable/jost";
 	</body>
 </html>
 
-<style>
+<style is:global>
 	:root {
 		/* Base */
 		--color-bg: #0f0f0f;
@@ -57,6 +57,8 @@ import "@fontsource-variable/jost";
 		--radius-xl: 1.5rem;
 		--radius-2xl: 2rem;
 
+		--font-family: "Jost Variable", sans-serif;
+
 		/* Gradientes (opcional) */
 		--gradient-js-ts: linear-gradient(90deg, var(--color-js), var(--color-ts));
 	}
@@ -65,6 +67,11 @@ import "@fontsource-variable/jost";
 		box-sizing: border-box;
 		padding: 0;
 		margin: 0;
+		font-family: var(--font-family);
+	}
+
+	button {
+		cursor: pointer;
 	}
 
 	html,
@@ -73,7 +80,7 @@ import "@fontsource-variable/jost";
 		width: 100svw;
 		overflow-x: hidden;
 		height: 100%;
-		font-family: "Jost Variable", sans-serif;
+		font-family: var(--font-family);
 		background: linear-gradient(135deg, #040507, #0b121d);
 		scroll-behavior: smooth;
 	}
