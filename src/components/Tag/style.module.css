@@ -33,6 +33,22 @@
 	padding: 0.5rem 1rem;
 }
 
+.tag-type-tag {
+	background: #96cdfa20;
+	border: 1px solid #96cdfa45;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 0.15rem 0.5rem;
+
+	.tag-title {
+		color: #96cdfa;
+	}
+}
+.tag-type-default {
+	background: var(--color-surface-secondary);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .tag-radius-xsmall {
 	border-radius: var(--radius-xs);
 }

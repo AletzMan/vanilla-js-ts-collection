@@ -5,10 +5,18 @@ interface Props {
 	icon?: boolean;
 	color?: string;
 	size?: "small" | "medium" | "large";
+	type?: "default" | "tag";
 	radius?: "xsmall" | "small" | "medium" | "large";
 }
 
-export default function Tag({ title, icon, color, size = "medium", radius = "medium" }: Props) {
+export default function Tag({
+	title,
+	icon,
+	color,
+	size = "medium",
+	type = "default",
+	radius = "medium",
+}: Props) {
 	return (
 		<div
 			className={`
@@ -29,6 +37,7 @@ export default function Tag({ title, icon, color, size = "medium", radius = "med
 						? styles[`tag-radius-large`]
 						: styles[`tag-radius-medium`]
 				}
+	        ${type === "tag" ? styles[`tag-type-tag`] : styles[`tag-type-default`]}
       `}
 		>
 			{icon && (
