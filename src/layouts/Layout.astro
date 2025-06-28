@@ -12,7 +12,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="scrollBar">
 		<slot />
 	</body>
 </html>
@@ -33,7 +33,10 @@ const { title } = Astro.props;
 		--color-surface-hover: #232c36;
 		--color-surface-secondary: #0f1318;
 		--color-surface-secondary-hover: #1a2129;
-		--color-border: #28394d;
+		--color-surface-a: #040507;
+		--color-surface-b: #010d14;
+		--color-surface-c: #0b121d;
+		--color-border: #1a2736;
 		--color-border-hover: #455468;
 
 		/* Acentos */
@@ -53,7 +56,7 @@ const { title } = Astro.props;
 		--size-lg: 1rem;
 		--size-xl: 1.5rem;
 		--size-2xl: 2rem;
-		--max-width: 1261px;
+		--max-width: 1361px;
 
 		--radius-xs: 0.25rem;
 		--radius-sm: 0.5rem;
@@ -86,9 +89,8 @@ const { title } = Astro.props;
 		overflow-x: hidden;
 		height: 100%;
 		font-family: var(--font-family);
-		background: linear-gradient(135deg, #040507, #0b121d);
 		scroll-behavior: smooth;
-		scrollbar-width: none;
+		background: linear-gradient(135deg, var(--color-surface-a), var(--color-surface-b));
 	}
 
 	.scrollBar {
