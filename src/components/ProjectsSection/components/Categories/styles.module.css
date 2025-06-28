@@ -1,12 +1,14 @@
 .categories-container {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 .categories {
 	position: relative;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 	gap: 0.5rem;
+	width: 100%;
 	padding: 0;
 	overflow: hidden;
 }
@@ -23,12 +25,13 @@ label {
 	align-items: center;
 	flex-direction: row;
 	gap: 0.05rem;
-	font-size: 0.8rem;
+	font-size: 0.7rem;
+	text-transform: uppercase;
 	position: relative;
-	padding: 0 var(--size-xs);
+	padding: var(--size-xs);
 	border-radius: var(--radius-xs);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	color: var(--color-text);
+	color: var(--color-text-secondary);
 	cursor: pointer;
 	transition: all 0.3s ease !important;
 
@@ -45,8 +48,8 @@ label {
 }
 
 .icon {
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 1.75rem;
+	height: 1.5rem;
 	stroke-width: 1px;
 	opacity: 0.15;
 	color: var(--color-text);
@@ -54,7 +57,8 @@ label {
 
 .category-content {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	gap: 0.5rem;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
@@ -67,6 +71,11 @@ label {
 
 .category-checked {
 	opacity: 1;
+
+	.icon {
+		opacity: 0.6;
+		color: currentColor;
+	}
 }
 
 input[type="radio"] {

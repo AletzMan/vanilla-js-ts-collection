@@ -23,8 +23,8 @@ export function Categories() {
 	};
 
 	return (
-		<div className={styles.categoriesContainer}>
-			<h2 className={styles.title}>Categorias</h2>
+		<div className={styles["categories-container"]}>
+			{/*<h2 className={styles.title}>Categorias</h2>*/}
 			<div className={styles.categories}>
 				{categories.map((category) => {
 					const Icon = category.icon;
@@ -41,6 +41,7 @@ export function Categories() {
 											background: `linear-gradient(170deg, ${category.color}20, ${category.color}35, ${category.color}20)`,
 											border: `1px solid ${category.color}70`,
 											color: category.color,
+											fontWeight: "500",
 									  }
 									: {
 											background:
