@@ -1,0 +1,94 @@
+---
+import { projects } from "../../data/proyects";
+import Button from "../Button.astro";
+import Project from "../ProjectsSection/components/Project/Project";
+import { ArrowRightIcon } from "@lucide/astro";
+const featuredProjects = projects.filter((project) => project.featured).slice(0, 5);
+---
+
+<section class="preview-section">
+	<header class="preview-header">
+		<h2 class="section-title">Proyectos destacados</h2>
+		<p class="section-subtitle">
+			Una muestra de lo que puedes hacer con JavaScript y TypeScript puro.
+		</p>
+	</header>
+
+	<div class="preview-grid">
+		{featuredProjects.map((project) => <Project project={project} variant="preview" client:load />)}
+	</div>
+
+	<div class="cta-container">
+		<Button
+			href="/projects"
+			title="Ver todos los proyectos"
+			type="link"
+			size="medium"
+			icon={ArrowRightIcon}
+		/>
+	</div>
+</section>
+
+<style>
+	.preview-section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: var(--size-xl) var(--size-xs);
+		text-align: center;
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		background: linear-gradient(135deg, #03101f, #b1980c);
+		background-image: linear-gradient(#f1f2ff08 1px, transparent 1px),
+			linear-gradient(to right, #f1f2ff08 1px, #8a821c00 1px);
+		background-size: 20px 20px;
+	}
+
+	.preview-header {
+		margin-bottom: var(--size-2xl);
+	}
+
+	.section-title {
+		font-size: 2rem;
+		font-weight: bold;
+		margin-bottom: 0.25em;
+		color: var(--color-text);
+	}
+
+	.section-subtitle {
+		color: var(--color-text-secondary);
+		font-size: 1rem;
+	}
+
+	.preview-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+		gap: 2rem;
+		max-width: 1200px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.cta-container {
+		display: flex;
+		justify-content: center;
+		margin: 6rem 0;
+	}
+
+	.view-all-button {
+		padding: 0.75rem 1.5rem;
+		background-color: var(--color-accent);
+		color: white;
+		border-radius: var(--radius-sm);
+		font-weight: 500;
+		text-decoration: none;
+		transition: background 0.3s ease;
+	}
+
+	.view-all-button:hover {
+		background-color: var(--color-accent-hover);
+	}
+</style>
