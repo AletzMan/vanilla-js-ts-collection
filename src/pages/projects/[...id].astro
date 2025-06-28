@@ -1,0 +1,134 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { projects } from "../../data/proyects";
+import { ChevronLeft, Share2 } from "@lucide/astro";
+import { HeaderDetailsProject } from "./components/HeaderDetailsProject";
+const { id } = Astro.params;
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: {
+			id: project.id.toString(),
+		},
+	}));
+}
+const project = projects.find((project) => project.id.toString() === id);
+---
+
+<Layout title={`Vanilla JS/TS Collection - ${project?.name}`}>
+	<section class="section">
+		{project && <HeaderDetailsProject project={project} client:only />}
+		<div class="hero">
+			<div class="hero-content">
+				{project && <h1 class="hero-title">{project.name}</h1>}
+				{project && <p class="hero-description">{project.description}</p>}
+			</div>
+			<picture class="hero-picture">
+				{project && <img class="hero-image" src={project.image} alt={project.name} />}
+			</picture>
+		</div>
+		<div class="container">
+			{project && <p>{project.tags}</p>}
+			{project && <p>{project.category}</p>}
+			{project && <p>{project.featured}</p>}
+			{project && <p>{project.date}</p>}
+			{project && <p>{project.difficulty}</p>}
+			{project && <p>{project.image}</p>}
+			{project && <p>{project.language}</p>}
+			{project && <p>{project.urlRepo}</p>}
+			{project && <p>{project.urlDemo}</p>}
+			{project && <p>{project.projectDetails.description}</p>}
+			{project && <p>{project.projectDetails.keyFeatures}</p>}
+			{project && <p>{project.projectDetails.codeHighlights}</p>}
+			{project && <p>{project.projectDetails.futureImprovements}</p>}
+		</div>
+	</section>
+</Layout>
+
+<script></script>
+
+<style>
+	.section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		width: 100svw;
+		text-wrap: balance;
+		align-items: center;
+		background: linear-gradient(135deg, #03101f, #b1980c);
+		background-image: linear-gradient(#f1f2ff08 1px, transparent 1px),
+			linear-gradient(to right, #f1f2ff08 1px, #8a821c00 1px);
+		background-size: 20px 20px;
+		color: var(--color-text);
+	}
+
+	.hero {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		gap: 1rem;
+		width: 100%;
+		height: 430px;
+		overflow: hidden;
+		padding: var(--size-2xl) var(--size-lg);
+		border-bottom: 1px solid var(--color-border);
+		background-color: var(--color-surface-a);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+		.hero-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 1rem;
+		}
+
+		.hero-picture {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 90%;
+			height: 80%;
+			border-radius: var(--radius-lg);
+			background-color: #b1980c;
+			overflow: hidden;
+		}
+
+		.hero-image {
+			width: 100%;
+			height: 100%;
+			object-position: left top;
+			object-fit: cover;
+		}
+	}
+
+	@media (width < 900px) {
+		.hero {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: var(--size-xs);
+		}
+		.hero-picture {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.container {
+		display: grid;
+		grid-template-columns: 1fr 350px;
+		gap: 1rem;
+		width: 100%;
+		max-width: var(--max-width);
+		height: 100%;
+		box-sizing: border-box;
+		padding: var(--size-lg);
+		background-color: var(--color-surface-a);
+		border-radius: var(--radius-xs);
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	}
+</style>
