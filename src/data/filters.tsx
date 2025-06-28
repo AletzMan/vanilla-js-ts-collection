@@ -5,7 +5,7 @@ export const categories = [
 	{ name: "Todos", icon: Grid3X3, value: "all", color: "#9b5de5" },
 	{ name: "Componentes", icon: PanelsTopLeft, value: "component", color: "#ffda0b" },
 	{ name: "Juegos", icon: Gamepad2, value: "game", color: "#ff5656" },
-	{ name: "Herramientas", icon: Wrench, value: "utility", color: "#77cdff" },
+	{ name: "Herramientas", icon: Wrench, value: "utility", color: "#638dff" },
 	{ name: "Efectos", icon: Zap, value: "effect", color: "#ff56da" },
 	{ name: "Animaciones", icon: Shell, value: "animation", color: "#97ff7d" },
 ];
