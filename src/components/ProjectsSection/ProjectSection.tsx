@@ -3,7 +3,6 @@ import {
 	Funnel,
 	ChevronDown,
 	SearchIcon,
-	ChevronUp,
 	ArrowUpWideNarrow,
 	ArrowDownWideNarrow,
 	SearchX,
@@ -14,7 +13,6 @@ import { Languages } from "./components/Languages/Languages";
 import { Difficulty } from "./components/Difficulty/Difficulty";
 import styles from "./style.module.css";
 import { Input } from "../Input/Input";
-import Tag from "../Tag/Tag";
 import { categories } from "../../data/filters";
 import { projects } from "../../data/proyects";
 import { TagFilter } from "./components/TagFilter/TagFilter";
@@ -129,120 +127,124 @@ export function ProjectsSection() {
 	return (
 		<section id="projects" className={styles.section}>
 			<header className={styles.header}>
-				<div className={styles["title-container"]}>
-					<h2 className={styles["title-container-title"]}>Explora los proyectos</h2>
-					<Input
-						type="search"
-						placeholder="Buscar proyectos"
-						size="medium"
-						value={search}
-						onChange={(e) => setSearch(e.target.value)}
-						icon={<SearchIcon className={styles.icon} />}
-					/>{" "}
-				</div>
+				<div className={styles["header-container"]}>
+					<div className={styles["title-container"]}>
+						<h2 className={styles["title-container-title"]}>Explora los proyectos</h2>
+						<Input
+							type="search"
+							placeholder="Buscar proyectos"
+							size="medium"
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							icon={<SearchIcon className={styles.icon} />}
+						/>{" "}
+					</div>
+					<Categories />
+					<div className={styles.options}>
+						<div className={styles.filters} ref={filtersRef}>
+							<button
+								className={styles[`filters-button`]}
+								onClick={() => setShowFilters((prev) => !prev)}
+							>
+								<Funnel className={styles.icon} /> Filtros Avanzados
+								<ChevronDown className={styles.icon} />
+								<span className={styles["count-filters"]}>{getCountFilters()}</span>
+							</button>
 
-				<Categories />
-				<div className={styles.options}>
-					<div className={styles.filters} ref={filtersRef}>
-						<button
-							className={styles[`filters-button`]}
-							onClick={() => setShowFilters((prev) => !prev)}
-						>
-							<Funnel className={styles.icon} /> Filtros Avanzados
-							<ChevronDown className={styles.icon} />
-							<span className={styles["count-filters"]}>{getCountFilters()}</span>
-						</button>
-
-						<div
-							className={styles.checkboxes}
-							style={{
-								height: showFilters ? "auto" : 0,
-								transform: showFilters ? "scaleY(1)" : "scaleY(0)",
-							}}
-						>
-							<Languages />
-							<Difficulty />
+							<div
+								className={styles.checkboxes}
+								style={{
+									height: showFilters ? "auto" : 0,
+									transform: showFilters ? "scaleY(1)" : "scaleY(0)",
+								}}
+							>
+								<Languages />
+								<Difficulty />
+							</div>
+						</div>
+						<div className={styles["sort-container"]}>
+							<button
+								className={styles[`sort-button`]}
+								onClick={() => setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"))}
+							>
+								{sortDirection === "asc" ? (
+									<ArrowUpWideNarrow className={styles["sort-icon"]} />
+								) : (
+									<ArrowDownWideNarrow className={styles["sort-icon"]} />
+								)}
+							</button>
+							<select className={styles.sort} onChange={(e) => setSort(e.target.value)}>
+								<option value="id" className={styles["sort-option"]}>
+									ID
+								</option>
+								<option className={styles["sort-option"]} value="name">
+									Nombre
+								</option>
+								<option className={styles["sort-option"]} value="date">
+									Fecha
+								</option>
+								<option className={styles["sort-option"]} value="difficulty">
+									Dificultad
+								</option>
+								<option className={styles["sort-option"]} value="language">
+									Lenguaje
+								</option>
+							</select>
 						</div>
 					</div>
-					<div className={styles["sort-container"]}>
-						<button
-							className={styles[`sort-button`]}
-							onClick={() => setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"))}
-						>
-							{sortDirection === "asc" ? (
-								<ArrowUpWideNarrow className={styles["sort-icon"]} />
-							) : (
-								<ArrowDownWideNarrow className={styles["sort-icon"]} />
-							)}
-						</button>
-						<select className={styles.sort} onChange={(e) => setSort(e.target.value)}>
-							<option value="id" className={styles["sort-option"]}>
-								ID
-							</option>
-							<option className={styles["sort-option"]} value="name">
-								Nombre
-							</option>
-							<option className={styles["sort-option"]} value="date">
-								Fecha
-							</option>
-							<option className={styles["sort-option"]} value="difficulty">
-								Dificultad
-							</option>
-							<option className={styles["sort-option"]} value="language">
-								Lenguaje
-							</option>
-						</select>
-					</div>
 				</div>
-				{(language.length > 0 ||
-					difficulty.length > 0 ||
-					category !== "Todos" ||
-					search.length > 0) && (
-					<div className={styles["tags-container"]}>
-						{search.length > 0 && (
-							<TagFilter text={search} type="search" onClick={() => setSearch("")} />
-						)}
-						{category !== "Todos" && (
-							<TagFilter
-								text={category}
-								type="category"
-								onClick={() => categorySelected.set("Todos")}
-							/>
-						)}
-						{language.length > 0 &&
-							language.map((lang) => (
+				<div className={styles["count-container"]}>
+					<span className={styles.count}>Mostrando {filteredProjects.length} proyectos</span>
+					{(language.length > 0 ||
+						difficulty.length > 0 ||
+						category !== "Todos" ||
+						search.length > 0) && (
+						<div className={styles["tags-container"]}>
+							{search.length > 0 && (
+								<TagFilter text={search} type="search" onClick={() => setSearch("")} />
+							)}
+							{category !== "Todos" && (
 								<TagFilter
-									key={lang}
-									text={lang}
-									type="language"
-									onClick={() => languageSelected.set(language.filter((l) => l !== lang))}
+									text={category}
+									type="category"
+									onClick={() => categorySelected.set("Todos")}
 								/>
-							))}
-						{difficulty.length > 0 &&
-							difficulty.map((diff) => (
+							)}
+							{language.length > 0 &&
+								language.map((lang) => (
+									<TagFilter
+										key={lang}
+										text={lang}
+										type="language"
+										onClick={() => languageSelected.set(language.filter((l) => l !== lang))}
+									/>
+								))}
+							{difficulty.length > 0 &&
+								difficulty.map((diff) => (
+									<TagFilter
+										key={diff}
+										text={diff}
+										type="difficulty"
+										onClick={() => difficultySelected.set(difficulty.filter((d) => d !== diff))}
+									/>
+								))}
+							{(language.length > 0 || difficulty.length > 0 || category !== "Todos") && (
 								<TagFilter
-									key={diff}
-									text={diff}
-									type="difficulty"
-									onClick={() => difficultySelected.set(difficulty.filter((d) => d !== diff))}
+									text="Limpiar filtros"
+									type="default"
+									onClick={() => {
+										languageSelected.set([]);
+										difficultySelected.set([]);
+										categorySelected.set("Todos");
+										setSearch("");
+									}}
 								/>
-							))}
-						{(language.length > 0 || difficulty.length > 0 || category !== "Todos") && (
-							<TagFilter
-								text="Limpiar filtros"
-								type="default"
-								onClick={() => {
-									languageSelected.set([]);
-									difficultySelected.set([]);
-									categorySelected.set("Todos");
-									setSearch("");
-								}}
-							/>
-						)}
-					</div>
-				)}
+							)}
+						</div>
+					)}
+				</div>
 			</header>
-			<span className={styles.count}>Mostrando {filteredProjects.length} proyectos</span>
+
 			<div
 				className={`${styles.projects} ${
 					filteredProjects.length === 0 ? styles["not-found-projects"] : ""

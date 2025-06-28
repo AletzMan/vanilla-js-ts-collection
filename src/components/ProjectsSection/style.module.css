@@ -2,9 +2,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.5rem;
 	width: 100%;
-	min-height: 100svh;
 	max-width: var(--max-width);
 	margin: 0 auto;
 	box-sizing: border-box;
@@ -14,11 +12,20 @@ section {
 	position: sticky;
 	top: 0;
 	width: 100%;
-	padding: 0 var(--size-sm) 0 var(--size-sm);
-	background-color: #010d14;
-	border-bottom: 1px solid #16a9ff15;
 	box-sizing: border-box;
 	z-index: 10;
+}
+
+.header-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0rem;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 var(--size-sm);
+	background-color: var(--color-surface-b);
+	border-bottom: 1px solid var(--color-border);
 }
 
 .title-container {
@@ -47,7 +54,6 @@ section {
 	padding: var(--size-lg);
 	width: 100%;
 	max-width: var(--max-width);
-	max-height: calc(100svh - 270px);
 	overflow-y: auto;
 	box-sizing: border-box;
 	gap: var(--size-lg);
@@ -87,9 +93,10 @@ section {
 .options {
 	display: flex;
 	justify-content: space-between;
-	margin-top: var(--size-lg);
+	margin-top: var(--size-sm);
 	border-top: 1px solid var(--color-border);
-	padding: var(--size-sm) var(--size-sm) var(--size-sm) 0;
+	width: 100%;
+	padding: var(--size-sm) 0;
 }
 
 .filters {
@@ -123,6 +130,16 @@ section {
 	height: var(--size-lg);
 }
 
+.count-container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	gap: 0.5rem;
+	padding: var(--size-sm) 0;
+	background-color: var(--color-surface-a);
+}
+
 .count {
 	font-size: 0.85em;
 	margin: 0;
@@ -154,8 +171,6 @@ section {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	border-top: 1px solid var(--color-border);
-	padding: var(--size-md) 0;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 }
