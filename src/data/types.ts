@@ -21,5 +21,7 @@ export type ProjectDetails = {
 	description: string;
 	keyFeatures: string[];
 	codeHighlights: string[];
+	technicalChallenges: string[];
+	lessonsLearned: string[];
 	futureImprovements: string[];
 };
