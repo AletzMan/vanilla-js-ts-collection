@@ -1,15 +1,17 @@
 .header {
-	position: sticky;
+	position: absolute;
 	top: 0;
+	left: 0;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	margin: 0 auto;
 	box-sizing: border-box;
-	padding: var(--size-sm) var(--size-sm);
+	padding: var(--size-sm) var(--size-sm) var(--size-sm) var(--size-sm);
 	background-color: var(--color-surface-b);
 	border-bottom: 1px solid var(--color-border);
+	z-index: 10;
 
 	.back-button {
 		display: flex;
@@ -69,6 +71,7 @@
 	transition: all 0.3s ease;
 	transform: scaleY(0);
 	transform-origin: top;
+	z-index: 10;
 }
 
 .share-options-active {

@@ -1,6 +1,6 @@
 ---
 import "@fontsource-variable/jost";
-const { title } = Astro.props;
+const { title, scrollBar } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,7 +12,7 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="scrollBar">
+	<body class={scrollBar ? "scrollBar" : "hiddenScrollBar"}>
 		<slot />
 	</body>
 </html>
@@ -64,6 +64,7 @@ const { title } = Astro.props;
 		--radius-lg: 1rem;
 		--radius-xl: 1.5rem;
 		--radius-2xl: 2rem;
+		--radius-full: 50%;
 
 		--font-family: "Jost Variable", sans-serif;
 
@@ -84,7 +85,6 @@ const { title } = Astro.props;
 
 	html,
 	body {
-		margin: 0;
 		width: 100svw;
 		overflow-x: hidden;
 		height: 100%;
@@ -93,8 +93,33 @@ const { title } = Astro.props;
 		background: linear-gradient(135deg, var(--color-surface-a), var(--color-surface-b));
 	}
 
+	pre {
+		color: var(--color-text);
+		border-radius: var(--radius-xs);
+		padding: var(--size-sm) var(--size-md);
+		font-family: monospace !important;
+
+		span {
+			font-family: monospace !important;
+		}
+	}
+
+	i {
+		font-style: normal;
+		font-family: monospace !important;
+		background-color: #24292e;
+		padding: var(--size-2xs) var(--size-sm);
+		border-radius: var(--radius-xs);
+		color: #f7df1e;
+	}
+
 	.scrollBar {
 		scrollbar-width: thin;
 		scrollbar-color: var(--color-accent) var(--color-surface);
+	}
+
+	.hiddenScrollBar {
+		overflow: hidden;
+		scrollbar-width: none;
 	}
 </style>

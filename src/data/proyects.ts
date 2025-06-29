@@ -22,6 +22,8 @@ export const projects: Project[] = [
 		featured: true,
 		image:
 			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/calculator.webp",
+		imageBrowser:
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/calculator.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/calculator",
 		urlDemo: "https://aletzman.github.io/calculator/",
@@ -38,11 +40,36 @@ export const projects: Project[] = [
 				"**Controles de Borrado:** Ofrece opciones para borrar la última entrada (Backspace), borrar la entrada actual (C) o borrar todo (CE).",
 			],
 			codeHighlights: [
-				"**Manipulación del DOM:** Se utiliza `document.querySelectorAll` y `document.querySelector` para acceder a los elementos HTML de la calculadora, y se manipulan sus propiedades `textContent` y `style` para actualizar la interfaz.\n```javascript\nconst displayResult = document.querySelector('.display-result');\nconst buttons = document.querySelectorAll('.calculator-button');\ndisplayResult.textContent = result;\ndisplayResult.style.fontSize = adjustFontSize(result.length);\n```",
-				"**Manejo de Eventos:** Se emplean `addEventListener(\"mousedown\", ...)` para detectar las interacciones del usuario con los botones, lo que permite ejecutar las funciones correspondientes a cada acción.\n```javascript\nbuttons.forEach(button => {\n    button.addEventListener('mousedown', (e) => {\n        // Lógica basada en el botón clickeado\n        console.log(e.target.textContent);\n    });\n});\n```",
-				"**Manejo de entrada de números y actualización del display:** La función `SelectNumberPress` maneja la entrada de números y actualiza el display, asegurando que los resultados se borren para nuevas entradas y que los números se añadan de forma incremental.\n```javascript\nfunction SelectNumberPress(number) {\n    if (displayResult.textContent == 0 || resultObtained) {\n        displayResult.textContent = number;\n        resultObtained = false;\n    } else {\n        displayResult.textContent += number;\n    }\n    newNumberEntered = true;\n}\n```",
-				"**Lógica de Operaciones:** La función `SelectOperation` gestiona la lógica central de la calculadora, manejando el estado de los números, operadores y resultados intermedios. Llama a `ValidateOperation` para realizar cálculos cuando se selecciona una nueva operación después de un número.\n```javascript\nfunction SelectOperation(operator) {\n    if (numberOne == 0) {\n        numberOne = Number(displayResult.textContent);\n    } else if (newNumberEntered) {\n        numberTwo = Number(displayResult.textContent);\n        ValidateOperation();\n        displayResult.textContent = numberOne;\n    }\n    operationRealized = operator;\n    newNumberEntered = false;\n}\n```",
-				"**Funcionalidad de Memoria:** La implementación de la memoria es un punto clave, con funciones para añadir, restar, recuperar y limpiar valores, junto con una interfaz dinámica para ver los elementos guardados. La función `AddMemory`, por ejemplo, añade un número al array de memoria y actualiza la visualización.\n```javascript\nfunction AddMemory(number) {\n    memory.push(Number(number));\n    UpdateMemoryList(); // Función para actualizar visualmente la lista de memoria\n}\n```",
+				{
+					description:
+						"**Manipulación del DOM:** Se utiliza `document.querySelectorAll` y `document.querySelector` para acceder a los elementos HTML de la calculadora, y se manipulan sus propiedades `textContent` y `style` para actualizar la interfaz.",
+					code: "const displayResult = document.querySelector('.display-result');\nconst buttons = document.querySelectorAll('.calculator-button');\ndisplayResult.textContent = result;\ndisplayResult.style.fontSize = adjustFontSize(result.length);",
+					lang: "javascript",
+				},
+				{
+					description:
+						'**Manejo de Eventos:** Se emplean `addEventListener("mousedown", ...)` para detectar las interacciones del usuario con los botones, lo que permite ejecutar las funciones correspondientes a cada acción.',
+					code: "buttons.forEach(button => {\n    button.addEventListener('mousedown', (e) => {\n        // Lógica basada en el botón clickeado\n        console.log(e.target.textContent);\n    });\n});",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manejo de entrada de números y actualización del display:** La función `SelectNumberPress` maneja la entrada de números y actualiza el display, asegurando que los resultados se borren para nuevas entradas y que los números se añadan de forma incremental.",
+					code: "function SelectNumberPress(number) {\n    if (displayResult.textContent == 0 || resultObtained) {\n        displayResult.textContent = number;\n        resultObtained = false;\n    } else {\n        displayResult.textContent += number;\n    }\n    newNumberEntered = true;\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Lógica de Operaciones:** La función `SelectOperation` gestiona la lógica central de la calculadora, manejando el estado de los números, operadores y resultados intermedios. Llama a `ValidateOperation` para realizar cálculos cuando se selecciona una nueva operación después de un número.",
+					code: "function SelectOperation(operator) {\n    if (numberOne == 0) {\n        numberOne = Number(displayResult.textContent);\n    } else if (newNumberEntered) {\n        numberTwo = Number(displayResult.textContent);\n        ValidateOperation();\n        displayResult.textContent = numberOne;\n    }\n    operationRealized = operator;\n    newNumberEntered = false;\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Funcionalidad de Memoria:** La implementación de la memoria es un punto clave, con funciones para añadir, restar, recuperar y limpiar valores, junto con una interfaz dinámica para ver los elementos guardados. La función `AddMemory`, por ejemplo, añade un número al array de memoria y actualiza la visualización.",
+					code: "function AddMemory(number) {\n    memory.push(Number(number));\n    UpdateMemoryList(); // Función para actualizar visualmente la lista de memoria\n}",
+					lang: "javascript",
+				},
 			],
 			technicalChallenges: [
 				"**Gestión del Estado de la Calculadora:** Mantener el control preciso de los números (`numberOne`, `numberTwo`), la operación actual y los indicadores (`resultObtained`, `newNumberEntered`) para garantizar que las operaciones se encadenen correctamente y el display refleje el estado exacto.",
@@ -87,6 +114,8 @@ export const projects: Project[] = [
 		featured: true,
 		image:
 			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paint-board.webp",
+		imageBrowser:
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/frame_paint_board.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/PaintBoard",
 		urlDemo: "https://aletzman.github.io/PaintBoard/",
@@ -103,11 +132,38 @@ export const projects: Project[] = [
 				"**Interfaz Intuitiva:** Botones visuales para seleccionar herramientas y colores, facilitando su uso.",
 			],
 			codeHighlights: [
-				"**API de Canvas 2D:** Uso extensivo de `HTMLCanvasElement.getContext('2d')` y sus métodos (`beginPath`, `moveTo`, `lineTo`, `arc`, `ellipse`, `rect`, `roundRect`, `stroke`, `fill`, `clearRect`) para dibujar dinámicamente en el lienzo.\n```javascript\n// Ejemplo de dibujo de uno de los segmentos de un número digital\nfunction createSegmentOne(context) {\n    context.beginPath();\n    context.moveTo(15, 15);\n    context.lineTo(30, 0);\n    context.lineTo(110, 0);\n    context.lineTo(125, 15);\n    context.lineTo(110, 30);\n    context.lineTo(30, 30);\n    context.lineTo(15, 15);\n    context.fill();\n    context.stroke();\n}\n```",
-				'**Manejo Avanzado de Eventos de Mouse:** Implementación de `mousedown`, `mousemove`, y `mouseup` para capturar la interacción del usuario y dibujar en tiempo real, incluyendo el cálculo de posiciones y tamaños de formas.\n```javascript\ncanvas.addEventListener("mousedown", (e) => {\n    isDrawing = true;\n    xInitial = e.clientX - canvas.getBoundingClientRect().left;\n    yInitial = e.clientY - canvas.getBoundingClientRect().top;\n    \n    // Configurar contexto para el dibujo\n    ctx.strokeStyle = actualColor;\n    ctx.fillStyle = actualFillColor;\n    ctx.lineWidth = actualSize;\n    ctx.lineCap = "round";\n    ctx.lineJoin = "round";\n});\n```',
-				"**Manipulación Dinámica del DOM:** Creación y modificación de elementos HTML (como las reglas y las guías de dibujo) en función de las interacciones del usuario y el tamaño de la ventana.",
-				"**Gestión de Herramientas y Estados:** Lógica para cambiar entre herramientas de dibujo, gestionar los colores activos (línea y relleno), y actualizar el grosor del trazo/borrador.",
-				'**Guías de Dibujo en Tiempo Real:** Implementación de un `div` flotante (`drawingGuide`) que visualiza la forma que se está creando antes de dibujarla permanentemente en el canvas.\n```javascript\n// En el contexto de un reloj digital, esta función demuestra la limpieza del canvas\n// y el redibujo de un dígito según el color seleccionado, mostrando la manipulación\n// fundamental del canvas para una visualización dinámica.\nfunction createNumber(number, context) {\n    context.clearRect(0, 0, 250, 460); // Limpia el canvas para redibujar\n    // createBase(context); // Dibuja la base "apagada" del dígito\n    context.fillStyle = digitColor; // Aplica el color actual\n    context.lineWidth = 5;\n    context.strokeStyle = "rgb(24, 24, 24)";\n    // ... switch case para dibujar los segmentos del número específico ...\n}\n```',
+				{
+					description:
+						"**API de Canvas 2D:** Uso extensivo de `HTMLCanvasElement.getContext('2d')` y sus métodos (`beginPath`, `moveTo`, `lineTo`, `arc`, `ellipse`, `rect`, `roundRect`, `stroke`, `fill`, `clearRect`) para dibujar dinámicamente en el lienzo.",
+					code: "// Ejemplo de dibujo de uno de los segmentos de un número digital\nfunction createSegmentOne(context) {\n    context.beginPath();\n    context.moveTo(15, 15);\n    context.lineTo(30, 0);\n    context.lineTo(110, 0);\n    context.lineTo(125, 15);\n    context.lineTo(110, 30);\n    context.lineTo(30, 30);\n    context.lineTo(15, 15);\n    context.fill();\n    context.stroke();\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manejo Avanzado de Eventos de Mouse:** Implementación de `mousedown`, `mousemove`, y `mouseup` para capturar la interacción del usuario y dibujar en tiempo real, incluyendo el cálculo de posiciones y tamaños de formas.",
+					code: 'canvas.addEventListener("mousedown", (e) => {\n    isDrawing = true;\n    xInitial = e.clientX - canvas.getBoundingClientRect().left;\n    yInitial = e.clientY - canvas.getBoundingClientRect().top;\n    \n    // Configurar contexto para el dibujo\n    ctx.strokeStyle = actualColor;\n    ctx.fillStyle = actualFillColor;\n    ctx.lineWidth = actualSize;\n    ctx.lineCap = "round";\n    ctx.lineJoin = "round";\n});',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manipulación Dinámica del DOM:** Creación y modificación de elementos HTML (como las reglas y las guías de dibujo) en función de las interacciones del usuario y el tamaño de la ventana.",
+					code: "// Código relacionado con la manipulación dinámica del DOM, por ejemplo, creando elementos de guía o reglas.",
+					// No hay un bloque de código específico en el ejemplo original para esta descripción.
+					// Si tuviera un ejemplo de código, se colocaría aquí. Por ahora, se dejará un placeholder.
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Gestión de Herramientas y Estados:** Lógica para cambiar entre herramientas de dibujo, gestionar los colores activos (línea y relleno), y actualizar el grosor del trazo/borrador.",
+					code: "// Código relacionado con la gestión de herramientas y estados.\n// Ejemplo: una función para cambiar la herramienta activa\nfunction changeTool(tool) {\n    currentTool = tool;\n    updateCursor(tool);\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Guías de Dibujo en Tiempo Real:** Implementación de un `div` flotante (`drawingGuide`) que visualiza la forma que se está creando antes de dibujarla permanentemente en el canvas.",
+					code: '// En el contexto de un reloj digital, esta función demuestra la limpieza del canvas\n// y el redibujo de un dígito según el color seleccionado, mostrando la manipulación\n// fundamental del canvas para una visualización dinámica.\nfunction createNumber(number, context) {\n    context.clearRect(0, 0, 250, 460); // Limpia el canvas para redibujar\n    // createBase(context); // Dibuja la base "apagada" del dígito\n    context.fillStyle = digitColor; // Aplica el color actual\n    context.lineWidth = 5;\n    context.strokeStyle = "rgb(24, 24, 24)";\n    // ... switch case para dibujar los segmentos del número específico ...\n}',
+					lang: "javascript",
+				},
 			],
 			technicalChallenges: [
 				"**Rendimiento en el Dibujo en Tiempo Real:** Asegurar que el dibujo y la visualización de formas sean fluidos y sin latencia, especialmente con el lápiz (trazado libre), que requiere una actualización constante del Canvas.",
@@ -156,6 +212,8 @@ export const projects: Project[] = [
 		featured: false,
 		image:
 			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/analog-clock.webp",
+		imageBrowser:
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/analog-clock.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/analog_clock",
 		urlDemo: "https://aletzman.github.io/analog_clock/",
@@ -170,12 +228,42 @@ export const projects: Project[] = [
 				"**Responsive:** La generación de la carátula se adapta al tamaño del canvas.",
 			],
 			codeHighlights: [
-				'**API de Canvas 2D para Gráficos:** Utiliza `canvas.getContext(\'2d\')` para dibujar las marcas de las horas y minutos del reloj, permitiendo un control preciso sobre la estética de la carátula.\n```javascript\nfunction DrawLinesClock() {\n    for (let index = 0; index < numberOfLines; index++) {\n        ctxClock.strokeStyle = index % 5 == 0 ? "#2c2c2c" : "#656565";\n        ctxClock.lineWidth = index % 5 == 0 ? 40 : 20;\n        circleDiameter = index % 5 == 0 ? 242 : 250;\n        ctxClock.beginPath();\n        ctxClock.arc(275, 275, circleDiameter, positionAngle * (index * 2) - 0.008, positionAngle * ((index * 2) + 0.1));\n        ctxClock.stroke();\n    }\n}\n```',
-				"**`setInterval` para Actualización Continua:** Emplea un temporizador para refrescar la posición de las agujas y la fecha cada segundo, asegurando la precisión del reloj.\n```javascript\nsetInterval(() => {\n    const date = new Date();\n    let seconds = (360 / 120) * (date.getSeconds() * 2);\n    let minutes = (360 / 60) * date.getMinutes();\n    let hours = (360 / 12) * date.getHours();\n    handSecond.style.transform = `rotate(${seconds}deg)`;\n    handMinute.style.transform = `rotate(${minutes}deg)`;\n    handHour.style.transform = `rotate(${hours}deg)`;\n    GetDate(); // Actualiza la visualización de la fecha\n}, 1000);\n```",
-				"**CSS Transformations para Animación:** Aplica `style.transform = 'rotate(Xdeg)'` directamente a los elementos DOM que representan las agujas, creando una animación de rotación eficiente y fluida.",
-				'**Objeto `Date` para Sincronización:** Utiliza el objeto `Date` de JavaScript para obtener la hora y fecha actuales del sistema, calculando las rotaciones necesarias para cada aguja.\n```javascript\nfunction GetDate() {\n    const date = new Date();\n    let weekdate = date.getDay();\n    let daysName = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];\n    let daysMonth = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]\n\n    weekDay.textContent = daysName[weekdate];\n    day.textContent = date.getDate();\n    month.textContent  = daysMonth[date.getMonth()];\n    year.textContent = date.getFullYear();\n}\n```',
-				"**Manipulación Directa del DOM:** Accede y actualiza el contenido de los elementos HTML (`textContent`) para mostrar la fecha y el día de la semana.",
-				"**Re-renderizado en Resize:** Adapta el dibujo de la carátula si la ventana cambia de tamaño, manteniendo la proporción y la calidad visual.",
+				{
+					description:
+						"**API de Canvas 2D para Gráficos:** Utiliza `canvas.getContext('2d')` para dibujar las marcas de las horas y minutos del reloj, permitiendo un control preciso sobre la estética de la carátula.",
+					code: 'function DrawLinesClock() {\n    for (let index = 0; index < numberOfLines; index++) {\n        ctxClock.strokeStyle = index % 5 == 0 ? "#2c2c2c" : "#656565";\n        ctxClock.lineWidth = index % 5 == 0 ? 40 : 20;\n        circleDiameter = index % 5 == 0 ? 242 : 250;\n        ctxClock.beginPath();\n        ctxClock.arc(275, 275, circleDiameter, positionAngle * (index * 2) - 0.008, positionAngle * ((index * 2) + 0.1));\n        ctxClock.stroke();\n    }\n}',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**`setInterval` para Actualización Continua:** Emplea un temporizador para refrescar la posición de las agujas y la fecha cada segundo, asegurando la precisión del reloj.",
+					code: "setInterval(() => {\n    const date = new Date();\n    let seconds = (360 / 120) * (date.getSeconds() * 2);\n    let minutes = (360 / 60) * date.getMinutes();\n    let hours = (360 / 12) * date.getHours();\n    handSecond.style.transform = `rotate(${seconds}deg)`;\n    handMinute.style.transform = `rotate(${minutes}deg)`;\n    handHour.style.transform = `rotate(${hours}deg)`;\n    GetDate(); // Actualiza la visualización de la fecha\n}, 1000);",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**CSS Transformations para Animación:** Aplica `style.transform = 'rotate(Xdeg)'` directamente a los elementos DOM que representan las agujas, creando una animación de rotación eficiente y fluida.",
+					code: "// El código de transformación CSS se aplica directamente en el JavaScript,\n// como se muestra en la función setInterval anterior para las agujas.\n// No hay un bloque CSS separado aquí para este highlight.",
+					lang: "javascript", // Aunque sea CSS, la manipulación es JS
+				},
+				{
+					description:
+						"**Objeto `Date` para Sincronización:** Utiliza el objeto `Date` de JavaScript para obtener la hora y fecha actuales del sistema, calculando las rotaciones necesarias para cada aguja.",
+					code: 'function GetDate() {\n    const date = new Date();\n    let weekdate = date.getDay();\n    let daysName = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];\n    let daysMonth = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]\n\n    weekDay.textContent = daysName[weekdate];\n    day.textContent = date.getDate();\n    month.textContent  = daysMonth[date.getMonth()];\n    year.textContent = date.getFullYear();\n}',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manipulación Directa del DOM:** Accede y actualiza el contenido de los elementos HTML (`textContent`) para mostrar la fecha y el día de la semana.",
+					code: "// El ejemplo de código para GetDate() arriba ya ilustra la manipulación del DOM\n// para actualizar textContent. No se requiere un bloque de código adicional aquí.",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Re-renderizado en Resize:** Adapta el dibujo de la carátula si la ventana cambia de tamaño, manteniendo la proporción y la calidad visual.",
+					code: "// Código para manejar el evento resize y redibujar el canvas.\n// window.addEventListener('resize', () => { \n//     // Lógica para recalcular dimensiones y redibujar el reloj\n//     DrawLinesClock(); \n// });",
+					lang: "javascript",
+				},
 			],
 			technicalChallenges: [
 				"**Cálculo Preciso de Rotaciones:** Convertir la hora del sistema (horas, minutos, segundos) en los ángulos de rotación exactos para cada aguja del reloj, asegurando su movimiento fluido y coordinado.",
@@ -219,6 +307,8 @@ export const projects: Project[] = [
 		featured: false,
 		image:
 			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/digital-clock.webp",
+		imageBrowser:
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/digital-clock.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/digital-clock-vanilla",
 		urlDemo: "https://aletzman.github.io/digital-clock-vanilla/",
@@ -234,13 +324,48 @@ export const projects: Project[] = [
 				"**Formatos de Hora:** Los números se muestran siempre con dos dígitos (ej. '05' en lugar de '5').",
 			],
 			codeHighlights: [
-				"**API de Canvas 2D para Segmentos:** Cada dígito del reloj está compuesto por siete segmentos individuales dibujados y controlados mediante Canvas, lo que demuestra un manejo detallado de gráficos vectoriales.\n```javascript\n// Ejemplo de dibujo del segmento central de un dígito de 7 segmentos en Canvas\nfunction createSegmentSeven(context) {\n    context.beginPath();\n    context.moveTo(15, 125);\n    context.lineTo(30, 110);\n    context.lineTo(110, 110);\n    context.lineTo(125, 125);\n    context.lineTo(110, 140);\n    context.lineTo(30, 140);\n    context.lineTo(15, 125);\n    context.fill();\n    context.stroke();\n}\n```",
-				"**Gestión de Estados Compleja:** Utiliza variables de estado (`optionSelected`, `start`, `hoursTimer`, `minutesTimer`, `secondsTimer`, etc.) para controlar el modo del reloj (tiempo real, cronómetro, temporizador) y el comportamiento de los botones.",
-				"**`setInterval` para Actualización Periódica:** Múltiples `setInterval` para gestionar la actualización del tiempo en diferentes modos (reloj, cronómetro, temporizador) de forma independiente.\n```javascript\nfunction Chronometer() {\n    secondsChronometer++;\n    if (secondsChronometer == 60) {\n        secondsChronometer = 0;\n        minutesChronometer++;\n    }\n    if (minutesChronometer == 60) {\n        minutesChronometer = 0;\n        hoursChronometer++;\n    }\n    // Actualiza los dígitos en el Canvas\n    createNumber(addZero(hoursChronometer)[0], ctxDigitHour_1);\n    createNumber(addZero(hoursChronometer)[1], ctxDigitHour_2);\n    // ... y para minutos y segundos ...\n}\n```",
-				"**Conditional DOM Manipulation:** La visibilidad de los elementos de control y los títulos se gestiona dinámicamente (`style.visibility`) en función del modo de reloj seleccionado, mejorando la experiencia del usuario.",
-				"**Lógica de Temporizador/Cronómetro:** Implementación de la lógica para el incremento/decremento de segundos, minutos y horas, incluyendo el manejo de desbordamientos (ej., 60 segundos = 1 minuto).",
-				"**CSS Animations:** Utiliza CSS `animation` (e.g., `aumentar`) para proporcionar retroalimentación visual cuando el temporizador finaliza.",
-				"**Función `addZero` auxiliar:** Una función auxiliar para formatear números de un solo dígito con un cero inicial, manteniendo una visualización uniforme.\n```javascript\nfunction addZero(number) {\n    let arrayNumber = [0, 0];\n    if (number > 9) {\n        arrayNumber[1] = Number(number.toString().charAt(1));\n        arrayNumber[0] = Number(number.toString().charAt(0));\n    } else {\n        arrayNumber[1] = Number(number.toString().charAt(0));\n        arrayNumber[0] = Number(0);\n    }\n    return arrayNumber;\n}\n```",
+				{
+					description:
+						"**API de Canvas 2D para Segmentos:** Cada dígito del reloj está compuesto por siete segmentos individuales dibujados y controlados mediante Canvas, lo que demuestra un manejo detallado de gráficos vectoriales.",
+					code: "// Ejemplo de dibujo del segmento central de un dígito de 7 segmentos en Canvas\nfunction createSegmentSeven(context) {\n    context.beginPath();\n    context.moveTo(15, 125);\n    context.lineTo(30, 110);\n    context.lineTo(110, 110);\n    context.lineTo(125, 125);\n    context.lineTo(110, 140);\n    context.lineTo(30, 140);\n    context.lineTo(15, 125);\n    context.fill();\n    context.stroke();\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Gestión de Estados Compleja:** Utiliza variables de estado (`optionSelected`, `start`, `hoursTimer`, `minutesTimer`, `secondsTimer`, etc.) para controlar el modo del reloj (tiempo real, cronómetro, temporizador) y el comportamiento de los botones.",
+					code: "// El código maneja múltiples variables de estado para el modo actual, los valores del temporizador/cronómetro,\n// y los estados de inicio/pausa. Por ejemplo:\n// let optionSelected = 'clock'; // 'clock', 'chronometer', 'timer'\n// let start = false;\n// let hoursTimer = 0, minutesTimer = 0, secondsTimer = 0;\n// Estas variables se actualizan en funciones como switchOptions() o en la lógica del temporizador.",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**`setInterval` para Actualización Periódica:** Múltiples `setInterval` para gestionar la actualización del tiempo en diferentes modos (reloj, cronómetro, temporizador) de forma independiente.",
+					code: "function Chronometer() {\n    secondsChronometer++;\n    if (secondsChronometer == 60) {\n        secondsChronometer = 0;\n        minutesChronometer++;\n    }\n    if (minutesChronometer == 60) {\n        minutesChronometer = 0;\n        hoursChronometer++;\n    }\n    // Actualiza los dígitos en el Canvas\n    createNumber(addZero(hoursChronometer)[0], ctxDigitHour_1);\n    createNumber(addZero(hoursChronometer)[1], ctxDigitHour_2);\n    // ... y para minutos y segundos ...\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Conditional DOM Manipulation:** La visibilidad de los elementos de control y los títulos se gestiona dinámicamente (`style.visibility`) en función del modo de reloj seleccionado, mejorando la experiencia del usuario.",
+					code: "// Ejemplo de cómo se ocultan/muestran elementos en función del modo.\n// if (optionSelected === 'timer') {\n//     timerControls.style.visibility = 'visible';\n// } else {\n//     timerControls.style.visibility = 'hidden';\n// }",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Lógica de Temporizador/Cronómetro:** Implementación de la lógica para el incremento/decremento de segundos, minutos y horas, incluyendo el manejo de desbordamientos (ej., 60 segundos = 1 minuto).",
+					code: "// La función Chronometer() ya ilustra esta lógica. Un ejemplo para el temporizador:\n// function decreaseTimer() {\n//     if (secondsTimer > 0) {\n//         secondsTimer--;\n//     } else if (minutesTimer > 0) {\n//         minutesTimer--;\n//         secondsTimer = 59;\n//     } else if (hoursTimer > 0) {\n//         hoursTimer--;\n//         minutesTimer = 59;\n//         secondsTimer = 59;\n//     } else { /* Timer finished */ }\n// }",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**CSS Animations:** Utiliza CSS `animation` (e.g., `aumentar`) para proporcionar retroalimentación visual cuando el temporizador finaliza.",
+					code: "// En JavaScript se añade/remueve una clase CSS para activar la animación.\n// function triggerFinishAnimation() {\n//     digitalClockContainer.classList.add('aumentar');\n//     setTimeout(() => {\n//         digitalClockContainer.classList.remove('aumentar');\n//     }, 1000); // Duración de la animación\n// }",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Función `addZero` auxiliar:** Una función auxiliar para formatear números de un solo dígito con un cero inicial, manteniendo una visualización uniforme.",
+					code: "function addZero(number) {\n    let arrayNumber = [0, 0];\n    if (number > 9) {\n        arrayNumber[1] = Number(number.toString().charAt(1));\n        arrayNumber[0] = Number(number.toString().charAt(0));\n    } else {\n        arrayNumber[1] = Number(number.toString().charAt(0));\n        arrayNumber[0] = Number(0);\n    }\n    return arrayNumber;\n}",
+					lang: "javascript",
+				},
 			],
 			technicalChallenges: [
 				"**Gestión de Múltiples Modos:** Implementar la lógica para alternar fluidamente entre el reloj en tiempo real, el cronómetro y el temporizador, asegurando que cada modo funcione de manera independiente y que la interfaz se adapte correctamente.",
@@ -288,6 +413,8 @@ export const projects: Project[] = [
 		featured: true,
 		image:
 			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble-shooter-game.webp",
+		imageBrowser:
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble-shooter-game.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/bubble_shooter_game",
 		urlDemo: "https://aletzman.github.io/bubble_shooter_game/",
@@ -306,13 +433,48 @@ export const projects: Project[] = [
 				"**Guía de Juego:** Un botón 'How to Play' que muestra/oculta una ventana con instrucciones.",
 			],
 			codeHighlights: [
-				'**Manipulación del DOM para Elementos del Juego:** Creación dinámica de elementos (`div` con `bulletMark`) para simular los disparos y la integración de elementos HTML para el marcador y las interfaces de usuario.\n```javascript\nconst newChild = document.createElement("div");\nnewChild.className = "bulletMark";\ndocument.children[0].children[1].children[0].appendChild(newChild);\nnewChild.style.left = (e.clientX - newChild.getBoundingClientRect().width / 2) + "px";\n```',
-				"**Animaciones CSS Dinámicas:** Utiliza propiedades CSS como `animationName`, `animationDuration`, `animationDelay` y `transform` en combinación con `setInterval` y `requestAnimationFrame` para crear el movimiento continuo de las burbujas y efectos visuales como explosiones.\n```javascript\nfunction AddSizeAndStylesToSquares() {\n    // ... bucle para establecer estilos para cada cuadrado ...\n    containerAnimation.children[index].style.animationName = `animateSquares${animationnumber}`;\n    containerAnimation.children[index].style.animationDuration = `${timeAnimation}s`;\n    // ... otras propiedades de animación ...\n}\n```",
-				"**Detección de Colisiones:** Implementación de la función `checkCollision` que usa `getBoundingClientRect()` para detectar cuando las burbujas objetivo chocan con la zona de puntuación (scoreboard), incrementando los fallos.\n```javascript\nfunction checkCollision() {\n    for (let i = 0; i < containerAnimation.childElementCount; i++) {\n        const childElement = containerAnimation.children[i];\n        // ... cálculo de colisiones ...\n        if (childElementPosition.left < scoreboardPosition.right &&\n            // ... otras condiciones de colisión ...\n            childElementPosition.bottom > scoreboardPosition.top) {\n            \n            if (containerAnimation.children[i].style.backgroundImage.replace(/^url\\(|\\)$|\"/g, '').replace('.', '') === targetImg.src.substring(targetImg.src.indexOf('/images')).replace(' ', '')) {\n                totalmisses++;\n                if (totalmisses == maxMisses) GameOver();\n                UpdateStats();\n            }\n            elementStates[i].hasCollided = true;\n        }\n    }\n    requestAnimationFrame(checkCollision);\n}\nrequestAnimationFrame(checkCollision);\n```",
-				"**Gestión de Eventos de Mouse:** `addEventListener('mousedown', ...)` se usa para detectar los clics del usuario, que inician el disparo y activan la lógica de impacto.\n```javascript\nconst bullet = document.addEventListener('mousedown', function (e) {\n    if (e.clientY > 115 && totalShots && !gameOver) {\n        // ... lógica para crear y posicionar la marca de la bala ...\n        totalShots--;\n        UpdateStats();\n        // ... lógica de sonido y limpieza ...\n    }\n    if (!totalShots) {\n        GameOver();\n    }\n});\n```",
-				"**Manejo de Audio:** Uso del objeto `HTMLAudioElement` (`soundExplosion`, `soundPainballShoot`) con métodos `play()` y `muted` para controlar los efectos de sonido del juego.\n```javascript\nfunction ParticlesExplosion() {\n    setTimeout(function () {\n        soundExplosion.currentTime = 0;\n        soundExplosion.play();\n        explosion.style.opacity = 1;\n    }, 250);\n    // ... resetear opacidad más tarde ...\n}\n```",
-				"**Lógica de Juego y Estado:** Variables como `totalShots`, `totalhits`, `totalmisses`, `gameOver`, `startTime` controlan el flujo del juego, la puntuación y el fin de la partida.",
-				"**Generación Aleatoria:** Funciones `GetRandomNumber` y `GetRandomNumberFloat` para asignar tamaños, posiciones, tiempos de animación e imágenes de fondo aleatorios a las burbujas, asegurando variabilidad en el juego.\n```javascript\nfunction GetRandomNumber(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}\n```",
+				{
+					description:
+						"**Manipulación del DOM para Elementos del Juego:** Creación dinámica de elementos (`div` con `bulletMark`) para simular los disparos y la integración de elementos HTML para el marcador y las interfaces de usuario.",
+					code: 'const newChild = document.createElement("div");\nnewChild.className = "bulletMark";\ndocument.children[0].children[1].children[0].appendChild(newChild);\nnewChild.style.left = (e.clientX - newChild.getBoundingClientRect().width / 2) + "px";',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Animaciones CSS Dinámicas:** Utiliza propiedades CSS como `animationName`, `animationDuration`, `animationDelay` y `transform` en combinación con `setInterval` y `requestAnimationFrame` para crear el movimiento continuo de las burbujas y efectos visuales como explosiones.",
+					code: "function AddSizeAndStylesToSquares() {\n    // ... bucle para establecer estilos para cada cuadrado ...\n    containerAnimation.children[index].style.animationName = `animateSquares${animationnumber}`;\n    containerAnimation.children[index].style.animationDuration = `${timeAnimation}s`;\n    // ... otras propiedades de animación ...\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Detección de Colisiones:** Implementación de la función `checkCollision` utilizando `getBoundingClientRect()` para detectar cuando las burbujas objetivo colisionan con el área del marcador, incrementando los fallos.",
+					code: "function checkCollision() {\n    for (let i = 0; i < containerAnimation.childElementCount; i++) {\n        const childElement = containerAnimation.children[i];\n        // ... cálculo de colisiones ...\n        if (childElementPosition.left < scoreboardPosition.right &&\n            // ... otras condiciones de colisión ...\n            childElementPosition.bottom > scoreboardPosition.top) {\n            \n            if (containerAnimation.children[i].style.backgroundImage.replace(/^url\\(|\\)$|\"/g, '').replace('.', '') === targetImg.src.substring(targetImg.src.indexOf('/images')).replace(' ', '')) {\n                totalmisses++;\n                if (totalmisses == maxMisses) GameOver();\n                UpdateStats();\n            }\n            elementStates[i].hasCollided = true;\n        }\n    }\n    requestAnimationFrame(checkCollision);\n}\nrequestAnimationFrame(checkCollision);",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manejo de Eventos de Mouse:** `addEventListener('mousedown', ...)` se usa para detectar los clics del usuario, que inician el disparo y activan la lógica de impacto.",
+					code: "const bullet = document.addEventListener('mousedown', function (e) {\n    if (e.clientY > 115 && totalShots && !gameOver) {\n        // ... lógica para crear y posicionar la marca de la bala ...\n        totalShots--;\n        UpdateStats();\n        // ... lógica de sonido y limpieza ...\n    }\n    if (!totalShots) {\n        GameOver();\n    }\n});",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Manejo de Audio:** Uso del objeto `HTMLAudioElement` (`soundExplosion`, `soundPainballShoot`) con métodos `play()` y `muted` para controlar los efectos de sonido del juego.",
+					code: "function ParticlesExplosion() {\n    setTimeout(function () {\n        soundExplosion.currentTime = 0;\n        soundExplosion.play();\n        explosion.style.opacity = 1;\n    }, 250);\n    // ... resetear opacidad más tarde ...\n}",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Lógica de Juego y Estado:** Variables como `totalShots`, `totalhits`, `totalmisses`, `gameOver`, `startTime` controlan el flujo del juego, la puntuación y el fin de la partida.",
+					code: "// Ejemplos de variables de estado y su uso:\n// let totalShots = 20; // Disparos disponibles\n// let totalhits = 0;   // Aciertos del jugador\n// let gameOver = false; // Estado del juego\n// La función UpdateStats() se encarga de reflejar estos valores en la UI.",
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Generación Aleatoria:** Funciones `GetRandomNumber` y `GetRandomNumberFloat` para asignar tamaños, posiciones, tiempos de animación e imágenes de fondo aleatorios a las burbujas, asegurando variabilidad en el juego.",
+					code: "function GetRandomNumber(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}",
+					lang: "javascript",
+				},
 			],
 			technicalChallenges: [
 				"**Gestión de Animaciones Simultáneas y Rendimiento:** Animación fluida de múltiples elementos (`div` con imágenes) moviéndose y reapareciendo en la pantalla, lo que exige optimización para evitar caídas en el framerate.",
@@ -322,7 +484,7 @@ export const projects: Project[] = [
 			],
 			lessonsLearned: [
 				"**Fundamentos de Desarrollo de Juegos en el Navegador:** Comprendí la estructura básica de un juego web, incluyendo el bucle de juego (`setInterval` para tiempo, `requestAnimationFrame` para colisiones), gestión de estado y mecánicas de puntuación.",
-				"**Optimización de Animaciones con DOM y CSS:** Aprendí a combinar la manipulación del DOM con animaciones CSS para crear efectos visuales complejos, prestando atención al rendimiento para mantener la fluidez incluso con muchos elementos en movimiento.",
+				"**Optimización de Animaciones con DOM y CSS:** Aprendí a combinar la manipulación del DOM con animaciones CSS para crear complejos efectos visuales, prestando atención al rendimiento para mantener la fluidez incluso con muchos elementos en movimiento.",
 				"**Lógica de Juego y Eventos:** Reforcé mis habilidades en la implementación de la lógica de un juego arcade, desde la respuesta a la interacción del usuario hasta la gestión de aciertos, fallos y condiciones de fin de partida.",
 				"**Integración de Audio:** Adquirí experiencia en la adición y control de elementos de audio en una aplicación web para mejorar la inmersión del usuario.",
 				"**Programación Reactiva a Eventos:** Manejar múltiples tipos de eventos (clics, animaciones CSS, cambios de tiempo) para actualizar dinátesis de forma dinámica y mantener la coherencia del juego.",
