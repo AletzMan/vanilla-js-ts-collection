@@ -58,7 +58,6 @@ section {
 	box-sizing: border-box;
 	gap: var(--size-lg);
 	border: 1px solid var(--color-border);
-	background-color: #4e4eff00;
 	opacity: 0.8;
 	background-size: 10px 10px;
 	background-image: repeating-linear-gradient(
