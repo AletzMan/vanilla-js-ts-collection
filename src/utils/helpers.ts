@@ -11,7 +11,7 @@ export function formatTextToHTML(text: string): string {
 	// Opcional: dividir por doble salto para párrafos
 	text = text
 		.split(/\n{2,}/)
-		.map((paragraph) => `<p>${paragraph.trim()}</p>`)
+		.map((paragraph) => `<li>${paragraph.trim()}</li>`)
 		.join("\n");
 
 	return text;
