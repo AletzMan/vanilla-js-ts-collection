@@ -113,9 +113,9 @@ export const projects: Project[] = [
 		date: "2023-01-14",
 		featured: true,
 		image:
-			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paint-board.webp",
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paint_board.webp",
 		imageBrowser:
-			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/frame_paint_board.webp",
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/paint_board.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/PaintBoard",
 		urlDemo: "https://aletzman.github.io/PaintBoard/",
@@ -412,9 +412,9 @@ export const projects: Project[] = [
 		date: "2023-04-04",
 		featured: true,
 		image:
-			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble-shooter-game.webp",
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble_shooter_game.webp",
 		imageBrowser:
-			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble-shooter-game.webp",
+			"https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/vanillacollection/bubble_shooter_game.webp",
 		language: "javascript",
 		urlRepo: "https://github.com/AletzMan/bubble_shooter_game",
 		urlDemo: "https://aletzman.github.io/bubble_shooter_game/",
