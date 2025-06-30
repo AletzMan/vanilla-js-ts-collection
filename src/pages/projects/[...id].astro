@@ -1,12 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { projects } from "../../data/proyects";
-import { Book, BookOpen, BrainIcon, CodeIcon, Github, Hash, Info, Lightbulb, Link, Share2, TriangleAlert, Zap } from "@lucide/astro";
+import { Book, BookOpen, BrainIcon, CodeIcon, Github, Hash, Info, Lightbulb, Link, Share2, Star, Tag, TriangleAlert, Zap } from "@lucide/astro";
 import { HeaderDetailsProject } from "./components/HeaderDetailsProject";
 import Button from "../../components/Button.astro";
-import { categories } from "../../data/filters";
+import { categories, difficulties, languages } from "../../data/filters";
 import { formatTextToHTML } from "../../utils/helpers";
 import { Code } from "astro/components";
+import DifficultyView from "../../components/DifficultyView.astro";
 const { id } = Astro.params;
 
 export function getStaticPaths() {
@@ -18,6 +19,7 @@ export function getStaticPaths() {
 }
 const project = projects.find((project) => project.id.toString() === id);
 const category = categories.find((category) => category.value === project?.category);
+const LanguageIcon = languages.find((language) => language.value === project?.language)?.icon;
 ---
 
 <Layout title={`Vanilla JS/TS Collection - ${project?.name}`}>
@@ -33,12 +35,12 @@ const category = categories.find((category) => category.value === project?.categ
 						</span>
 						<div
 							class="hero-category"
-							style={{ backgroundColor: `${category?.color}30`, color: `${category?.color}` }}
+							style={{ backgroundColor: `${category?.color}15`, color: `${category?.color}` }}
 						>
 							{category?.icon && <category.icon />}
 							{category?.name}
 						</div>
-						<h1 class="hero-title">{project.name}</h1>
+						<h1 class="hero-title">{project.featured ? <Star class="hero-star"/> : null}{project.name}</h1>
 						<p class="hero-resume">{project.description}</p>
 						<div class="hero-buttons">
 							<Button
@@ -65,94 +67,116 @@ const category = categories.find((category) => category.value === project?.categ
 		}
 		<div class="container">
 			<div class="details">
-				<div class="description">
-					<div class="description-title">
-						<BookOpen />
+				<div class="box">
+					<div class="box-title box-title-desc">
+						<BookOpen class="box-icon-desc"/>
 						<h2>Descripción</h2>
 					</div>
-					{project && <p class="description-text">{project.projectDetails.description}</p>}
+					{project && <p class="box-text">{project.projectDetails.description}</p>}
 				</div>
-				<div class="description">
-					<div class="description-title">
-						<Zap />
+				<div class="box">
+					<div class="box-title box-title-key">
+						<Zap class="box-icon-key"/>
 						<h2>Características clave</h2>
 					</div>
-					{ project && project.projectDetails.keyFeatures.map((feature) => (
-							<p set:html={formatTextToHTML(feature)} />
+					<ul class="list list-key">
+						{ project && project.projectDetails.keyFeatures.map((feature) => (
+							<Fragment set:html={formatTextToHTML(feature)} />
 						))
 					}
+					</ul>
 				</div> 	
-				<div class="description">
-					<div class="description-title">
-						<CodeIcon /> 
+				<div class="box">
+					<div class="box-title box-title-code">
+						<CodeIcon class="box-icon-code" /> 
 						<h2>Aspectos destacados del código</h2>
 					</div>
-					{ project && project.projectDetails.codeHighlights.map((highlight) => (
-							<p set:html={formatTextToHTML(highlight.description)} />
-							<Code code={highlight.code} lang={highlight.lang === "javascript" ? "js" : "ts"} />
+					<ul class="list list-code">
+						{ project && project.projectDetails.codeHighlights.map((highlight) => (
+						 
+								<Fragment set:html={formatTextToHTML(highlight.description)} />
+							 
+							<li class="code">
+								<Code code={highlight.code} lang={highlight.lang === "javascript" ? "js" : "ts"} />
+							</li>
 						))
 					}
+				</ul>
 				</div>
-				<div class="description">
-					<div class="description-title">
-						<TriangleAlert />
+				<div class="box">
+					<div class="box-title box-title-challenge">
+						<TriangleAlert class="box-icon-challenge"/>
 						<h2>Desafíos técnicos</h2>
 					</div>
-					{ project && project.projectDetails.technicalChallenges.map((challenge) => (
-							<p set:html={formatTextToHTML(challenge)} />
+					<ul class="list list-challenge">
+						{ project && project.projectDetails.technicalChallenges.map((challenge) => (
+							<Fragment set:html={formatTextToHTML(challenge)} />
 						))
 					}
+					</ul>
 				</div>
-				<div class="description">
-					<div class="description-title">
-						<BrainIcon />
+				<div class="box">
+					<div class="box-title box-title-lesson">
+						<BrainIcon class="box-icon-lesson"/>
 						<h2>Aprendizajes obtenidos</h2>
 					</div>
-					{ project && project.projectDetails.lessonsLearned.map((lesson) => (
-							<p set:html={formatTextToHTML(lesson)} />
+					<ul class="list list-lesson">
+						{ project && project.projectDetails.lessonsLearned.map((lesson) => (
+							<Fragment set:html={formatTextToHTML(lesson)} />
 						))
 					}
+					</ul>
 				</div>
-				<div class="description">
-					<div class="description-title">
-						<Lightbulb />
+				<div class="box">
+					<div class="box-title box-title-improvement">
+						<Lightbulb class="box-icon-improvement"/>
 						<h2>Posibles mejoras / Ideas a implementar</h2>
 					</div>
-					{ project && project.projectDetails.futureImprovements.map((improvement) => (
-							<p set:html={formatTextToHTML(improvement)} />
+					<ul class="list list-improvement">
+						{ project && project.projectDetails.futureImprovements.map((improvement) => (
+							<Fragment set:html={formatTextToHTML(improvement)} />
 						))
 					}
+					</ul>
 				</div>
 			</div>
 			<div class="info">
-				<div class="info-title">
-					<Info />
-					<h2>Información del proyecto</h2>
+				<div class="box">
+				<div class="box-title box-title-info">
+					<Info class="box-icon-info"/>
+					<h2>Información</h2>
 				</div>
 				<div class="info-content">
 					<div class="info-item">
-						<label>Categoría</label>
-						{project && <p>{project.category}</p>}
+						<label class="info-label">Categoría</label>
+						{project && <p class="info-text">{category?.name}</p>}
 					</div>
 					<div class="info-item">
-						<label>Fecha</label>
-						{project && <p>{project.date}</p>}
+						<label class="info-label">Fecha</label>
+						{project && <p class="info-text">{project.date}</p>}
 					</div>
 					<div class="info-item">
-						<label>Dificultad</label>
-						{project && <p>{project.difficulty}</p>}
+						<label class="info-label">Dificultad</label>
+						{project && <DifficultyView difficulty={project.difficulty} />} 
 					</div>
 					<div class="info-item">
-						<label>Idioma</label>
-						{project && <p>{project.language}</p>}
+						<label class="info-label">Lenguaje</label>
+						<div class="info-container">
+							{LanguageIcon && <LanguageIcon />}
+							{project && <p class="info-text" style={{color: project.language === "javascript" ? "var(--color-js)" : "var(--color-ts)"}}>{languages.find((language) => language.value === project.language)?.name}</p>}
+						</div>
 					</div>
 				</div>
-				<div class="info-content">
+			</div>
+				<div class="box">
+					<div class="box-title box-title-tag">
+						<Tag class="box-icon-tag"/>
+						<h2>Etiquetas</h2>  
+					</div>
 					<div class="info-item">
-						<label>Etiquetas</label>
 						<div class="tags-container">
 							{project && project.tags.map((tag) => (
-								<span class="tag" style={{ backgroundColor: `${category?.color}30`, color: `${category?.color}` }}>{tag}</span>
+								<span class="tag">{tag}</span>
 							))}
 						</div> 
 					</div> 
@@ -170,7 +194,7 @@ const category = categories.find((category) => category.value === project?.categ
 		flex-direction: column;
 		align-items: center;
 		width: 100svw;
-		height: 100svh;
+		height: calc(100svh - 57px);
 		overflow-y: auto;
 		overflow-x: hidden;
 		text-wrap: balance;
@@ -199,7 +223,7 @@ const category = categories.find((category) => category.value === project?.categ
 		box-sizing: border-box;
 		background-color: #000000;
 		opacity: 1;
-		background-image: radial-gradient(#313136 0px, #000000 1px);
+		background-image: radial-gradient(var(--color-surface-f) 0px, var(--color-surface-a) 1px);
 		background-size: 10px 10px;
 	}
 
@@ -229,13 +253,19 @@ const category = categories.find((category) => category.value === project?.categ
 	}
 
 	.hero-title {
+		position: relative;
 		font-size: calc(1rem + 3svw);
 		line-height: 1em;
 		font-weight: bold;
-		background: linear-gradient(90deg, var(--color-js), var(--color-ts));
-		background-clip: text;
-		text-wrap: balance;
-		-webkit-text-fill-color: transparent;
+		color: var(--color-secondary);
+	}
+
+	.hero-star {
+		position: absolute;
+		top: -0.1em;
+		right: -0.3em;
+		color: var(--color-js);
+		fill: var(--color-js);
 	}
 
 	.hero-resume {
@@ -243,8 +273,8 @@ const category = categories.find((category) => category.value === project?.categ
 		line-height: 1.5em;
 		text-wrap: balance;
 		width: 100%;
-	}
-
+	} 
+ 
 	.hero-picture {
 		position: relative;
 		display: flex;
@@ -254,9 +284,7 @@ const category = categories.find((category) => category.value === project?.categ
 		width: 100%;
 		max-width: max-content;
 		height: 85%;
-		border-radius: var(--radius-sm);
-		overflow: hidden;
-		border: 4px solid var(--color-text-secondary);
+		overflow: hidden; 
 	}
 
 	.hero-id {
@@ -266,7 +294,7 @@ const category = categories.find((category) => category.value === project?.categ
 		width: 3rem;
 		height: 3rem;
 		border-radius: var(--radius-md);
-		background-color: #ff009d25;
+		background-color: #ff009d20;
 		backdrop-filter: blur(10px);
 		color: #ff009d;
 		font-size: 1.25rem;
@@ -286,7 +314,10 @@ const category = categories.find((category) => category.value === project?.categ
 		width: 100%;
 		height: 100%;
 		object-position: center;
-		object-fit: contain;
+		object-fit: cover; 
+		object-position: top left;
+		border-radius: var(--radius-sm);  
+		border: 4px solid var(--color-surface-f);
 	}
 
 	.hero-buttons {
@@ -302,25 +333,27 @@ const category = categories.find((category) => category.value === project?.categ
 		}
 	}
 
-	.description {
+	.box {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		padding: var(--size-lg) var(--size-xl);
 		gap: 1rem;
 		width: 100%;
+		max-width: 937px;
 		background-color: var(--color-surface-c);
 		border-radius: var(--radius-xs);
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border: 1px solid var(--color-border);
+		animation: fadeInUp 1s ease-in-out forwards;
 
-		.description-title {
+		.box-title {
 			display: flex;
 			align-items: center;
 			gap: 0.75rem;
 			width: 100%;
 			font-size: 1rem;
-			line-height: 1em;
-			font-weight: bold;
+			line-height: 1em; 
 			text-transform: capitalize;
 			text-align: left;
 			padding: var(--size-sm) 0 var(--size-lg) 0;
@@ -331,14 +364,43 @@ const category = categories.find((category) => category.value === project?.categ
 				width: 2rem;
 				height: 2rem;
 			}
+
+			h2 { 
+				font-weight: 500;
+			}
 		}
 
-		.description-text {
-			font-size: 1rem;
+		.box-text {
+			font-size: 0.95rem;
 			line-height: 1.5em;
-			text-wrap: balance;
+			text-wrap: balance; 
 			width: 100%;
 		}
+	}
+
+	.box-title-desc {
+		color: var(--color-js);
+	}
+	.box-title-key {
+		color: var(--color-ts);
+	}
+	.box-title-code {
+		color: var(--color-secondary);
+	}
+	.box-title-challenge {
+		color: var(--color-warning);
+	}
+	.box-title-lesson {
+		color: var(--color-success);
+	}
+	.box-title-improvement {
+		color: var(--color-danger);
+	}
+	.box-title-tag {
+		color: var(--color-accent);
+	}
+	.box-title-info {
+		color: var(--color-info);
 	}
 
 	.details {
@@ -388,6 +450,7 @@ const category = categories.find((category) => category.value === project?.categ
 	.info-item {
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
 		gap: 0.75rem;
 		width: 100%;
 		font-size: 1rem;
@@ -400,6 +463,120 @@ const category = categories.find((category) => category.value === project?.categ
 		border-bottom: 1px solid var(--color-border);
 	}
 
+	.info-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+
+		svg {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+	}
+	
+	.info-label {
+		font-size: 1rem;
+		line-height: 1em;
+		font-weight: 500;
+		text-transform: capitalize;
+		color: var(--color-text);
+		text-align: left;
+	}
+	.info-text {
+		font-size: 1rem;
+		line-height: 1em;
+		font-weight: 400;
+		color: var(--color-text-secondary);
+		text-transform: capitalize;
+		text-align: left;
+		border-radius: var(--radius-xs);
+		padding: var(--size-xs) var(--size-md); 
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		list-style-type: none;
+		width: 100%;
+
+		
+		li:not(.code) {   
+			border: 1px solid var(--color-border);
+			border-left: 4px solid var(--color-border);  
+			padding: var(--size-sm) var(--size-md);
+			background-color: var(--color-surface-d);
+			border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+			font-weight: 400;
+			color: var(--color-text-secondary);
+			
+			strong{
+				color: var(--color-text);
+				font-weight: bold; 
+			}
+			
+		}
+	 
+
+		&.list-key{
+			li{
+				border-color: var(--color-border);
+				border-left-color: var(--color-ts);
+			}
+		}
+
+		&.list-code{
+			li{
+				border-color: var(--color-border);
+				border-left-color: var(--color-secondary);
+			}
+		}
+
+		&.list-challenge{
+			li{
+				border-color: var(--color-border);
+				border-left-color: var(--color-warning);
+			}
+		}
+
+		&.list-lesson{
+			li{
+				border-color: var(--color-border);
+				border-left-color: var(--color-success);
+			}
+		}
+
+		&.list-improvement{
+			li{
+				border-color: var(--color-border);
+				border-left-color: var(--color-danger);
+			}
+		}
+		 
+	}
+
+	.tags-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tag {
+		display: flex;
+		align-items: center;
+		justify-content: center; 
+		padding: var(--size-xs) var(--size-sm);
+		border-radius: var(--radius-xs);
+		font-size: 0.8rem;
+		line-height: 1em;
+		font-weight: 300;
+		text-transform: capitalize;
+		text-align: center;
+		background-color: var(--color-secondary-opacity);
+		color: var(--color-secondary);
+	}
+
 	.container {
 		display: grid;
 		grid-template-columns: 1fr 0.4fr;
@@ -408,14 +585,14 @@ const category = categories.find((category) => category.value === project?.categ
 		max-width: var(--max-width);
 		box-sizing: border-box;
 		padding: var(--size-lg);
-		border-radius: var(--radius-xs);
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		border-radius: var(--radius-xs);  
 	}
 
 	@media (width < 900px) {
 		.hero {
 			display: flex;
 			flex-direction: column;
+			flex-flow: column-reverse ;
 			align-items: center;
 			height: 650px;
 			justify-content: center;
@@ -435,4 +612,15 @@ const category = categories.find((category) => category.value === project?.categ
 			flex-direction: column;
 		}
 	}
+
+	@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
