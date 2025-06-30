@@ -38,9 +38,9 @@ label {
 	&:hover:not(.category-checked) {
 		background: linear-gradient(
 			135deg,
-			var(--color-surface-secondary-hover),
-			var(--color-surface-hover),
-			var(--color-surface-secondary-hover)
+			var(--color-surface-d),
+			var(--color-surface-c),
+			var(--color-surface-d)
 		) !important;
 		color: var(--color-text);
 		border-color: var(--color-border-hover) !important;
