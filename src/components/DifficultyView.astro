@@ -1,0 +1,108 @@
+---
+import { difficulties } from "../data/filters";
+import type { Difficulty } from "../data/types";
+
+interface Props {
+	difficulty: Difficulty;
+}
+
+const { difficulty } = Astro.props;
+const difficultyText = difficulties.find((diff) => diff.value === difficulty)?.name;
+---
+
+<div class="difficulty" title={difficultyText}>
+	<span
+		class={`difficulty-bar    difficulty-easy  ${difficulty === "easy" ? "difficulty-easy-active" : ""}`}
+	>
+	</span>
+	<span
+		class={`difficulty-bar   difficulty-intermediate  ${difficulty === "intermediate" ? "difficulty-intermediate-active" : ""}`}
+	>
+	</span>
+	<span
+		class={`difficulty-bar   difficulty-advanced  ${difficulty === "advanced" ? "difficulty-advanced-active" : ""}`}
+	>
+	</span>
+	<span
+		class={`difficulty-bar   difficulty-expert  ${difficulty === "expert" ? "difficulty-expert-active" : ""}`}
+	>
+	</span>
+</div>
+
+<style>
+	.difficulty {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		margin: 0 0.5em 0 0;
+		gap: 2px;
+
+		&:hover {
+			&:before {
+				opacity: 1;
+				position: absolute;
+				top: -1.75rem;
+				left: 0;
+				content: attr(title);
+				height: 1rem;
+				font-weight: 400;
+				padding: var(--size-xs) var(--size-sm);
+				border-radius: var(--radius-xs) var(--radius-xs) 0 0;
+				background-color: var(--color-border);
+				animation: fadeInUp 0.5s ease-in-out forwards;
+			}
+		}
+	}
+
+	.difficulty-bar {
+		width: 0.5rem;
+		border-radius: 2px 2px 0 0;
+	}
+
+	.difficulty-easy {
+		height: 0.75rem;
+		background-color: var(--color-easy-opacity);
+		border: 1px solid var(--color-easy-opacity);
+
+		&.difficulty-easy-active {
+			background-color: var(--color-easy);
+		}
+	}
+	.difficulty-intermediate {
+		height: 1rem;
+		background-color: var(--color-intermediate-opacity);
+		border: 1px solid var(--color-intermediate-opacity);
+
+		&.difficulty-intermediate-active {
+			background-color: var(--color-intermediate);
+		}
+	}
+	.difficulty-advanced {
+		height: 1.25rem;
+		background-color: var(--color-advanced-opacity);
+
+		&.difficulty-advanced-active {
+			background-color: var(--color-advanced);
+		}
+	}
+	.difficulty-expert {
+		height: 1.5rem;
+		background-color: var(--color-expert-opacity);
+		border: 1px solid var(--color-expert-opacity);
+
+		&.difficulty-expert-active {
+			background-color: var(--color-expert);
+		}
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(10px) translateX(-50%);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(-50px) translateX(-50%);
+		}
+	}
+</style>
