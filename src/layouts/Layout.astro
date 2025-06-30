@@ -28,25 +28,38 @@ const { title, scrollBar } = Astro.props;
 		--color-js: #f7df1e;
 		--color-ts: #3178c6;
 
+		--color-success: #99dd3f;
+		--color-warning: #fde635;
+		--color-danger: #f73737;
+		--color-info: #698cff;
+
+		--color-easy: #99dd3f;
+		--color-easy-opacity: #99dd3f20;
+		--color-intermediate: #fde635;
+		--color-intermediate-opacity: #fde63520;
+		--color-advanced: #f77d37;
+		--color-advanced-opacity: #f77d3720;
+		--color-expert: #ff4c4c;
+		--color-expert-opacity: #ff4c4c20;
+
 		/* Neutrales */
-		--color-surface: #151b22;
-		--color-surface-hover: #232c36;
-		--color-surface-secondary: #0f1318;
-		--color-surface-secondary-hover: #1a2129;
-		--color-surface-a: #040507;
-		--color-surface-b: #010d14;
+
+		--color-surface-a: #080a0f;
+		--color-surface-b: #04101b;
 		--color-surface-c: #0b121d;
+		--color-surface-d: #151b22;
+		--color-surface-e: #232c36;
+		--color-surface-f: #344150;
 		--color-border: #1a2736;
 		--color-border-hover: #455468;
 
 		/* Acentos */
-		--color-accent: #9b5de5;
-		--color-accent-opacity: #9b5de550;
-		--color-hover: #7a42be;
-		--color-hover-opacity: #7a42be50;
-		--color-secondary: #35aeff;
-		--color-secondary-hover: #1b89d3;
-		--color-secondary-opacity: #35aeff50;
+		--color-accent: #3ea6ff;
+		--color-accent-hover: #288ae0;
+		--color-accent-opacity: #3ea6ff20;
+		--color-secondary: #4ac2ba;
+		--color-secondary-hover: #28a199;
+		--color-secondary-opacity: #60d4cd20;
 
 		/* Tamaños */
 		--size-2xs: 0.125rem;
@@ -70,6 +83,21 @@ const { title, scrollBar } = Astro.props;
 
 		/* Gradientes (opcional) */
 		--gradient-js-ts: linear-gradient(90deg, var(--color-js), var(--color-ts));
+	}
+
+	[data-theme="dark"] {
+		--color-bg: #fcfcfc;
+		--color-text: #0f0f0f;
+		--color-text-secondary: #2c2c2c;
+
+		--color-surface-a: #e3e3e6;
+		--color-surface-b: #d3d3d6;
+		--color-surface-c: #c3c3c6;
+		--color-surface-d: #b3b3b6;
+		--color-surface-e: #a3a3a6;
+		--color-surface-f: #939396;
+		--color-border: #737376;
+		--color-border-hover: #455468;
 	}
 
 	* {
@@ -115,11 +143,16 @@ const { title, scrollBar } = Astro.props;
 
 	.scrollBar {
 		scrollbar-width: thin;
-		scrollbar-color: var(--color-accent) var(--color-surface);
+		scrollbar-color: var(--color-accent) var(--color-surface-d);
 	}
 
 	.hiddenScrollBar {
 		overflow: hidden;
 		scrollbar-width: none;
+	}
+	html.no-transition *,
+	html.no-transition *::before,
+	html.no-transition *::after {
+		transition: none !important;
 	}
 </style>
