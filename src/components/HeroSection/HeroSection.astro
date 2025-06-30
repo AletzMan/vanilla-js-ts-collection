@@ -9,9 +9,6 @@ const total = projects.length;
 ---
 
 <section>
-	<div class="background">
-		<div class="background-gradient"></div>
-	</div>
 	<div class="container">
 		<div class="icons">
 			<JSIcon class="icon" />
@@ -63,33 +60,12 @@ const total = projects.length;
 		gap: 1rem;
 		text-wrap: balance;
 		align-items: center;
-		background: linear-gradient(135deg, #03101f, #b1980c);
-		background-image: linear-gradient(#f1f2ff08 1px, transparent 1px),
-			linear-gradient(to right, #f1f2ff08 1px, #8a821c00 1px);
+		background-image: linear-gradient(var(--color-surface-c) 1px, transparent 1px),
+			linear-gradient(to right, var(--color-surface-c) 1px, var(--color-surface-b) 1px);
 		background-size: 20px 20px;
 	}
-
-	.background {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow: hidden;
-		width: 100svw;
-		z-index: -1;
-	}
-
-	.background-gradient {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(135deg, #0a0f1430, #0d1f2730);
-	}
-
 	.container {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -166,14 +142,14 @@ const total = projects.length;
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		background: #1a1a1a;
 		color: #fff;
 		padding: 1.25rem 1.5rem;
 		border-radius: 1rem;
-		border: 1px solid rgba(255, 255, 255, 0.05);
+		border: 1px solid var(--color-border);
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 		margin-top: 2.5rem;
 		animation: hover 3s ease-in-out forwards infinite;
+		background: var(--color-surface-c);
 
 		@media (width < 768px) {
 			margin-top: 1.5rem;
@@ -197,7 +173,7 @@ const total = projects.length;
 	}
 
 	.project-count-icon {
-		background: linear-gradient(135deg, #f7df1e, #3178c6);
+		background: linear-gradient(135deg, var(--color-js), var(--color-ts));
 		padding: 0.75rem;
 		border-radius: 0.75rem;
 		display: grid;
@@ -208,14 +184,15 @@ const total = projects.length;
 		font-size: 1.25rem;
 		font-weight: 600;
 		margin: 0;
-		background: linear-gradient(to right, #f7df1e, #3178c6);
+		background: linear-gradient(to right, var(--color-js), var(--color-ts));
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
 
 	.project-count-content p {
 		font-size: 0.9rem;
-		color: #aaa;
+		color: var(--color-text-secondary);
+		font-weight: 300;
 		margin: 0.25rem 0 0 0;
 	}
 </style>
