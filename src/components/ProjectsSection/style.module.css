@@ -58,7 +58,6 @@ section {
 	box-sizing: border-box;
 	gap: var(--size-lg);
 	border: 1px solid var(--color-border);
-	opacity: 0.8;
 	background-size: 10px 10px;
 	background-image: repeating-linear-gradient(
 		45deg,
@@ -82,7 +81,7 @@ section {
 	padding: var(--size-xs) var(--size-md) var(--size-md) var(--size-md);
 	border-radius: var(--radius-xs);
 	border: 1px solid var(--color-border);
-	background-color: var(--color-surface);
+	background-color: var(--color-surface-b);
 	box-sizing: border-box;
 	transition: all 0.3s ease;
 	transform: scaleY(0);
@@ -120,7 +119,7 @@ section {
 	transition: all 0.3s ease;
 
 	&:hover {
-		background-color: var(--color-surface-secondary-hover);
+		background-color: var(--color-surface-c);
 	}
 }
 
@@ -210,7 +209,7 @@ section {
 	transition: all 0.3s ease;
 
 	&:hover {
-		background-color: var(--color-surface-secondary-hover);
+		background-color: var(--color-surface-c);
 	}
 }
 
