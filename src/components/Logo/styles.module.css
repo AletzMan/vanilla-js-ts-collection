@@ -1,0 +1,32 @@
+.logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	max-width: max-content;
+	height: 100%;
+	text-decoration: none;
+	color: var(--color-text);
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.logo-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+
+	&:first-child {
+		transform: rotate(10deg);
+	}
+
+	&:last-child {
+		transform: rotate(-10deg);
+	}
+}
