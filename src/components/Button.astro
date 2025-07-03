@@ -7,14 +7,16 @@ interface Props {
 	size?: "small" | "medium" | "large";
 	type?: "button" | "link";
 	href?: string;
+	target?: "_blank" | "_self" | "_parent" | "_top";
 }
-const { title, icon: Icon, color, size, type, href } = Astro.props;
+const { title, icon: Icon, color, size, type, href, target } = Astro.props;
 ---
 
 {
 	type === "link" ? (
 		<a
 			href={href}
+			target={target}
 			class={`link ${color === "primary" ? "button-primary" : "button-secondary"} ${size === "small" ? "button-small" : size === "large" ? "button-large" : "button-medium"}`}
 		>
 			{Icon && <Icon class="icon" />}
