@@ -20,7 +20,7 @@ const { title, scrollBar } = Astro.props;
 <style is:global>
 	:root {
 		/* Base */
-		--color-bg: #0f0f0f;
+		--color-bg: #0c101b;
 		--color-text: #f0f0f0;
 		--color-text-secondary: #a0a0a0;
 
@@ -50,7 +50,7 @@ const { title, scrollBar } = Astro.props;
 		--color-surface-d: #151b22;
 		--color-surface-e: #232c36;
 		--color-surface-f: #344150;
-		--color-border: #1a2736;
+		--color-border: #172331;
 		--color-border-hover: #455468;
 
 		/* Acentos */
@@ -85,21 +85,6 @@ const { title, scrollBar } = Astro.props;
 		--gradient-js-ts: linear-gradient(90deg, var(--color-js), var(--color-ts));
 	}
 
-	[data-theme="dark"] {
-		--color-bg: #fcfcfc;
-		--color-text: #0f0f0f;
-		--color-text-secondary: #2c2c2c;
-
-		--color-surface-a: #e3e3e6;
-		--color-surface-b: #d3d3d6;
-		--color-surface-c: #c3c3c6;
-		--color-surface-d: #b3b3b6;
-		--color-surface-e: #a3a3a6;
-		--color-surface-f: #939396;
-		--color-border: #737376;
-		--color-border-hover: #455468;
-	}
-
 	* {
 		box-sizing: border-box;
 		padding: 0;
@@ -124,6 +109,7 @@ const { title, scrollBar } = Astro.props;
 	pre {
 		color: var(--color-text);
 		border-radius: var(--radius-xs);
+		border: 1px solid var(--color-surface-f);
 		padding: var(--size-sm) var(--size-md);
 		font-family: monospace !important;
 
