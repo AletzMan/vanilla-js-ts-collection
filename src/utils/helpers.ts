@@ -1,18 +1,17 @@
 export function formatTextToHTML(text: string): string {
-	// Procesar bloques de código primero
-	text = text.replace(/`([^`]+)`/g, "<i>$1</i>");
+	// Extraer la parte en negrita como título
+	const boldMatch = text.match(/\*\*(.+?)\*\*/);
+	const title = boldMatch ? `<strong>${boldMatch[1]}</strong>` : "";
 
-	// Negritas: **texto**
-	text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+	// Eliminar el texto en negrita del contenido
+	let content = text.replace(/\*\*(.+?)\*\*/, "").trim();
 
-	// Fórmulas inline tipo $x^2$
-	text = text.replace(/\$(.+?)\$/g, '<span class="math">$1</span>');
+	// Reemplazar código inline: `...`
+	content = content.replace(/`([^`]+)`/g, "<i>$1</i>");
 
-	// Opcional: dividir por doble salto para párrafos
-	text = text
-		.split(/\n{2,}/)
-		.map((paragraph) => `<li>${paragraph.trim()}</li>`)
-		.join("\n");
+	// Reemplazar fórmulas: $...$
+	content = content.replace(/\$(.+?)\$/g, '<span class="math">$1</span>');
 
-	return text;
+	// Devolver HTML con estructura <li><strong></strong><p>...</p></li>
+	return `<li>${title}${content ? `<p>${content}</p>` : ""}</li>`;
 }
