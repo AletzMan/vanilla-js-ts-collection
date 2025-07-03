@@ -8,6 +8,7 @@ import { categories, difficulties, languages } from "../../data/filters";
 import { formatTextToHTML } from "../../utils/helpers";
 import { Code } from "astro/components";
 import DifficultyView from "../../components/DifficultyView.astro";
+import Footer from "../../components/Footer.astro";
 const { id } = Astro.params;
 
 export function getStaticPaths() {
@@ -22,7 +23,7 @@ const category = categories.find((category) => category.value === project?.categ
 const LanguageIcon = languages.find((language) => language.value === project?.language)?.icon;
 ---
 
-<Layout title={`Vanilla JS/TS Collection - ${project?.name}`}>
+<Layout title={`Vanilla JS/TS Collection - ${project?.name}`} >
 	<section class="section scrollBar">
 		{project && <HeaderDetailsProject project={project} client:only />}
 		{
@@ -48,6 +49,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 								color="primary"
 								icon={Github}
 								type="link"
+								target="_blank"
 								href={project.urlRepo}
 							/>
 							<Button
@@ -55,6 +57,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 								color="secondary"
 								icon={Link}
 								type="link"
+								target="_blank"
 								href={project.urlDemo}
 							/>
 						</div>
@@ -65,17 +68,17 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 				</div>
 			)
 		}
-		<div class="container">
+		<div class="main-content-grid">
 			<div class="details">
 				<div class="box">
-					<div class="box-title box-title-desc">
+					<div class="box-title box-title-desc box-title-sticky">
 						<BookOpen class="box-icon-desc"/>
 						<h2>Descripción</h2>
 					</div>
 					{project && <p class="box-text">{project.projectDetails.description}</p>}
 				</div>
 				<div class="box">
-					<div class="box-title box-title-key">
+					<div class="box-title box-title-key box-title-sticky">
 						<Zap class="box-icon-key"/>
 						<h2>Características clave</h2>
 					</div>
@@ -87,7 +90,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 					</ul>
 				</div> 	
 				<div class="box">
-					<div class="box-title box-title-code">
+					<div class="box-title box-title-code box-title-sticky">
 						<CodeIcon class="box-icon-code" /> 
 						<h2>Aspectos destacados del código</h2>
 					</div>
@@ -104,7 +107,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 				</ul>
 				</div>
 				<div class="box">
-					<div class="box-title box-title-challenge">
+					<div class="box-title box-title-challenge box-title-sticky">
 						<TriangleAlert class="box-icon-challenge"/>
 						<h2>Desafíos técnicos</h2>
 					</div>
@@ -116,7 +119,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 					</ul>
 				</div>
 				<div class="box">
-					<div class="box-title box-title-lesson">
+					<div class="box-title box-title-lesson box-title-sticky">
 						<BrainIcon class="box-icon-lesson"/>
 						<h2>Aprendizajes obtenidos</h2>
 					</div>
@@ -128,7 +131,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 					</ul>
 				</div>
 				<div class="box">
-					<div class="box-title box-title-improvement">
+					<div class="box-title box-title-improvement box-title-sticky">
 						<Lightbulb class="box-icon-improvement"/>
 						<h2>Posibles mejoras / Ideas a implementar</h2>
 					</div>
@@ -141,9 +144,11 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 				</div>
 			</div>
 			<div class="info">
+				
+				<div class="box-container">
 				<div class="box">
-				<div class="box-title box-title-info">
-					<Info class="box-icon-info"/>
+				<div class="box-title box-title-info ">
+					<Info class="box-icon-info "/>
 					<h2>Información</h2>
 				</div>
 				<div class="info-content">
@@ -167,7 +172,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 						</div>
 					</div>
 				</div>
-			</div>
+			    </div>
 				<div class="box">
 					<div class="box-title box-title-tag">
 						<Tag class="box-icon-tag"/>
@@ -181,30 +186,47 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 						</div> 
 					</div> 
 				</div>
+				<div class="box box-buttons">
+					<Button
+						title="Repositorio"
+						color="primary"
+						icon={Github}
+						type="link"
+						href={project?.urlRepo}
+					/>
+					<Button
+						title="Demo"
+						color="secondary"
+						icon={Link}
+						type="link"
+						href={project?.urlDemo}
+					/>
+				</div>
+			</div>
 			</div>
 		</div>
+		<Footer/>
 	</section>
 </Layout>
 
 <script></script>
 
 <style>
-	.section {
+	.section { 
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 100svw;
-		height: calc(100svh - 57px);
-		overflow-y: auto;
+		height: calc(100svh - 64px);
+		overflow-y: visible;
 		overflow-x: hidden;
 		text-wrap: balance;
 		align-items: center;
-		background: linear-gradient(135deg, #03101f, #b1980c);
-		background-image: linear-gradient(#f1f2ff08 1px, transparent 1px),
-			linear-gradient(to right, #f1f2ff08 1px, #8a821c00 1px);
+		background-image: linear-gradient(var(--color-surface-c) 1px, transparent 1px),
+			linear-gradient(to right, var(--color-surface-c) 1px, var(--color-surface-a) 1px);
 		background-size: 20px 20px;
 		color: var(--color-text);
-		margin-top: 57px;
+		margin-top: 64px;
 	}
 
 	.hero {
@@ -341,13 +363,13 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 		gap: 1rem;
 		width: 100%;
 		max-width: 937px;
-		background-color: var(--color-surface-c);
+		background: var(--color-bg);
 		border-radius: var(--radius-xs);
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 		border: 1px solid var(--color-border);
 		animation: fadeInUp 1s ease-in-out forwards;
 
-		.box-title {
+		.box-title { 
 			display: flex;
 			align-items: center;
 			gap: 0.75rem;
@@ -370,12 +392,40 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 			}
 		}
 
+		.box-title-sticky{
+			position: sticky;
+			top: 0;
+			z-index: 10;
+		}
+
 		.box-text {
 			font-size: 0.95rem;
 			line-height: 1.5em;
 			text-wrap: balance; 
 			width: 100%;
-		}
+		} 
+
+		
+	}
+
+	.box-buttons {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%; 
+
+			a {
+				min-width: 10rem !important;
+			}
+	 }
+
+	 
+
+	.box-container {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
 	}
 
 	.box-title-desc {
@@ -396,14 +446,14 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 	.box-title-improvement {
 		color: var(--color-danger);
 	}
-	.box-title-tag {
+	.box-title-tag { 
 		color: var(--color-accent);
 	}
-	.box-title-info {
+	.box-title-info { 
 		color: var(--color-info);
 	}
 
-	.details {
+	.details {  
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -415,7 +465,12 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
-		border-radius: var(--radius-xs);
+		border-radius: var(--radius-xs); 
+
+		.box-container {
+			 position: sticky;
+			 top: 1rem; 
+		}
 	}
 	
 	.info-title {
@@ -441,10 +496,8 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 	.info-content {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
-		background-color: var(--color-surface-c);
-		gap: 1rem;
-		width: 100%;
+		width: 100%; 
+		gap: 1rem; 
 	}
 
 	.info-item {
@@ -483,6 +536,7 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 		color: var(--color-text);
 		text-align: left;
 	}
+
 	.info-text {
 		font-size: 1rem;
 		line-height: 1em;
@@ -503,9 +557,12 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 
 		
 		li:not(.code) {   
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
 			border: 1px solid var(--color-border);
 			border-left: 4px solid var(--color-border);  
-			padding: var(--size-sm) var(--size-md);
+			padding: var(--size-sm) var(--size-md) var(--size-lg) var(--size-md);
 			background-color: var(--color-surface-d);
 			border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
 			font-weight: 400;
@@ -577,12 +634,13 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 		color: var(--color-secondary);
 	}
 
-	.container {
+	.main-content-grid {  
+		position: relative; 
 		display: grid;
 		grid-template-columns: 1fr 0.4fr;
 		gap: 1rem;
 		width: 100%;
-		max-width: var(--max-width);
+		max-width: var(--max-width); 
 		box-sizing: border-box;
 		padding: var(--size-lg);
 		border-radius: var(--radius-xs);  
@@ -592,24 +650,34 @@ const LanguageIcon = languages.find((language) => language.value === project?.la
 		.hero {
 			display: flex;
 			flex-direction: column;
-			flex-flow: column-reverse ;
 			align-items: center;
 			height: 650px;
 			justify-content: center;
 			padding: var(--size-xs);
 		}
 		.hero-picture {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			width: 100%;
-			max-width: 100%;
+			max-width: 100%; 
+			background-color: var(--color-surface-a);
 		}
 
 		.hero-image {
-			object-fit: cover;
+			object-fit: contain;
+			object-position: center;
 		}
 
-		.container {
+		.box{  
+			.box-title{
+				position:  relative ;
+			}
+		}
+
+		.main-content-grid {
 			display: flex;
-			flex-direction: column;
+			flex-direction: column-reverse;
 		}
 	}
 
