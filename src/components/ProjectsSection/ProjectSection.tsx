@@ -17,6 +17,7 @@ import { categories } from "../../data/filters";
 import { projects } from "../../data/proyects";
 import { TagFilter } from "./components/TagFilter/TagFilter";
 import Project from "./components/Project/Project";
+import { Logo } from "../Logo/Logo";
 
 export function ProjectsSection() {
 	const [search, setSearch] = useState("");
@@ -129,7 +130,7 @@ export function ProjectsSection() {
 			<header className={styles.header}>
 				<div className={styles["header-container"]}>
 					<div className={styles["title-container"]}>
-						<h2 className={styles["title-container-title"]}>Explora los proyectos</h2>
+						<Logo />
 						<Input
 							type="search"
 							placeholder="Buscar proyectos"

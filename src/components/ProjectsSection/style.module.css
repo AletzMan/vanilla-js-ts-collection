@@ -61,10 +61,10 @@ section {
 	background-size: 10px 10px;
 	background-image: repeating-linear-gradient(
 		45deg,
-		#cbcdfc00 0,
-		#cbcdfc30 1px,
-		#e5e5f703 0,
-		#e5e5f700 50%
+		transparent 0,
+		var(--color-surface-d) 1px,
+		var(--color-surface-a) 0,
+		var(--color-surface-a) 50%
 	);
 }
 
