@@ -32,6 +32,10 @@
 			background-color: var(--color-surface-c);
 		}
 	}
+
+	.back-button-text {
+		white-space: nowrap;
+	}
 }
 
 .share-container {
@@ -58,13 +62,13 @@
 .share-options {
 	position: absolute;
 	top: 2.6em;
-	right: 0;
+	right: 0.5em;
 	height: 0;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-	background-color: var(--color-surface-c);
+	background-color: var(--color-surface-d);
 	border-radius: var(--radius-xs);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	color: var(--color-text);
@@ -95,6 +99,11 @@
 	cursor: pointer;
 
 	&:hover {
-		background-color: var(--color-surface-d);
+		background-color: var(--color-surface-e);
+	}
+
+	svg {
+		width: 1.1rem;
+		height: 1.1rem;
 	}
 }
