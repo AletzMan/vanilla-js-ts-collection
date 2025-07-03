@@ -109,7 +109,7 @@ export const projects: Project[] = [
 			"frontend",
 		],
 		category: "utility",
-		difficulty: "easy",
+		difficulty: "intermediate",
 		date: "2023-01-14",
 		featured: true,
 		image:
@@ -135,33 +135,31 @@ export const projects: Project[] = [
 				{
 					description:
 						"**API de Canvas 2D:** Uso extensivo de `HTMLCanvasElement.getContext('2d')` y sus métodos (`beginPath`, `moveTo`, `lineTo`, `arc`, `ellipse`, `rect`, `roundRect`, `stroke`, `fill`, `clearRect`) para dibujar dinámicamente en el lienzo.",
-					code: "// Ejemplo de dibujo de uno de los segmentos de un número digital\nfunction createSegmentOne(context) {\n    context.beginPath();\n    context.moveTo(15, 15);\n    context.lineTo(30, 0);\n    context.lineTo(110, 0);\n    context.lineTo(125, 15);\n    context.lineTo(110, 30);\n    context.lineTo(30, 30);\n    context.lineTo(15, 15);\n    context.fill();\n    context.stroke();\n}",
+					code: "// Este fragmento muestra cómo se definen las rutas y se dibujan las formas en el canvas.\n// Por ejemplo, para dibujar una línea:\nconst LineDrawing = (cursorX, cursorY) => {\n    ctxCanvas.beginPath();\n    ctxCanvas.moveTo(initX, initY);\n    ctxCanvas.lineTo(cursorX, cursorY);\n    ctxCanvas.stroke();\n}",
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Manejo Avanzado de Eventos de Mouse:** Implementación de `mousedown`, `mousemove`, y `mouseup` para capturar la interacción del usuario y dibujar en tiempo real, incluyendo el cálculo de posiciones y tamaños de formas.",
-					code: 'canvas.addEventListener("mousedown", (e) => {\n    isDrawing = true;\n    xInitial = e.clientX - canvas.getBoundingClientRect().left;\n    yInitial = e.clientY - canvas.getBoundingClientRect().top;\n    \n    // Configurar contexto para el dibujo\n    ctx.strokeStyle = actualColor;\n    ctx.fillStyle = actualFillColor;\n    ctx.lineWidth = actualSize;\n    ctx.lineCap = "round";\n    ctx.lineJoin = "round";\n});',
+					code: 'const MouseDown = (e) => {\n    initX = e.offsetX;\n    initY = e.offsetY;\n    ctxCanvas.lineWidth = lineTickness;\n    ctxCanvas.strokeStyle = lineColor;\n    ctxCanvas.fillStyle = fillColor;\n    ctxCanvas.lineCap = "round";\n    ctxCanvas.lineJoin = "round";\n    // ... lógica para el tipo de dibujo ...\n    canvas.addEventListener("mousemove", MouseMove);\n}',
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Manipulación Dinámica del DOM:** Creación y modificación de elementos HTML (como las reglas y las guías de dibujo) en función de las interacciones del usuario y el tamaño de la ventana.",
-					code: "// Código relacionado con la manipulación dinámica del DOM, por ejemplo, creando elementos de guía o reglas.",
-					// No hay un bloque de código específico en el ejemplo original para esta descripción.
-					// Si tuviera un ejemplo de código, se colocaría aquí. Por ahora, se dejará un placeholder.
+					code: 'function CreateRuleX() {\n    let numberOfPixels = ruleXContainer.getBoundingClientRect().width / 5;\n    let coorXRule = 0;\n    for (let index = 0; index < numberOfPixels / 2; index++) {\n        const drawingGuide = document.createElement(\'div\');\n        ruleXContainer.appendChild(drawingGuide);\n        if (index == 0) {\n            drawingGuide.style.width = "11px";\n        }\n        if (index % 10 == 0) {\n            drawingGuide.style.height = "10px";\n            const newChildMeasX = document.createElement(\'p\');\n            drawingGuide.appendChild(newChildMeasX);\n            const newChildTextX = document.createTextNode(coorXRule);\n            newChildMeasX.appendChild(newChildTextX);\n            coorXRule += 100;\n        }\n    }\n    sizeCanvas = ruleXContainer.getBoundingClientRect().width + "px";\n}',
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Gestión de Herramientas y Estados:** Lógica para cambiar entre herramientas de dibujo, gestionar los colores activos (línea y relleno), y actualizar el grosor del trazo/borrador.",
-					code: "// Código relacionado con la gestión de herramientas y estados.\n// Ejemplo: una función para cambiar la herramienta activa\nfunction changeTool(tool) {\n    currentTool = tool;\n    updateCursor(tool);\n}",
+					code: 'for (let index = 0; index < buttonsTools.length; index++) {\n    buttonsTools.item(index).addEventListener("mousedown", function (e) {\n        drawingType = index + 1;\n        initX = null;\n        initY = null;\n        for (const button of buttonsTools) {\n            button.classList.remove("selectedButtonTools");\n        }\n        e.target.classList.add("selectedButtonTools");\n        // ... lógica para cursor y habilitar/deshabilitar sliders ...\n    });\n}',
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Guías de Dibujo en Tiempo Real:** Implementación de un `div` flotante (`drawingGuide`) que visualiza la forma que se está creando antes de dibujarla permanentemente en el canvas.",
-					code: '// En el contexto de un reloj digital, esta función demuestra la limpieza del canvas\n// y el redibujo de un dígito según el color seleccionado, mostrando la manipulación\n// fundamental del canvas para una visualización dinámica.\nfunction createNumber(number, context) {\n    context.clearRect(0, 0, 250, 460); // Limpia el canvas para redibujar\n    // createBase(context); // Dibuja la base "apagada" del dígito\n    context.fillStyle = digitColor; // Aplica el color actual\n    context.lineWidth = 5;\n    context.strokeStyle = "rgb(24, 24, 24)";\n    // ... switch case para dibujar los segmentos del número específico ...\n}',
+					code: 'function CreateDrawingGuide(positionMove) {\n    drawingGuide = document.createElement(\'div\');\n    containerCanvas.appendChild(drawingGuide);\n    if (positionMove) {\n        drawingGuide.style.left = initX + "px";\n        drawingGuide.style.top = initY + "px";\n    } else {\n        drawingGuide.style.left = (initX - eraserSize.value / 2) + "px";\n        drawingGuide.style.top = (initY - eraserSize.value / 2) + "px";\n    }\n}',
 					lang: "javascript",
 				},
 			],
@@ -207,7 +205,7 @@ export const projects: Project[] = [
 			"date",
 		],
 		category: "component",
-		difficulty: "easy",
+		difficulty: "easy", // Keeping it as 'easy' as per our previous discussion.
 		date: "2022-12-24",
 		featured: false,
 		image:
@@ -219,7 +217,7 @@ export const projects: Project[] = [
 		urlDemo: "https://aletzman.github.io/analog_clock/",
 		projectDetails: {
 			description:
-				"Este proyecto es una representación digital de un reloj analógico clásico, construido utilizando JavaScript, HTML y CSS. No solo muestra la hora en tiempo real con agujas animadas suavemente, sino que también incluye un indicador completo de la fecha (día de la semana, día del mes, mes y año). La carátula del reloj, con sus marcas de hora y minuto, se dibuja dinámicamente utilizando el API de Canvas 2D, lo que permite un diseño flexible y adaptable. Las animaciones fluidas de las agujas se logran mediante transformaciones CSS, proporcionando una experiencia visual elegante y precisa.",
+				"Este proyecto es una representación digital de un reloj analógico clásico, construido utilizando JavaScript, HTML y CSS. No solo muestra la hora en tiempo real con agujas animadas suavemente, sino que también incluye un indicador completo de la fecha (día de la semana, día del mes, mes y año). La carátula del reloj, con sus marcas de hora y minuto, se dibuja dinámicamente utilizando el API de Canvas 2D, lo que permite un diseño flexible y adaptable. Las animaciones fluidas de las agujas se logran mediante transformaciones CSS, proporcionando una una experiencia visual elegante y precisa.",
 			keyFeatures: [
 				"**Visualización Analógica en Tiempo Real:** Muestra la hora exacta con agujas de hora, minuto y segundo que se actualizan cada segundo.",
 				"**Diseño de Carátula Dinámico:** La carátula del reloj, incluyendo las marcas de hora y minuto, se dibuja programáticamente usando el API de Canvas 2D.",
@@ -243,25 +241,25 @@ export const projects: Project[] = [
 				{
 					description:
 						"**CSS Transformations para Animación:** Aplica `style.transform = 'rotate(Xdeg)'` directamente a los elementos DOM que representan las agujas, creando una animación de rotación eficiente y fluida.",
-					code: "// El código de transformación CSS se aplica directamente en el JavaScript,\n// como se muestra en la función setInterval anterior para las agujas.\n// No hay un bloque CSS separado aquí para este highlight.",
-					lang: "javascript", // Aunque sea CSS, la manipulación es JS
+					code: "    handSecond.style.transform = `rotate(${seconds}deg)`;\n    handMinute.style.transform = `rotate(${minutes}deg)`;\n    handHour.style.transform = `rotate(${hours}deg)`;",
+					lang: "javascript",
 				},
 				{
 					description:
-						"**Objeto `Date` para Sincronización:** Utiliza el objeto `Date` de JavaScript para obtener la hora y fecha actuales del sistema, calculando las rotaciones necesarias para cada aguja.",
-					code: 'function GetDate() {\n    const date = new Date();\n    let weekdate = date.getDay();\n    let daysName = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];\n    let daysMonth = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]\n\n    weekDay.textContent = daysName[weekdate];\n    day.textContent = date.getDate();\n    month.textContent  = daysMonth[date.getMonth()];\n    year.textContent = date.getFullYear();\n}',
+						"**Objeto `Date` para Sincronización:** Utiliza el objeto `Date` de JavaScript para obtener la hora y fecha actuales del sistema, calculando las rotaciones necesarias para cada aguja y extrayendo la información de la fecha.",
+					code: 'function GetDate() {\n    const date = new Date();\n    let weekdate = date.getDay();\n    let daysName = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];\n    let daysMonth = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]\n\n    weekDay.textContent = daysName[weekdate];\n    day.textContent = date.getDate();\n    month.textContent = daysMonth[date.getMonth()];\n    year.textContent = date.getFullYear();\n}',
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Manipulación Directa del DOM:** Accede y actualiza el contenido de los elementos HTML (`textContent`) para mostrar la fecha y el día de la semana.",
-					code: "// El ejemplo de código para GetDate() arriba ya ilustra la manipulación del DOM\n// para actualizar textContent. No se requiere un bloque de código adicional aquí.",
+					code: "    weekDay.textContent = daysName[weekdate];\n    day.textContent = date.getDate();\n    month.textContent = daysMonth[date.getMonth()];\n    year.textContent = date.getFullYear();",
 					lang: "javascript",
 				},
 				{
 					description:
 						"**Re-renderizado en Resize:** Adapta el dibujo de la carátula si la ventana cambia de tamaño, manteniendo la proporción y la calidad visual.",
-					code: "// Código para manejar el evento resize y redibujar el canvas.\n// window.addEventListener('resize', () => { \n//     // Lógica para recalcular dimensiones y redibujar el reloj\n//     DrawLinesClock(); \n// });",
+					code: 'window.addEventListener("resize", function () {\n    // Lógica para borrar y redibujar la carátula al cambiar el tamaño de la ventana\n    while (ruleXContainer.children[1]) { // Asumiendo que ruleXContainer se refiere a una parte de la carátula que se reconstruye\n        ruleXContainer.removeChild(ruleXContainer.children[1])\n    }\n    CreateRuleX(); // O la función específica para redibujar las marcas del reloj\n});',
 					lang: "javascript",
 				},
 			],
@@ -326,66 +324,74 @@ export const projects: Project[] = [
 			codeHighlights: [
 				{
 					description:
-						"**API de Canvas 2D para Segmentos:** Cada dígito del reloj está compuesto por siete segmentos individuales dibujados y controlados mediante Canvas, lo que demuestra un manejo detallado de gráficos vectoriales.",
-					code: "// Ejemplo de dibujo del segmento central de un dígito de 7 segmentos en Canvas\nfunction createSegmentSeven(context) {\n    context.beginPath();\n    context.moveTo(15, 125);\n    context.lineTo(30, 110);\n    context.lineTo(110, 110);\n    context.lineTo(125, 125);\n    context.lineTo(110, 140);\n    context.lineTo(30, 140);\n    context.lineTo(15, 125);\n    context.fill();\n    context.stroke();\n}",
+						"**API de Canvas 2D para Dibujo de Dígitos:** Funciones modulares (`createSegmentOne` a `createSegmentSeven`) que utilizan `ctx.beginPath()`, `ctx.lineTo()`, `ctx.fill()`, y `ctx.stroke()` para construir cada segmento de los números de 7-segmentos, permitiendo un control granular sobre su apariencia.",
+					code: "function createSegmentOne(context) {\n    context.beginPath();\n    context.moveTo(15, 15);\n    context.lineTo(30, 0);\n    context.lineTo(110, 0);\n    context.lineTo(125, 15);\n    context.lineTo(110, 30);\n    context.lineTo(30, 30);\n    context.lineTo(15, 15);\n    context.fill();\n    context.stroke();\n}",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Gestión de Estados Compleja:** Utiliza variables de estado (`optionSelected`, `start`, `hoursTimer`, `minutesTimer`, `secondsTimer`, etc.) para controlar el modo del reloj (tiempo real, cronómetro, temporizador) y el comportamiento de los botones.",
-					code: "// El código maneja múltiples variables de estado para el modo actual, los valores del temporizador/cronómetro,\n// y los estados de inicio/pausa. Por ejemplo:\n// let optionSelected = 'clock'; // 'clock', 'chronometer', 'timer'\n// let start = false;\n// let hoursTimer = 0, minutesTimer = 0, secondsTimer = 0;\n// Estas variables se actualizan en funciones como switchOptions() o en la lógica del temporizador.",
+						"**Lógica de Renderizado de Números:** La función `createNumber` toma un dígito y un contexto de canvas para dibujar el número correspondiente, seleccionando y activando los segmentos necesarios, y limpiando el canvas antes de redibujar.",
+					code: 'function createNumber(number, context) {\n    context.clearRect(0, 0, 250, 460);\n    createBase(context);\n    context.fillStyle = digitColor;\n    context.lineWidth = 5;\n    context.strokeStyle = "rgb(24, 24, 24)";\n    switch (number) {\n        case 0:\n            createSegmentOne(context);\n            // ... (other segments for 0)\n            break;\n        case 1:\n            createSegmentTwo(context);\n            createSegmentThree(context);\n            break;\n        // ... cases for other numbers\n    }\n}',
 					lang: "javascript",
 				},
 				{
 					description:
-						"**`setInterval` para Actualización Periódica:** Múltiples `setInterval` para gestionar la actualización del tiempo en diferentes modos (reloj, cronómetro, temporizador) de forma independiente.",
-					code: "function Chronometer() {\n    secondsChronometer++;\n    if (secondsChronometer == 60) {\n        secondsChronometer = 0;\n        minutesChronometer++;\n    }\n    if (minutesChronometer == 60) {\n        minutesChronometer = 0;\n        hoursChronometer++;\n    }\n    // Actualiza los dígitos en el Canvas\n    createNumber(addZero(hoursChronometer)[0], ctxDigitHour_1);\n    createNumber(addZero(hoursChronometer)[1], ctxDigitHour_2);\n    // ... y para minutos y segundos ...\n}",
+						"**Gestión de Modos y Visibilidad de UI:** La función `changeOptionSelect` controla qué elementos de la interfaz (botones de control, sliders de ajuste) son visibles u ocultos, adaptando la UI según si se selecciona el reloj, cronómetro o temporizador.",
+					code: 'function changeOptionSelect() {\n    optionSelected = selectOption.value;\n    // ... logic to hide/show buttons and titles based on optionSelected\n    if (optionSelected == 3) { // Timer mode\n        buttonStart.style.visibility = "visible";\n        // ... show other timer controls\n    } if (optionSelected == 2) { // Chronometer mode\n        buttonStart.style.visibility = "visible";\n        // ... hide timer-specific controls\n    }\n    AnimationNormal();\n}',
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Conditional DOM Manipulation:** La visibilidad de los elementos de control y los títulos se gestiona dinámicamente (`style.visibility`) en función del modo de reloj seleccionado, mejorando la experiencia del usuario.",
-					code: "// Ejemplo de cómo se ocultan/muestran elementos en función del modo.\n// if (optionSelected === 'timer') {\n//     timerControls.style.visibility = 'visible';\n// } else {\n//     timerControls.style.visibility = 'hidden';\n// }",
+						"**Actualización en Tiempo Real con `setInterval`:** Múltiples `setInterval` se utilizan para gestionar la lógica de actualización: uno para el reloj digital (`countSeconds`) y otro para las operaciones del cronómetro (`Chronometer`) y temporizador (`Timer`), asegurando una sincronización precisa cada segundo.",
+					code: "setInterval(() => {\n    if (optionSelected == 1) {\n        countSeconds();\n    }\n}, 1000);\n\nsetInterval(() => {\n    if (optionSelected == 3 && start) {\n        Timer();\n    }\n    if (optionSelected == 2 && start) {\n        Chronometer();\n    }\n}, 1000);",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Lógica de Temporizador/Cronómetro:** Implementación de la lógica para el incremento/decremento de segundos, minutos y horas, incluyendo el manejo de desbordamientos (ej., 60 segundos = 1 minuto).",
-					code: "// La función Chronometer() ya ilustra esta lógica. Un ejemplo para el temporizador:\n// function decreaseTimer() {\n//     if (secondsTimer > 0) {\n//         secondsTimer--;\n//     } else if (minutesTimer > 0) {\n//         minutesTimer--;\n//         secondsTimer = 59;\n//     } else if (hoursTimer > 0) {\n//         hoursTimer--;\n//         minutesTimer = 59;\n//         secondsTimer = 59;\n//     } else { /* Timer finished */ }\n// }",
+						"**Lógica de Cronómetro (Stopwatch):** La función `Chronometer` incrementa los segundos, minutos y horas, manejando los desbordamientos para un conteo continuo, y actualiza los dígitos en el Canvas.",
+					code: "function Chronometer() {\n    secondsChronometer++;\n    if (secondsChronometer == 60) {\n        secondsChronometer = 0;\n        minutesChronometer++;\n    }\n    if (minutesChronometer == 60) {\n        minutesChronometer = 0;\n        hoursChronometer++;\n    }\n\n    createNumber(addZero(hoursChronometer)[0], ctxDigitHour_1);\n    createNumber(addZero(hoursChronometer)[1], ctxDigitHour_2);\n    // ... update other digits\n}",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**CSS Animations:** Utiliza CSS `animation` (e.g., `aumentar`) para proporcionar retroalimentación visual cuando el temporizador finaliza.",
-					code: "// En JavaScript se añade/remueve una clase CSS para activar la animación.\n// function triggerFinishAnimation() {\n//     digitalClockContainer.classList.add('aumentar');\n//     setTimeout(() => {\n//         digitalClockContainer.classList.remove('aumentar');\n//     }, 1000); // Duración de la animación\n// }",
+						"**Lógica de Temporizador (Countdown):** La función `Timer` decrementa el tiempo, gestiona la lógica de 'préstamo' entre segundos, minutos y horas, y detiene el temporizador cuando llega a cero, activando una animación de finalización.",
+					code: "function Timer() {\n    if (secondsTimer == 0 || secondsTimer == -1) {\n        secondsTimer = 60;\n        if (minutesTimer == 0 && hoursTimer == 0) {\n            start = false;\n            // ... reset button state, call TimerFinishied, and return\n            return;\n        }\n    }\n    secondsTimer--;\n    // ... logic for minutes and hours decrement\n    createNumber(addZero(hoursTimer)[0], ctxDigitHour_1);\n    createNumber(addZero(hoursTimer)[1], ctxDigitHour_2);\n    // ... update other digits\n}",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Función `addZero` auxiliar:** Una función auxiliar para formatear números de un solo dígito con un cero inicial, manteniendo una visualización uniforme.",
-					code: "function addZero(number) {\n    let arrayNumber = [0, 0];\n    if (number > 9) {\n        arrayNumber[1] = Number(number.toString().charAt(1));\n        arrayNumber[0] = Number(number.toString().charAt(0));\n    } else {\n        arrayNumber[1] = Number(number.toString().charAt(0));\n        arrayNumber[0] = Number(0);\n    }\n    return arrayNumber;\n}",
+						"**Control de Inicio/Pausa/Reseteo:** La función `TimerStart` gestiona el estado de reproducción (inicio/pausa/continuar) de las funciones de cronómetro y temporizador, incluyendo la actualización del texto y estilo del botón, y la función `Reset` devuelve todos los contadores a cero y restablece la UI.",
+					code: 'function TimerStart() {\n    if (((hoursTimer != 0 || minutesTimer != 0 || secondsTimer != 0) && optionSelected == 3) || optionSelected == 2) {\n        if (!start) {\n            start = true;\n            buttonStart.style.background = \'#8ad4cd\';\n            buttonStart.textContent = "PAUSE";\n        } else {\n            start = false;\n            buttonStart.style.background = \'#e0e0e0\';\n            buttonStart.textContent = "CONTINUE";\n        }\n    } else {\n        alert("Favor de elegir el tiempo!");\n        buttonStart.style.background = \'#e0e0e0\';\n        buttonStart.textContent = "START";\n    }\n}',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Animación de Finalización del Temporizador:** `TimerFinishied` aplica animaciones CSS a los elementos del Canvas que muestran los dígitos, creando un efecto visual llamativo para indicar que el temporizador ha terminado, mientras `AnimationNormal` revierte estos estilos.",
+					code: 'function TimerFinishied() {\n    digitSecond_2.style.animation = "aumentar 1s infinite alternate ease-in-out";\n    digitSecond_1.style.animation = "aumentar 1s infinite alternate ease-in-out ";\n    // ... apply animation to other digit canvases\n}\n\nfunction AnimationNormal() {\n    digitSecond_2.style.animation = "normal";\n    // ... remove animation from other digit canvases\n}',
 					lang: "javascript",
 				},
 			],
 			technicalChallenges: [
-				"**Gestión de Múltiples Modos:** Implementar la lógica para alternar fluidamente entre el reloj en tiempo real, el cronómetro y el temporizador, asegurando que cada modo funcione de manera independiente y que la interfaz se adapte correctamente.",
-				"**Precisión del Temporizador de Cuenta Regresiva:** Desarrollar una lógica de cuenta regresiva robusta que maneje correctamente el decremento de segundos, minutos y horas, incluyendo las transiciones cuando los valores llegan a cero (ej., 0 segundos -> 59 segundos, con decremento de minutos).",
-				"**Dibujo de Dígitos de 7 Segmentos con Canvas:** Replicar la apariencia de los dígitos de 7 segmentos utilizando el API de Canvas 2D, lo que implica dibujar y activar/desactivar segmentos individuales para formar cada número.",
-				"**Control Dinámico de la UI:** Mostrar u ocultar elementos de la interfaz (botones de control, títulos) de forma condicional basándose en el modo de reloj seleccionado por el usuario, sin afectar la experiencia general.",
+				"**Gestión de Múltiples Modos:** Implementar y alternar entre las tres funcionalidades (reloj, cronómetro, temporizador) de forma fluida, asegurando que los contadores y la UI se comporten correctamente en cada modo.",
+				"**Sincronización Precisa del Tiempo:** Mantener el reloj, cronómetro y temporizador actualizados cada segundo sin errores de desfase, lo que implica un manejo cuidadoso de `setInterval` y las operaciones de tiempo.",
+				"**Renderizado Eficiente de Dígitos en Canvas:** Dibujar y redibujar múltiples dígitos de 7-segmentos en Canvas en tiempo real, optimizando el rendimiento para evitar parpadeos o lentitud.",
+				"**Lógica de Temporizador Compleja:** Desarrollar la lógica de cuenta regresiva del temporizador, incluyendo el manejo de minutos y horas cuando los segundos llegan a cero, y la detección del final del conteo.",
+				"**Manipulación Dinámica del DOM y UI Reactiva:** Mostrar u ocultar elementos de la interfaz de usuario de forma condicional y actualizar sus propiedades (como el color o el texto de los botones) en respuesta a las acciones del usuario y los cambios de estado.",
 			],
 			lessonsLearned: [
-				"**Diseño de Aplicaciones Multi-modo:** Adquirí experiencia en la estructuración de aplicaciones con diferentes funcionalidades que comparten la misma interfaz visual, gestionando el estado y la lógica de cada modo de forma modular.",
-				"**Programación de Temporizadores Avanzada:** Profundicé en el uso de `setInterval` y en la lógica para construir un cronómetro y un temporizador que funcionan con precisión, manejando los desbordamientos de tiempo (segundos a minutos, minutos a horas).",
-				"**Manipulación Detallada de Canvas:** Reforcé mis habilidades en el dibujo de formas complejas y personalizadas con Canvas, utilizando líneas y rellenos para construir dígitos a partir de segmentos.",
-				"**Mejora de la Experiencia de Usuario (UX):** Comprendí la importancia de proporcionar retroalimentación visual (cambios de color, animaciones) y de adaptar la interfaz a la funcionalidad activa para una mejor experiencia del usuario.",
+				"**Diseño de Componentes Modulares:** Aprendí a descomponer la interfaz digital en segmentos y dígitos individuales, facilitando su dibujo y reutilización a través del Canvas API.",
+				"**Gestión Avanzada de Estados en JavaScript:** Reforcé mi capacidad para manejar estados complejos (reloj, cronómetro, temporizador, inicio/pausa) y cómo estos influyen en la lógica y la interfaz de usuario.",
+				"**Aplicaciones del Objeto `Date` y `setInterval`:** Profundicé en la aplicación práctica de `Date` para obtener y manipular el tiempo, y `setInterval` para ejecutar tareas recurrentes en tiempo real.",
+				"**Técnicas de Renderizado de Gráficos con Canvas:** Mejoré mis habilidades en el dibujo programático de formas y la gestión de contextos de Canvas para crear interfaces visuales personalizadas.",
+				"**Mejora de UI/UX:** Entendí la importancia de la retroalimentación visual (como la animación de finalización del temporizador) y la adaptación de la UI para una experiencia de usuario intuitiva.",
 			],
 			futureImprovements: [
-				"**Múltiples Temporizadores/Alarmas:** Permitir configurar y gestionar varios temporizadores o alarmas simultáneamente.",
-				"**Sonidos de Alarma Personalizables:** Opción de seleccionar diferentes sonidos para la alarma del temporizador.",
-				"**Funcionalidad de Lap para Cronómetro:** Añadir la capacidad de registrar tiempos intermedios (vueltas) en el cronómetro.",
-				"**Persistencia de Datos:** Guardar la configuración del temporizador o los tiempos del cronómetro en el almacenamiento local del navegador.",
-				"**Control por Teclado:** Permitir a los usuarios controlar el cronómetro/temporizador con atajos de teclado.",
-				"**Diseño Responsivo Mejorado:** Asegurar que la interfaz se adapte perfectamente a una amplia gama de tamaños de pantalla.",
+				"**Sonidos de Alarma/Tictac:** Añadir efectos de sonido para el final del temporizador o un tictac opcional para el reloj/cronómetro.",
+				"**Personalización de Digitos:** Permitir al usuario elegir entre diferentes estilos de fuente o colores para cada par de dígitos.",
+				"**Funcionalidad de Vueltas (Laps) en Cronómetro:** Agregar la capacidad de registrar tiempos de vuelta en el modo cronómetro.",
+				"**Preajustes de Temporizador:** Permitir guardar y cargar configuraciones de temporizador predefinidas.",
+				"**Soporte de Zonas Horarias:** Opción para mostrar la hora en diferentes zonas horarias.",
+				"**Modo de Pantalla Completa:** Opción para expandir el reloj a pantalla completa.",
 			],
 		},
 	},
@@ -435,68 +441,77 @@ export const projects: Project[] = [
 			codeHighlights: [
 				{
 					description:
-						"**Manipulación del DOM para Elementos del Juego:** Creación dinámica de elementos (`div` con `bulletMark`) para simular los disparos y la integración de elementos HTML para el marcador y las interfaces de usuario.",
-					code: 'const newChild = document.createElement("div");\nnewChild.className = "bulletMark";\ndocument.children[0].children[1].children[0].appendChild(newChild);\nnewChild.style.left = (e.clientX - newChild.getBoundingClientRect().width / 2) + "px";',
+						"**Generación Dinámica de Elementos del Juego:** La función `CreateSquares` crea y añade un número determinado de `div` elementos al DOM (`containerAnimation`), que representan los objetivos y obstáculos en movimiento. Esto permite que el juego genere una cantidad controlada de elementos visuales.",
+					code: 'function CreateSquares(numberSquares) {\n    let html = "<div></div>";\n    for (let index = 0; index < numberSquares; index++) {\n        containerAnimation.insertAdjacentHTML("afterbegin", html);\n    }\n    AddSizeAndStylesToSquares();\n}',
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Animaciones CSS Dinámicas:** Utiliza propiedades CSS como `animationName`, `animationDuration`, `animationDelay` y `transform` en combinación con `setInterval` y `requestAnimationFrame` para crear el movimiento continuo de las burbujas y efectos visuales como explosiones.",
-					code: "function AddSizeAndStylesToSquares() {\n    // ... bucle para establecer estilos para cada cuadrado ...\n    containerAnimation.children[index].style.animationName = `animateSquares${animationnumber}`;\n    containerAnimation.children[index].style.animationDuration = `${timeAnimation}s`;\n    // ... otras propiedades de animación ...\n}",
+						"**Estilos y Animaciones CSS para Movimiento:** La función `AddSizeAndStylesToSquares` asigna tamaños, posiciones iniciales, imágenes de fondo y múltiples propiedades de animación CSS (`animationName`, `animationDuration`, `animationDelay`, `animationIterationCount`, `animationTimingFunction`) a cada cuadrado, creando su movimiento continuo desde abajo hacia arriba y reaparición.",
+					code: "function AddSizeAndStylesToSquares() {\n    for (let index = 0; index < containerAnimation.childElementCount; index++) {\n        let sizeSquare = GetRandomNumber(3, 7);\n        let leftSquare = GetRandomNumber(10, 85);\n        // ... otras variables aleatorias ...\n        containerAnimation.children[index].style.width = `${sizeSquare}vw`;\n        containerAnimation.children[index].style.height = `${sizeSquare}vw`;\n        containerAnimation.children[index].style.animationName = `animateSquares${animationnumber}`;\n        // ... otras propiedades de estilo y animación ...\n    }\n}",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Detección de Colisiones:** Implementación de la función `checkCollision` utilizando `getBoundingClientRect()` para detectar cuando las burbujas objetivo colisionan con el área del marcador, incrementando los fallos.",
-					code: "function checkCollision() {\n    for (let i = 0; i < containerAnimation.childElementCount; i++) {\n        const childElement = containerAnimation.children[i];\n        // ... cálculo de colisiones ...\n        if (childElementPosition.left < scoreboardPosition.right &&\n            // ... otras condiciones de colisión ...\n            childElementPosition.bottom > scoreboardPosition.top) {\n            \n            if (containerAnimation.children[i].style.backgroundImage.replace(/^url\\(|\\)$|\"/g, '').replace('.', '') === targetImg.src.substring(targetImg.src.indexOf('/images')).replace(' ', '')) {\n                totalmisses++;\n                if (totalmisses == maxMisses) GameOver();\n                UpdateStats();\n            }\n            elementStates[i].hasCollided = true;\n        }\n    }\n    requestAnimationFrame(checkCollision);\n}\nrequestAnimationFrame(checkCollision);",
+						"**Manejo de Clics y Generación de Marcas de Disparo:** Un `addEventListener` global para `mousedown` detecta los clics del usuario en la pantalla. Si es un disparo válido, crea dinámicamente un nuevo elemento `div` (`bulletMark`) que representa la marca del disparo, lo posiciona según las coordenadas del clic y le aplica estilos aleatorios antes de eliminarlo después de un tiempo.",
+					code: 'const bullet = document.addEventListener(\'mousedown\', function (e) {\n    if (e.clientY > 115 && totalShots && !gameOver) {\n        const newChild = document.createElement("div");\n        newChild.className = "bulletMark";\n        // ... lógica de posicionamiento, estilos aleatorios y remoción ...\n        totalShots--;\n        UpdateStats();\n    }\n    if (e.clientY > 115) {\n        soundPainballShoot.currentTime = 0;\n        soundPainballShoot.play();\n    }\n    if (!totalShots) {\n        GameOver();\n    }\n});',
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Manejo de Eventos de Mouse:** `addEventListener('mousedown', ...)` se usa para detectar los clics del usuario, que inician el disparo y activan la lógica de impacto.",
-					code: "const bullet = document.addEventListener('mousedown', function (e) {\n    if (e.clientY > 115 && totalShots && !gameOver) {\n        // ... lógica para crear y posicionar la marca de la bala ...\n        totalShots--;\n        UpdateStats();\n        // ... lógica de sonido y limpieza ...\n    }\n    if (!totalShots) {\n        GameOver();\n    }\n});",
+						"**Lógica de Aciertos, Fallos y Puntuación:** La función `ComponentChange` se activa cuando se hace clic en un cuadrado. Determina si el cuadrado clicado es el objetivo correcto comparando sus imágenes de fondo. Si es un acierto, incrementa `totalhits` y llama a `ParticlesExplosion`. Si es un fallo (o un no-objetivo), incrementa `totalmisses` y verifica la condición de 'Game Over'. También gestiona la transparencia y desaparición del cuadrado impactado.",
+					code: "function ComponentChange(e) {\n    if (!gameOver) {\n        // ... posicionamiento de la explosión ...\n        if (e.target.style.backgroundImage.replace(/^url\\(|\\)$|\"/g, '').replace('.', '') == targetImg.src.substring(targetImg.src.indexOf('/images')).replace(' ', '') && e.target.style.backgroundColor != \"transparent\") {\n            totalhits++;\n            ParticlesExplosion();\n            CountHits(true); // Recompensa por aciertos consecutivos\n        } else {\n            totalmisses++;\n            if (totalmisses == maxMisses) GameOver();\n            ParticlesExplosion();\n            CountHits(false);\n        }\n        // ... lógica de ocultamiento del cuadrado impactado ...\n    }\n}",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Manejo de Audio:** Uso del objeto `HTMLAudioElement` (`soundExplosion`, `soundPainballShoot`) con métodos `play()` y `muted` para controlar los efectos de sonido del juego.",
-					code: "function ParticlesExplosion() {\n    setTimeout(function () {\n        soundExplosion.currentTime = 0;\n        soundExplosion.play();\n        explosion.style.opacity = 1;\n    }, 250);\n    // ... resetear opacidad más tarde ...\n}",
+						"**Detección de Colisiones para Fallos por Paso:** La función `checkCollision` utiliza `requestAnimationFrame` para un bucle de juego continuo. Compara las posiciones de los cuadrados móviles con la del marcador (`scoreboard`). Si un cuadrado objetivo (`targetImg.src`) colisiona con el marcador sin haber sido disparado, se registra como un fallo (`totalmisses`), simulando que el enemigo ha 'escapado'.",
+					code: "function checkCollision() {\n    for (let i = 0; i < containerAnimation.childElementCount; i++) {\n        const childElement = containerAnimation.children[i];\n        if (elementStates[i].hasCollided) { continue; }\n        const childElementPosition = childElement.getBoundingClientRect();\n        const scoreboardPosition = scoreboard.getBoundingClientRect();\n        if (childElementPosition.left < scoreboardPosition.right &&\n            childElementPosition.right > scoreboardPosition.left &&\n            childElementPosition.top + childElementPosition.height < scoreboardPosition.bottom &&\n            childElementPosition.bottom > scoreboardPosition.top) {\n            if (containerAnimation.children[i].style.backgroundImage.replace(/^url\\(|\\)$|\"/g, '').replace('.', '') === targetImg.src.substring(targetImg.src.indexOf('/images')).replace(' ', '')) {\n                totalmisses++;\n                if (totalmisses == maxMisses) GameOver();\n                UpdateStats();\n            }\n            elementStates[i].hasCollided = true;\n        }\n    }\n    requestAnimationFrame(checkCollision);\n}\nrequestAnimationFrame(checkCollision);",
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Lógica de Juego y Estado:** Variables como `totalShots`, `totalhits`, `totalmisses`, `gameOver`, `startTime` controlan el flujo del juego, la puntuación y el fin de la partida.",
-					code: "// Ejemplos de variables de estado y su uso:\n// let totalShots = 20; // Disparos disponibles\n// let totalhits = 0;   // Aciertos del jugador\n// let gameOver = false; // Estado del juego\n// La función UpdateStats() se encarga de reflejar estos valores en la UI.",
+						"**Gestión del Estado del Juego y 'Game Over':** La función `GameOver` se activa cuando se cumplen las condiciones de fin de juego (munición agotada o demasiados fallos). Detiene las animaciones de todos los cuadrados, los oculta de la pantalla con un efecto visual y muestra la tarjeta de 'Game Over' al jugador.",
+					code: 'async function GameOver() {\n    if (!gameOver) {\n        soundExplosion.currentTime = 0;\n        for (let index = 0; index < containerAnimation.childElementCount; index++) {\n            containerAnimation.children[index].style.animationPlayState = "paused";\n        }\n        for (let index = 0; index < containerAnimation.childElementCount; index++) {\n            containerAnimation.children[index].style.top = "1000px"; // Mueve los elementos fuera de vista\n            containerAnimation.children[index].style.boxShadow = "none";\n            containerAnimation.children[index].style.backgroundColor = "transparent";\n            soundExplosion.play();\n            await sleep(50);\n        }\n    }\n    gameOverCard.style.transform = "translateX(0%)"; // Muestra la tarjeta de Game Over\n    gameOver = true;\n}',
 					lang: "javascript",
 				},
 				{
 					description:
-						"**Generación Aleatoria:** Funciones `GetRandomNumber` y `GetRandomNumberFloat` para asignar tamaños, posiciones, tiempos de animación e imágenes de fondo aleatorios a las burbujas, asegurando variabilidad en el juego.",
-					code: "function GetRandomNumber(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}",
+						"**Control de Audio:** El botón de silencio (`mutedButton`) permite al usuario activar o desactivar los efectos de sonido del juego (`soundPainballShoot`, `soundExplosion`). La lógica cambia la propiedad `muted` de los elementos de audio y actualiza visualmente el estado del botón.",
+					code: 'mutedButton.children[0].addEventListener(\'mousedown\', function () {\n    const styleElement = getComputedStyle(mutedButton.children[0], null);\n    let translateElement = styleElement.getPropertyValue("transform");\n    if (translateElement == "none" || translateElement == "matrix(1, 0, 0, 1, 0, 0)") {\n        mutedButton.children[0].style.transform = "translateX(35px)";\n        // ... actualizar estilos para \'muteado\' ...\n        soundPainballShoot.muted = true;\n        soundExplosion.muted = true;\n    } else {\n        mutedButton.children[0].style.transform = "translateX(0px)";\n        // ... actualizar estilos para \'no muteado\' ...\n        soundPainballShoot.muted = false;\n        soundExplosion.muted = false;\n    }\n})',
+					lang: "javascript",
+				},
+				{
+					description:
+						"**Lógica de Reaparición de Objetivos y Aleatoriedad:** Un evento `animationiteration` en los cuadrados permite que, al finalizar cada ciclo de animación (cuando desaparecen por la parte superior de la pantalla), reaparezcan desde abajo con nuevas posiciones, tamaños y, crucialmente, una nueva imagen de fondo (pueden ser objetivos o no) de forma aleatoria, manteniendo el juego dinámico.",
+					code: "for (let index = 0; index < containerAnimation.children.length; index++) {\n    containerAnimation.children[index].addEventListener(\"animationiteration\", function () {\n        let leftSquare = GetRandomNumber(10, 80);\n        let backgroundSquare = GetRandomNumber(1, 41);\n        let sizeSquare = GetRandomNumber(3, 7);\n        // ... resetear opacidad, posición, tamaño y estilos ...\n        if (index > 5 && index < 13) { // Asignar ciertos índices como objetivos\n            containerAnimation.children[index].style.backgroundImage = `url('./images/comp_${imageTargetID}.svg')`;\n        } else if (index > 25 && index < 33) {\n            containerAnimation.children[index].style.backgroundImage = `url('./images/comp_${imageTargetID}.svg')`;\n        } else { // El resto son objetivos aleatorios\n            containerAnimation.children[index].style.backgroundImage = `url('./images/comp_${backgroundSquare}.svg')`;\n        }\n        containerAnimation.children[index].style.scale = 1;\n        elementStates[index].hasCollided = false;\n    });\n}",
 					lang: "javascript",
 				},
 			],
 			technicalChallenges: [
-				"**Gestión de Animaciones Simultáneas y Rendimiento:** Animación fluida de múltiples elementos (`div` con imágenes) moviéndose y reapareciendo en la pantalla, lo que exige optimización para evitar caídas en el framerate.",
-				"**Detección Precisa de Colisiones:** Implementar un sistema de detección de colisiones que determine cuándo las burbujas objetivo alcanzan la zona de puntuación inferior, requiriendo cálculos exactos de posiciones y dimensiones de elementos DOM.",
-				"**Sincronización de Eventos de Juego:** Coordinar las interacciones del usuario (clics para disparar), los efectos visuales (explosiones), los sonidos y la lógica del juego (puntuación, fin del juego) para una experiencia coherente.",
-				"**Gestión de Recursos Multimedia:** Manejar la carga y reproducción de efectos de sonido (`soundExplosion`, `soundPainballShoot`) de manera eficiente para que se reproduzcan sin latencia al ocurrir los eventos.",
+				"**Gestión de Animaciones DOM a Gran Escala:** Mantener animaciones CSS fluidas y sincronizadas para múltiples elementos moviéndose concurrentemente por la pantalla, lo que exige una consideración cuidadosa del rendimiento del navegador para evitar lag.",
+				"**Detección de Colisiones Bidireccional:** Implementar una lógica precisa para detectar cuándo los clics del usuario impactan un objetivo (hit detection) y, por otro lado, cuándo los objetivos no impactados 'escapan' al alcanzar un área específica de la pantalla (miss detection).",
+				"**Sincronización de Eventos de Juego Complejos:** Coordinar los disparos, impactos, explosiones, sonidos, actualizaciones del marcador y la lógica de reaparición de objetivos de manera que todos los componentes del juego se sientan cohesivos y responsivos.",
+				"**Manejo Eficiente de Recursos Multimedia:** Cargar y reproducir efectos de sonido instantáneamente (`soundExplosion`, `soundPainballShoot`) al ocurrir los eventos del juego sin introducción de latencia o fallos.",
+				"**Lógica de Flujo de Juego y Estado:** Implementar un sistema robusto para gestionar el estado del juego (activo, pausado, game over), las condiciones de victoria/derrota, y las recompensas por racha de aciertos de manera lógica y sin errores.",
+				"**Generación Aleatoria Controlada:** Asegurar que los objetivos aparezcan de forma aleatoria pero con una probabilidad adecuada para mantener el juego desafiante y justo, y que los elementos no objetivo actúen como distracciones efectivas.",
 			],
 			lessonsLearned: [
-				"**Fundamentos de Desarrollo de Juegos en el Navegador:** Comprendí la estructura básica de un juego web, incluyendo el bucle de juego (`setInterval` para tiempo, `requestAnimationFrame` para colisiones), gestión de estado y mecánicas de puntuación.",
-				"**Optimización de Animaciones con DOM y CSS:** Aprendí a combinar la manipulación del DOM con animaciones CSS para crear complejos efectos visuales, prestando atención al rendimiento para mantener la fluidez incluso con muchos elementos en movimiento.",
-				"**Lógica de Juego y Eventos:** Reforcé mis habilidades en la implementación de la lógica de un juego arcade, desde la respuesta a la interacción del usuario hasta la gestión de aciertos, fallos y condiciones de fin de partida.",
-				"**Integración de Audio:** Adquirí experiencia en la adición y control de elementos de audio en una aplicación web para mejorar la inmersión del usuario.",
-				"**Programación Reactiva a Eventos:** Manejar múltiples tipos de eventos (clics, animaciones CSS, cambios de tiempo) para actualizar dinátesis de forma dinámica y mantener la coherencia del juego.",
+				"**Diseño de Bucle de Juego en el Navegador:** Aprendí a estructurar la lógica de un juego arcade web, utilizando `setInterval` para el temporizador principal y `requestAnimationFrame` para la gestión de animaciones y colisiones, creando un bucle de juego eficiente.",
+				"**Optimización del Rendimiento en Animaciones DOM:** Gane experiencia en cómo manipular un gran número de elementos DOM y sus estilos CSS para crear animaciones complejas y fluidas sin sacrificar el rendimiento, lo cual es crítico en juegos.",
+				"**Implementación de Sistemas de Puntuación:** Comprendí cómo diseñar y mantener un sistema de puntuación que no solo registre aciertos y fallos, sino que también incorpore mecánicas de recompensa (disparos adicionales por racha) para mejorar la jugabilidad.",
+				"**Manejo Avanzado de Eventos y Estados:** Reforcé mis habilidades en la programación reactiva a eventos, manejando múltiples tipos de interacciones del usuario y cambios de estado del juego para actualizar la interfaz y la lógica de forma dinámica.",
+				"**Integración Efectiva de Audio:** Adquirí práctica en cómo añadir y controlar efectos de sonido en una aplicación web, mejorando la inmersión del usuario y la retroalimentación del juego.",
+				"**Desarrollo de Experiencias de Usuario Intuitivas:** Entendí la importancia de proveer instrucciones claras (`buttonHowToPlay`) y retroalimentación visual y auditiva para una experiencia de usuario atractiva y fácil de entender.",
 			],
 			futureImprovements: [
-				"**Múltiples Niveles de Dificultad:** Implementar diferentes niveles que ajusten la velocidad de las burbujas, el número de disparos o el límite de fallos.",
-				"**Tipos de Burbujas/Poderes:** Añadir burbujas especiales que otorguen poderes (ej. ralentizar el tiempo, disparos múltiples) o diferentes valores de puntos.",
-				"**Efectos Visuales Mejorados:** Incorporar más animaciones para los aciertos críticos o los game over.",
-				"**Pantalla de Inicio/Fin de Juego:** Una pantalla de inicio con opciones de juego y una pantalla de fin de juego que muestre la puntuación final y un botón para reiniciar.",
-				"**Almacenamiento de Puntuaciones Altas:** Guardar las mejores puntuaciones de los jugadores utilizando `localStorage`.",
-				"**Optimización del Rendimiento:** Para juegos más complejos, considerar el uso de un bucle de juego más sofisticado o librerías de renderizado.",
-				"**Controles Táctiles:** Adaptar la interacción para dispositivos móviles.",
+				"**Múltiples Niveles de Dificultad:** Implementar niveles que aumenten la velocidad de los objetivos, reduzcan la munición inicial o modifiquen el límite de fallos.",
+				"**Diferentes Tipos de Objetivos:** Introducir objetivos con diferentes valores de puntuación, tamaños o patrones de movimiento.",
+				"**Poderes (Power-ups):** Añadir elementos especiales que, al ser disparados, otorguen ventajas temporales (ej., cámara lenta, disparos infinitos, bonificación de puntos).",
+				"**Pantallas de Inicio y Fin de Juego:** Desarrollar pantallas más elaboradas para el inicio del juego (con opciones de configuración) y el final (mostrando la puntuación final y opción para reiniciar).",
+				"**Almacenamiento de Puntuaciones Altas:** Implementar `localStorage` para guardar las mejores puntuaciones de los jugadores localmente.",
+				"**Optimización Adicional de Rendimiento:** Investigar el uso de Web Workers o Canvas para el renderizado de un número mucho mayor de elementos, si el juego escalara en complejidad.",
+				"**Controles Adaptados a Dispositivos Táctiles:** Optimizar la experiencia de juego para dispositivos móviles con eventos táctiles.",
 			],
 		},
 	},
