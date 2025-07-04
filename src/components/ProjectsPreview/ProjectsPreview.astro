@@ -1,9 +1,9 @@
 ---
-import { projects } from "../../data/proyects";
-import Button from "../Button.astro";
-import Project from "../ProjectsSection/components/Project/Project";
-import { ArrowRightIcon } from "@lucide/astro";
-const featuredProjects = projects.filter((project) => project.featured).slice(0, 5);
+import { projects } from "../../data/proyects"
+import Button from "../Button.astro"
+import Project from "../ProjectsSection/components/Project/Project"
+import { ArrowRightIcon } from "@lucide/astro"
+const featuredProjects = projects.filter((project) => project.featured).slice(0, 5)
 ---
 
 <section class="preview-section">
@@ -15,7 +15,11 @@ const featuredProjects = projects.filter((project) => project.featured).slice(0,
 	</header>
 
 	<div class="preview-grid">
-		{featuredProjects.map((project) => <Project project={project} variant="preview" client:load />)}
+		{
+			featuredProjects.map((project) => (
+				<Project project={project} variant="preview" client:load />
+			))
+		}
 	</div>
 
 	<div class="cta-container">
